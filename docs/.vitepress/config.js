@@ -4,7 +4,7 @@ const path = require('path');
 export default defineConfig({
   title: "Grow Admin",
   base: '/docs/',
-  cleanUrls: 'with-subfolders'，
+  cleanUrls: 'with-subfolders',
   head: [
     [
       'link',{ rel: 'icon', href: '/favicon.ico' }
