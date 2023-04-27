@@ -1,7 +1,6 @@
+import { defineConfig } from 'vitepress';
 
-module.exports = {
+export default defineConfig({
   title: "Grow Admin",
-  base: "./",
-  dest: "./dist",
   cleanUrls: 'with-subfolders'
-};
+});
