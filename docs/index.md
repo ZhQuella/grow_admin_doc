@@ -5,7 +5,7 @@ titleTemplate: The intuitive store for Vue.js
 
 hero:
   image:
-    src: image/logo.png
+    src: /image/logo.png
     alt: Grow Admin
   name: "Grow Admin"
   text: "开箱即用的\n中台前端解决方案"
