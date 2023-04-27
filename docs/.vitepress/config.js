@@ -1,6 +1,6 @@
 
 module.exports = {
   title: "Grow Admin",
-  base: ".",
+  base: "./",
   dest: "./dist"
 };

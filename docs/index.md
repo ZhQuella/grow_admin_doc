@@ -1,5 +1,6 @@
 ---
 layout: home
+
 title: "Grow Admin"
 titleTemplate: The intuitive store for Vue.js
 
