@@ -17,7 +17,7 @@ hero:
 #      link: /guide/
     - theme: alt
       text: "Demo 演示"
-      link: ""
+      link: "https://demo.gadmin.top/"
       target: _blank
     - theme: alt
       text: "Pro 版本"
