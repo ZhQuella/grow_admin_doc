@@ -14,7 +14,7 @@ hero:
   actions:
     - theme: brand
       text: "开始使用"
-      link: /guide/
+#      link: /guide/
     - theme: alt
       text: "Demo 演示"
       link: ""
