@@ -2,11 +2,11 @@ const path = require('path');
 
 module.exports = {
   title: "Grow Admin",
-  base: './',
+  base: '/grow_admin_doc/',
   cleanUrls: 'with-subfolders',
   head: [
     [
-      'link',{ rel: 'icon', href: '/favicon.ico' }
+      'link',{ rel: 'icon', href: './favicon.ico' }
     ]
   ]
 };
