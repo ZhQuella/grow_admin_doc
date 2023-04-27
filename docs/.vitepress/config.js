@@ -1,7 +1,6 @@
-import { defineConfig } from 'vitepress';
 const path = require('path');
 
-export default defineConfig({
+module.exports = {
   title: "Grow Admin",
   base: '/docs/',
   cleanUrls: 'with-subfolders',
@@ -10,4 +9,4 @@ export default defineConfig({
       'link',{ rel: 'icon', href: '/favicon.ico' }
     ]
   ]
-});
+};
