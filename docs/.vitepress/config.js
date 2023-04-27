@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   title: "Grow Admin",
-  base: '/docs/',
+  base: '/',
   cleanUrls: 'with-subfolders',
   head: [
     [
