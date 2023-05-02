@@ -2,7 +2,7 @@
 layout: home
 
 title: "Grow Admin"
-titleTemplate: The intuitive store for Vue.js
+titleTemplate: 一个开箱即用的Admin框架
 
 hero:
   image:
@@ -14,7 +14,7 @@ hero:
   actions:
     - theme: brand
       text: "开始使用"
-#      link: /guide/
+      link: "/system/"
     - theme: alt
       text: "Demo 演示"
       link: "https://demo.gadmin.top/"
@@ -23,12 +23,19 @@ hero:
       text: "Pro 版本"
       link: ""
       target: _blank
-# features:
-#   - icon: <span class="i-carbon:ibm-toolchain"></span>
-#     title: Fully Customizable
-#     details: No core utilities, all functionalities are provided via presets.
-#     link: /guide/
-#     linkText: Getting Started
+features:
+  - title: 💡 最新的技术栈
+    details: 基于Vue3/Vite/Typescript等最新技术栈开发
+  - title: 🔥 企业级结构体系
+    details: 采用企业级结构体系结构分层，基于packages区别开发
+  - title: 🛠️ 丰富的示例
+    details: 丰富的Web端插件示例实现
+  - title: 📦 组件封装
+    details: 对日常使用频率较高的组件二次封装满足基础工作需求
+  - title: 🔭 优秀的布局方案
+    details: 丰富的布局模式，具有高可配性，满足您的各类布局需求
+  - title: 💈 优秀的布局方案
+    details: 丰富的布局模式，具有高可配性，满足您的各类布局需求
 #   - icon: <span class="i-carbon-meter-alt"></span>
 #     title: Instant
 #     details: No parsing, no AST, no scanning. It’s 5x faster than Windi CSS or Tailwind JIT.
