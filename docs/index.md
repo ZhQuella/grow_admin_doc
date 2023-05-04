@@ -37,3 +37,13 @@ features:
   - title: 💈 优秀的布局方案
     details: 丰富的布局模式，具有高可配性，满足您的各类布局需求
 ---
+
+<style>
+.VPHero .image-bg {
+  z-index: 1;
+  opacity: 0.8;
+  background-image: linear-gradient(to bottom, red, blue);
+  filter: blur(70px);
+  transform: translate(-50%,-50%) rotate(50deg);
+}
+</style>
