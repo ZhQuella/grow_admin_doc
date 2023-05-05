@@ -27,8 +27,8 @@ lang: zh-CN
 
 如果你已经对`Grwo Admin`的[介绍](/guide/)有过相关阅读，项目中使用了`packages`对项目整体进行管理。在开始之前我们应该对开发环境进行配置，具体环境要求如下：
 
-- nodejs ≤ 16.20.0
-- pnpm ≤ 8.3.1
+- nodejs ≥ 16.20.0
+- pnpm ≥ 8.3.1
 - git 
 
 ::: warning 温馨提示
