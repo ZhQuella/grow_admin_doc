@@ -41,9 +41,14 @@ features:
 <style>
 .VPHero .image-bg {
   z-index: 1;
-  opacity: 0.8;
-  background-image: linear-gradient(to bottom, red, blue);
+  opacity: 0.7;
+  background-image: linear-gradient(to bottom, #8b5cf6, fuchsia);
   filter: blur(70px);
-  transform: translate(-50%,-50%) rotate(50deg);
+  transform: translate(-50%,-50%);
+}
+.VPHero .clip {
+  background: linear-gradient(to bottom, #8b5cf6, #d946ef);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 </style>
