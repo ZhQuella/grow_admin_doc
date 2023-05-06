@@ -11,11 +11,14 @@ module.exports = {
   ],
   themeConfig: {
     logo: '/image/logo.png',
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/ZhQuella/grow_up_admin' }
+    ],
     nav: [
       { text: '指南', link: '/guide/' }
     ],
-    sidebar: [
-      {
+    sidebar: {
+      "/guide/": [{
         text: '介绍',
         collapsible: true,
         collapsed: true,
@@ -33,7 +36,7 @@ module.exports = {
             link: '/guide/module-description'
           }
         ]
-      }
-    ]
+      }]
+    }
   }
 };
