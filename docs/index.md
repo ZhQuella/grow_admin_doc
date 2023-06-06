@@ -51,8 +51,7 @@ const members = [
     name: '张鱼烧',
     title: '作者',
     links: [
-      { icon: 'github', link: 'https://github.com/ZhQuella' },
-      { icon: 'google', link: 'https://github.com/xiaogonggong-w' }
+      { icon: 'github', link: 'https://github.com/ZhQuella' }
     ]
   },
   {
