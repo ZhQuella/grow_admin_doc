@@ -61,8 +61,6 @@ const members = [
     avatar: 'https://avatars.githubusercontent.com/u/54763364?v=4',
     name: 'null',
     title: '开发者',
-    orgLink: "https://juejin.cn/user/1355056673731902",
-    org: "掘金",
     links: [
       { icon: 'github', link: 'https://github.com/lowProfileH' }
     ]
