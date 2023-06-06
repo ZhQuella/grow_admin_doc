@@ -38,7 +38,60 @@ features:
     details: 丰富的主题配置及黑暗主题适配
 ---
 
+<script setup>
+import {
+  VPTeamPage,
+  VPTeamPageTitle,
+  VPTeamMembers
+} from 'vitepress/theme';
+
+const members = [
+  {
+    avatar: 'https://avatars.githubusercontent.com/u/82251521?v=4',
+    name: '张鱼烧',
+    title: '作者',
+    links: [
+      { icon: 'github', link: 'https://github.com/ZhQuella' },
+      { icon: 'google', link: 'https://github.com/xiaogonggong-w' }
+    ]
+  },
+  {
+    avatar: 'https://avatars.githubusercontent.com/u/54763364?v=4',
+    name: 'null',
+    title: '开发者',
+    links: [
+      { icon: 'github', link: 'https://github.com/lowProfileH' }
+    ]
+  },
+  {
+    avatar: 'https://avatars.githubusercontent.com/u/79799040?v=4',
+    name: 'xiaogonggong-w',
+    title: '开发者',
+    links: [
+      { icon: 'github', link: 'https://github.com/xiaogonggong-w' }
+    ]
+  }
+]
+</script>
+
+<VPTeamPage>
+  <VPTeamPageTitle>
+    <template #title>
+      <div class="team-title">团队介绍</div>
+    </template>
+    <template #lead>
+      Grow Admin 的主要开发人员包括
+    </template>
+  </VPTeamPageTitle>
+  <VPTeamMembers
+    :members="members"
+  />
+</VPTeamPage>
+
 <style>
+.team-title {
+    font-size: 34px;
+}
 .VPHero .image-bg {
   z-index: 1;
   opacity: 0.7;
