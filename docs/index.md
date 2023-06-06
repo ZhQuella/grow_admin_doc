@@ -42,7 +42,8 @@ features:
 import {
   VPTeamPage,
   VPTeamPageTitle,
-  VPTeamMembers
+  VPTeamMembers,
+  VPTeamPageSection
 } from 'vitepress/theme';
 
 const members = [
@@ -50,6 +51,8 @@ const members = [
     avatar: 'https://avatars.githubusercontent.com/u/82251521?v=4',
     name: '张鱼烧',
     title: '作者',
+    orgLink: "https://juejin.cn/user/2788017220107640",
+    org: "掘金",
     links: [
       { icon: 'github', link: 'https://github.com/ZhQuella' }
     ]
@@ -58,6 +61,8 @@ const members = [
     avatar: 'https://avatars.githubusercontent.com/u/54763364?v=4',
     name: 'null',
     title: '开发者',
+    orgLink: "https://juejin.cn/user/1355056673731902",
+    org: "掘金",
     links: [
       { icon: 'github', link: 'https://github.com/lowProfileH' }
     ]
@@ -70,7 +75,13 @@ const members = [
       { icon: 'github', link: 'https://github.com/xiaogonggong-w' }
     ]
   }
-]
+];
+const partners = [
+  {
+    avatar: 'https://avatars.githubusercontent.com/u/82251521?v=4',
+    name: '张鱼烧'
+  }
+];
 </script>
 
 <VPTeamPage>
@@ -85,7 +96,16 @@ const members = [
   <VPTeamMembers
     :members="members"
   />
+
+  <VPTeamPageSection>
+    <template #title>赞助商</template>
+    <template #members>
+      <VPTeamMembers size="small" :members="partners" />
+    </template>
+  </VPTeamPageSection>
+
 </VPTeamPage>
+
 
 <style>
 .team-title {
