@@ -35,7 +35,7 @@ features:
   - title: 🔭 优秀的布局方案
     details: 丰富的布局模式，具有高可配性，满足您的各类布局需求
   - title: 💈 主题配置
-    details: 丰富的主题配置及黑暗主题适配和优质CSS方案
+    details: 丰富的主题配置及黑暗主题适配
 ---
 
 <script setup>
