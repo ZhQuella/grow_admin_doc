@@ -54,7 +54,7 @@ const members = [
     orgLink: "https://juejin.cn/user/2788017220107640",
     org: "掘金",
     links: [
-      { icon: 'github', link: 'https://github.com/ZhQuella' }
+      { icon: 'github', link: 'https://juejin.cn/user/2788017220107640/posts' }
     ]
   },
   {
