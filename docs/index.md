@@ -51,10 +51,10 @@ const members = [
     avatar: 'https://avatars.githubusercontent.com/u/82251521?v=4',
     name: '张鱼烧',
     title: '作者',
-    orgLink: "https://juejin.cn/user/2788017220107640",
+    orgLink: "https://juejin.cn/user/2788017220107640/posts",
     org: "掘金",
     links: [
-      { icon: 'github', link: 'https://juejin.cn/user/2788017220107640/posts' }
+      { icon: 'github', link: 'https://github.com/ZhQuella' }
     ]
   },
   {
