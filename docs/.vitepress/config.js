@@ -16,11 +16,20 @@ module.exports = {
     ],
     nav: [
       { text: '指南', link: '/guide/' },
-      { text: '组件', link: '/built-component/' },
-      { text: '工具', link: '/built-utils/' },
-      { text: '表单设计器', link: '/form-designer/' },
-      { text: '流程设计器', link: '/process-designer/' },
-      { text: '规则设计器', link: '/rule-designer/' }
+      {
+        text: "前端框架",
+        items: [
+          { text: '组件', link: '/front-end/built-component/' },
+          { text: '工具', link: '/front-end/built-utils/' },
+          { text: '表单设计器', link: '/front-end/form-designer/' },
+          { text: '流程设计器', link: '/front-end/process-designer/' },
+          { text: '规则设计器', link: '/front-end/rule-designer/' }
+        ]
+      },
+      {
+        text: "后端框架",
+        items: []
+      }
     ],
     sidebar: {
       "/guide/": [{
@@ -42,7 +51,7 @@ module.exports = {
           }
         ]
       }],
-      "/built-component/": [{
+      "/front-end/built-component/": [{
         text: '介绍',
         collapsible: true,
         collapsed: true,
@@ -51,7 +60,7 @@ module.exports = {
           link: '/built-component/'
         }]
       }],
-      "/built-utils/": [{
+      "/front-end/built-utils/": [{
         text: '介绍',
         collapsible: true,
         collapsed: true,
@@ -60,7 +69,7 @@ module.exports = {
           link: '/built-utils/'
         }]
       }],
-      "/form-designer/": [{
+      "/front-end/form-designer/": [{
         text: '介绍',
         collapsible: true,
         collapsed: true,
@@ -69,7 +78,7 @@ module.exports = {
           link: '/form-designer/'
         }]
       }],
-      "/process-designer/": [{
+      "/front-end/process-designer/": [{
         text: '介绍',
         collapsible: true,
         collapsed: true,
@@ -78,7 +87,7 @@ module.exports = {
           link: '/process-designer/'
         }]
       }],
-      "/rule-designer/": [{
+      "/front-end/rule-designer/": [{
         text: '介绍',
         collapsible: true,
         collapsed: true,

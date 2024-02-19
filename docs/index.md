@@ -6,8 +6,8 @@ titleTemplate: 一个开箱即用的Admin框架
 
 hero:
   image:
-    src: /image/logo.png
-    alt: Grow Admin
+    src: "/image/logo.png"
+    alt: "Grow Admin"
   name: "Grow Admin"
   text: "开箱即用的\n中台前端解决方案"
   tagline: "基于Vue3\\Vite\\TypeScript\n最新技术栈开发轻松构建规范且美观的系统"
@@ -60,7 +60,7 @@ const members = [
   {
     avatar: 'https://avatars.githubusercontent.com/u/54763364?v=4',
     name: 'null',
-    title: '开发者',
+    title: '前端-开发者',
     links: [
       { icon: 'github', link: 'https://github.com/lowProfileH' }
     ]
@@ -68,7 +68,7 @@ const members = [
   {
     avatar: 'https://avatars.githubusercontent.com/u/79799040?v=4',
     name: 'xiaogonggong-w',
-    title: '开发者',
+    title: '前端-开发者',
     links: [
       { icon: 'github', link: 'https://github.com/xiaogonggong-w' }
     ]
