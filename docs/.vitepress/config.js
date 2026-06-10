@@ -12,90 +12,49 @@ module.exports = {
   themeConfig: {
     logo: '/image/logo.png',
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/ZhQuella/grow_up_admin' }
+      { icon: 'github', link: 'https://github.com/ZhQuella/grow_admin' }
     ],
     nav: [
       { text: '指南', link: '/guide/' },
-      {
-        text: "前端框架",
-        items: [
-          { text: '组件', link: '/front-end/built-component/' },
-          { text: '工具', link: '/front-end/built-utils/' },
-          { text: '表单设计器', link: '/front-end/form-designer/' },
-          { text: '流程设计器', link: '/front-end/process-designer/' },
-          { text: '规则设计器', link: '/front-end/rule-designer/' }
-        ]
-      },
-      {
-        text: "后端框架",
-        items: []
-      }
+      { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
     ],
     sidebar: {
-      "/guide/": [{
-        text: '介绍',
-        collapsible: true,
-        collapsed: true,
-        items: [
-          {
-            text: "简介",
-            link: '/guide/'
-          },
-          {
-            text: "快速上手",
-            link: '/guide/getting-started'
-          },
-          {
-            text: "包说明",
-            link: '/guide/module-description'
-          }
-        ]
-      }],
-      "/front-end/built-component/": [{
-        text: '介绍',
-        collapsible: true,
-        collapsed: true,
-        items: [{
-          text: "简介",
-          link: '/built-component/'
-        }]
-      }],
-      "/front-end/built-utils/": [{
-        text: '介绍',
-        collapsible: true,
-        collapsed: true,
-        items: [{
-          text: "简介",
-          link: '/built-utils/'
-        }]
-      }],
-      "/front-end/form-designer/": [{
-        text: '介绍',
-        collapsible: true,
-        collapsed: true,
-        items: [{
-          text: "简介",
-          link: '/form-designer/'
-        }]
-      }],
-      "/front-end/process-designer/": [{
-        text: '介绍',
-        collapsible: true,
-        collapsed: true,
-        items: [{
-          text: "简介",
-          link: '/process-designer/'
-        }]
-      }],
-      "/front-end/rule-designer/": [{
-        text: '介绍',
-        collapsible: true,
-        collapsed: true,
-        items: [{
-          text: "简介",
-          link: '/rule-designer/'
-        }]
-      }]
+      "/guide/": [
+        {
+          text: '介绍',
+          items: [
+            { text: '简介', link: '/guide/' },
+            { text: '快速上手', link: '/guide/getting-started' }
+          ]
+        },
+        {
+          text: '架构',
+          items: [
+            { text: '项目结构', link: '/guide/architecture/project-structure' },
+            { text: 'IOC 模块化', link: '/guide/architecture/ioc' },
+            { text: '组件驱动架构', link: '/guide/architecture/component-driver' }
+          ]
+        },
+        {
+          text: '开发指南',
+          items: [
+            { text: '项目配置', link: '/guide/development/project-setting' },
+            { text: '切换组件库', link: '/guide/development/switch-component-library' },
+            { text: 'Grow 契约组件', link: '/guide/development/grow-components' },
+            { text: '命令式 API', link: '/guide/development/imperative-api' },
+            { text: '业务模块开发', link: '/guide/development/business-module' },
+            { text: '局部覆盖组件库', link: '/guide/development/local-override' }
+          ]
+        },
+        {
+          text: '包说明',
+          items: [
+            { text: 'DesignRock 核心层', link: '/guide/packages/design-rock' },
+            { text: 'DesignCornerstone 业务层', link: '/guide/packages/design-cornerstone' },
+            { text: '构建配置', link: '/guide/packages/configs' }
+          ]
+        }
+      ]
     }
   }
 };
