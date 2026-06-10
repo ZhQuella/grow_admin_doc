@@ -121,4 +121,13 @@ const partners = [
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
+.VPNav {
+  background-image: radial-gradient(transparent 1px, #fff 1px);
+  background-size: 4px 4px;
+  backdrop-filter: saturate(50%) blur(6px);
+  -webkit-backdrop-filter: saturate(50%) blur(6px);
+}
+.VPNavBar, .content-body {
+  background: none !important;
+}
 </style>
