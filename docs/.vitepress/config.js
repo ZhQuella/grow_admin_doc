@@ -30,15 +30,22 @@ module.exports = {
         {
           text: '架构',
           items: [
+            { text: '架构设计理念', link: '/guide/architecture/design-philosophy' },
             { text: '项目结构', link: '/guide/architecture/project-structure' },
             { text: 'IOC 模块化', link: '/guide/architecture/ioc' },
-            { text: '组件驱动架构', link: '/guide/architecture/component-driver' }
+            { text: '组件驱动架构', link: '/guide/architecture/component-driver' },
+            { text: '路由与菜单', link: '/guide/architecture/routing-and-menu' }
           ]
         },
         {
           text: '开发指南',
           items: [
             { text: '项目配置', link: '/guide/development/project-setting' },
+            { text: '认证与登录', link: '/guide/development/authentication' },
+            { text: 'HTTP 基础设施', link: '/guide/development/http-infrastructure' },
+            { text: 'Mock 数据', link: '/guide/development/mock' },
+            { text: '主题与颜色', link: '/guide/development/theme-and-colors' },
+            { text: '主题与语言', link: '/guide/development/theme-and-locale' },
             { text: '切换组件库', link: '/guide/development/switch-component-library' },
             { text: 'Grow 契约组件', link: '/guide/development/grow-components' },
             { text: '命令式 API', link: '/guide/development/imperative-api' },

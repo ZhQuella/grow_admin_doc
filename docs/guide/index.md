@@ -12,6 +12,7 @@ Grow Admin 是一个基于 **Vue 3 / Vite / TypeScript** 的 Monorepo 管理后�
 - **IOC 模块化**：基于 Inversify 的依赖注入，业务模块以 Library 形式独立开发、按需装配
 - **组件驱动桥接**：`Grow*` 契约组件 + 驱动包，一套业务代码适配三套 UI 库
 - **Monorepo 分层**：`DesignRock`（框架核心）与 `DesignCornerstone`（业务模块）职责清晰
+- **动态路由与菜单**：静态基础路由 + 接口驱动动态注册，目录与叶子节点职责分离
 - **开箱即用**：内置路由中间件、HTTP 基础设施、国际化、状态管理、主题与布局配置
 - **宿主应用模式**：`sample` 作为宿主，统一完成驱动初始化与模块装配
 
@@ -19,7 +20,7 @@ Grow Admin 是一个基于 **Vue 3 / Vite / TypeScript** 的 Monorepo 管理后�
 
 传统 Admin 框架通常将业务代码、组件封装、工具函数全部堆叠在单一应用中，模块之间耦合紧密，难以独立演进。
 
-Grow Admin 打破了这一结构：
+Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 设计。建议先阅读 [架构设计理念](/guide/architecture/design-philosophy) 了解整体设计动机，再深入各专题章节。
 
 | 维度 | 传统 Admin | Grow Admin |
 |------|-----------|------------|
@@ -48,11 +49,14 @@ Grow Admin 打破了这一结构：
 
 | 章节 | 说明 |
 |------|------|
+| [架构设计理念](/guide/architecture/design-philosophy) | 为什么这样设计、有什么好处 |
 | [快速上手](/guide/getting-started) | 环境准备、安装、启动 |
 | [项目结构](/guide/architecture/project-structure) | Monorepo 目录与分层 |
 | [IOC 模块化](/guide/architecture/ioc) | 依赖注入与 Library 机制 |
 | [组件驱动架构](/guide/architecture/component-driver) | Grow* 契约组件与驱动桥接 |
-| [开发指南](/guide/development/project-setting) | 配置、组件库切换、业务模块开发 |
+| [路由与菜单](/guide/architecture/routing-and-menu) | 静态路由 + 动态注册 + 侧边菜单 |
+| [认证与登录](/guide/development/authentication) | Token、守卫、登录流程 |
+| [开发指南](/guide/development/project-setting) | 配置、主题、Mock、HTTP、业务模块开发 |
 | [包说明](/guide/packages/design-rock) | DesignRock / DesignCornerstone / configs 各包职责 |
 
 ::: tip 包管理器

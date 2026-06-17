@@ -25,17 +25,17 @@ hero:
     #   target: _blank
 features:
   - title: 💡 最新的技术栈
-    details: 基于Vue3/Vite/Typescript等最新技术栈开发
-  - title: 🔥 企业级结构体系
-    details: 采用企业级结构体系结构分层，基于packages区别开发
-  - title: 🛠️ 丰富的示例
-    details: 丰富的Web端插件示例实现
-  - title: 📦 组件封装
-    details: 对日常使用频率较高的组件二次封装满足基础工作需求
+    details: 基于 Vue3 / Vite / TypeScript 等最新技术栈开发
+  - title: 🔥 IOC 模块化架构
+    details: 基于 Inversify 的依赖注入，业务模块以 Library 形式独立开发、按需装配
+  - title: 🎨 组件驱动桥接
+    details: Grow* 契约组件 + 驱动包，一套业务代码适配 Element Plus / Naive UI / Ant Design Vue
+  - title: 🗂️ 动态路由与菜单
+    details: 静态基础路由 + 接口驱动动态注册，目录与叶子节点职责分离
   - title: 🔭 优秀的布局方案
-    details: 丰富的布局模式，具有高可配性，满足您的各类布局需求
-  - title: 💈 主题配置
-    details: 丰富的主题配置及黑暗主题适配
+    details: 布局壳、侧边菜单、项目配置抽屉，支持亮/暗主题与主题色切换
+  - title: 💈 主题与国际化
+    details: CSS 变量 + UnoCSS 语义色，登录页与设置抽屉均支持主题/语言切换
 ---
 
 <script setup>
@@ -112,20 +112,26 @@ const partners = [
 .VPHero .image-bg {
   z-index: 1;
   opacity: 0.7;
-  background-image: linear-gradient(to bottom, #8b5cf6, fuchsia);
+  background-image: linear-gradient(to bottom, #8b5cf6, #a78bfa);
   filter: blur(70px);
   transform: translate(-50%,-50%);
 }
 .VPHero .clip {
-  background: linear-gradient(to bottom, #8b5cf6, #d946ef);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  background: linear-gradient(to bottom, #8b5cf6, #7c3aed);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .VPNav {
-  background-image: radial-gradient(transparent 1px, #fff 1px);
+  --nav-dot-color: #fff;
+  background-image: radial-gradient(transparent 1px, var(--nav-dot-color) 1px);
   background-size: 4px 4px;
   backdrop-filter: saturate(50%) blur(6px);
   -webkit-backdrop-filter: saturate(50%) blur(6px);
+}
+
+.dark .VPNav {
+  --nav-dot-color: var(--vp-c-bg);
 }
 .VPNavBar, .content-body {
   background: none !important;

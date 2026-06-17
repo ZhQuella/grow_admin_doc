@@ -7,6 +7,40 @@ lang: zh-CN
 
 Grow Admin 使用 [Inversify](https://inversify.io/) 实现依赖注入（IOC），所有功能模块以 **Library** 形式声明，由宿主应用统一装配。
 
+## 设计理念：为什么用 IOC + Library？
+
+### 问题从哪来？
+
+中大型 Admin 常见痛点：
+
+1. **启动顺序隐式化**——A 文件 import B，B 又 import C，没人能一眼说清「谁先谁后」
+2. **模块边界模糊**——业务直接 `import` 路由实例、axios 单例，拆包后路径全断
+3. **难以按需装配**——客户 A 不要 Mock，客户 B 不要某业务模块，只能改源码删 import
+
+### Grow Admin 的解法
+
+每个能力包暴露统一的 **`Lib` 契约**，宿主在 `initIoc.ts` 显式 `.use()`：
+
+```
+模块只声明「我能提供什么」→ 宿主决定「装什么」→ AppContext.load() 统一启动
+```
+
+| 设计点 | 为什么 | 好处 |
+|--------|--------|------|
+| Library 契约 | 模块接入方式标准化 | 新业务包照抄 `library.ts` 即可 |
+| AppContext 编排 | IOC 只管 Bean，不管路由汇总 | 路由、钩子、参数一处收集 |
+| `diKT` 取服务 | 不 export 单例 | 测试可替换实现，无隐式全局 |
+| 装配顺序写死在宿主 | 顺序即文档 | 避免模块间抢跑 |
+
+### 与 Vue `app.use(Plugin)` 的关系
+
+Library 的 `install` 兼容 Vue 插件协议，但**不止于插件**：
+
+- 插件通常只做 `app.component` / `app.provide`
+- Library 还可声明 `routes`、`AsyncIocModule`、`onSetup` 钩子
+
+因此 Grow Admin 的模块是 **「Vue 插件 + 路由片段 + IOC 绑定」** 的复合体，适合 Admin 这种路由密集、服务密集的应用。
+
 ## 核心概念
 
 | 概念 | 说明 |
@@ -71,25 +105,36 @@ appContext.load(app)
 | `basicRoutes` | `meta.isBasic === true` | 基础路由（如登录页），不需要权限 |
 | `appRoutes` | 其他 | 应用路由，需要权限与菜单 |
 
+### 为什么要分 basic / app 路由？
+
+权限变更或重新登录时，需要**重置动态路由**但保留登录页、Home 布局壳。`isBasic: true` 标记「不可被权限系统摘掉的路由」，`resetRouter()` 只移除非 basic 项——这是**安全重置**与**框架稳定性**的折中。
+
 ## 宿主装配顺序
 
 `sample/src/plugin/initIoc.ts` 中的装配顺序**必须保持**：
 
 ```typescript
-await installComponentDriver(app, appContext);  // 1. 安装组件驱动
+await installComponentDriver(app, appContext)  // 1. 安装组件驱动
 
 app
   .use(IocPlugin, iocOptions)                   // 2. 安装 IOC 插件
   .use(infrastructureLib, appContext)          // 3. 基础设施（HTTP）
-  .use(routeLib, appContext)                    // 4. 路由中间件
-  .use(appsLoginLib, appContext)                 // 5. 业务模块
-  .use(componentsLib, appContext);              // 6. 契约组件库
+  .use(stateLib, appContext)                    // 4. 应用状态与主题
+  .use(localeLib, appContext)                  // 5. 多语言
+  .use(mockLib, appContext)                    // 6. Mock 注册中心
+  .use(routeLib, appContext)                    // 7. 路由中间件
+  .use(appsLoginLib, appContext)               // 8. 登录模块
+  .use(appsHomeLib, appContext)                 // 9. 首页模块（含动态路由守卫）
+  .use(appsWorkspaceLib, appContext)             // 10. 工作区模块
+  .use(componentsLib, appContext)               // 11. 契约组件库
 
-await appContext.load(app);                      // 7. 加载 IOC 容器
+await appContext.load(app)                       // 12. 加载 IOC 容器
 
-const router = diKT(routeLib.types.RouteTable).router;
-app.use(router);                                 // 8. 挂载路由
-await router.isReady();
+bootstrapAppConfig()                             // 13. 合并 projectSetting
+
+const router = diKT(routeLib.types.RouteTable).router
+app.use(router)                                  // 14. 挂载路由
+await router.isReady()
 ```
 
 ::: warning 顺序敏感
@@ -154,5 +199,7 @@ const router = routeTable.router;
 
 ## 下一步
 
+- [架构设计理念](/guide/architecture/design-philosophy) — IOC 在整体架构中的位置
+- [路由与菜单](/guide/architecture/routing-and-menu) — 动态路由注册机制
 - [组件驱动架构](/guide/architecture/component-driver)
 - [业务模块开发](/guide/development/business-module)

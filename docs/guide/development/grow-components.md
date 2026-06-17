@@ -107,14 +107,21 @@ const buttonComponent = ComponentMap.get(RockComponent.Button);
 | `useDriverComponent(RockComponent.Button)` | 直接引用三方组件 |
 | 通过 `projectSetting` 切换后自动适配 | 在组件中硬编码 UI 库判断 |
 
-## 不包含的组件
+## 组件分类说明
 
-以下能力不在契约层，需在业务模块中自行封装：
+### 框架内置（无三库驱动映射）
+
+| 组件 | 说明 |
+|------|------|
+| `GrowIconify` | Iconify 图标，由 `rock-components` 全局注册，菜单/登录页均在使用 |
+
+### 参考项目封装（不纳入契约层）
+
+以下能力不在三库共有契约中，需在业务模块中自行封装：
 
 - `GrowTable`（vxe-table）
 - `GrowCubeTable`（@antv/s2）
-- `GrowIconify`（Iconify）
-- `GrowLocalePicker`（语言切换器）
+- `GrowLocalePicker`（请用 `SwitchLanguage` / `LoginLanguageSwitch` 替代）
 
 ## 下一步
 

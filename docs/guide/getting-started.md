@@ -67,19 +67,24 @@ pnpm serve
 启动后可以验证以下内容：
 
 1. 页面正常渲染，`<GrowButton>`、`<GrowInput>` 等契约组件显示为 Element Plus 风格
-2. 访问 `/login` 路由，查看登录模块页面
-3. 点击页面中的 `DriverDemo` 按钮，测试 Message / Notification 命令式 API
+2. 访问 `/` 路由，查看登录模块页面（支持主题/语言切换）
+3. 登录后进入 `/home` 布局，侧边栏显示树形菜单
+4. 点击「工作台」跳转至 `/home/workspace`，页面正常渲染
+5. 直接访问 `/home/workspace` URL，确认动态路由已正确注册
+5. 在设置抽屉或登录页测试 Message / Notification（参考 [命令式 API](/guide/development/imperative-api)）
 
 ## 常用命令
 
 | 命令 | 说明 |
 |------|------|
 | `pnpm serve` | 启动 sample 示例应用开发服务器 |
-| `pnpm build` | 生产构建（通过 scripts 包统一调度） |
+| `pnpm dev` | 交互式选择 workspace 包并行启动 dev（`scripts/dev.ts`） |
+| `pnpm build` | 生产构建全部包（`scripts/build.ts --all`） |
 | `pnpm stub` | 预构建 Vite 配置包 |
-| `pnpm clean` | 清理所有包的 node_modules 与构建产物 |
+| `pnpm clean` | Turbo clean + 删除根 `node_modules` |
 | `pnpm turbo:build` | 使用 Turbo 并行构建所有包 |
 | `pnpm turbo:dev` | 使用 Turbo 并行启动所有包的 dev 模式 |
+| `pnpm turbo:preview` | 使用 Turbo 并行预览构建产物 |
 
 ### sample 应用独立命令
 
@@ -107,7 +112,9 @@ sample/src/plugin/initIoc.ts
     ↓ installComponentDriver()   ← 加载组件驱动
     ↓ IocPlugin + 各 Library     ← 装配 IOC 模块
     ↓ appContext.load()          ← 加载 IOC 容器
+    ↓ bootstrapAppConfig()       ← 合并 projectSetting（首次）
     ↓ router.isReady()           ← 路由就绪后挂载
+    ↓ removeAppLoading()         ← 移除首屏 loading（双 rAF）
 ```
 
 关键文件：
@@ -124,4 +131,5 @@ sample/src/plugin/initIoc.ts
 
 - 了解 [项目结构](/guide/architecture/project-structure) 与 Monorepo 分层
 - 阅读 [IOC 模块化](/guide/architecture/ioc) 理解模块装配机制
+- 学习 [路由与菜单](/guide/architecture/routing-and-menu) 了解动态路由注册
 - 学习 [切换组件库](/guide/development/switch-component-library) 在三套 UI 库之间切换

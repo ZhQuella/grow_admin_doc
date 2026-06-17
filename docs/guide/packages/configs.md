@@ -56,7 +56,8 @@ export default defineConfig(async ({ command, mode }) => {
 | `vite-plugin-svg-icons` | SVG 图标 |
 | `vite-plugin-compression` | Gzip 压缩 |
 | `vite-plugin-html` | HTML 模板处理 |
-| `unocss` | 原子化 CSS |
+| `unocss` | 原子化 CSS（语义色映射、入场动画 preflight） |
+| `MonoRepoResolver` | Monorepo 包内 `#/` → `src/` 路径别名解析 |
 | `vite-plugin-monaco-editor` | Monaco 编辑器 |
 
 ### 预构建
@@ -140,6 +141,17 @@ configs/
 └── grow-admin-css-preprocess/
     └── postcss.js
 ```
+
+### MonoRepo 路径别名（`#/`）
+
+`configs/vite/src/plugins/monorepo.ts` 为 DesignRock / DesignCornerstone 包解析 `#/` 到包内 `src/` 目录。业务模块中常见写法：
+
+```typescript
+import { RouteList } from '#/routes'
+import { registerDynamicRoutes } from '#/routes/registerDynamicRoutes'
+```
+
+---
 
 ## 自定义配置
 

@@ -18,7 +18,11 @@ lang: zh-CN
 
 | 包名 | 说明 | 状态 |
 |------|------|------|
-| `@grow-admin-cornerstone/apps-login` | 账号登录模块 | 开发中 |
+| `@grow-admin-cornerstone/apps-login` | 账号登录模块 | 可用 |
+| `@grow-admin-cornerstone/apps-home` | 登录后首页布局壳 + 动态路由注册 | 可用 |
+| `@grow-admin-cornerstone/apps-workspace` | 工作区示例业务页（路由配置 + 页面） | 可用 |
+
+---
 
 ## @grow-admin-cornerstone/apps-login
 
@@ -37,7 +41,10 @@ cornerstone-apps-login/
     │   ├── index.ts      # 登录路由定义
     │   └── guard.ts      # 认证路由守卫
     ├── pages/
-    │   └── login.vue     # 登录页面
+    │   └── Login/        # 登录页面
+    ├── components/
+    │   ├── LoginThemeSwitch/
+    │   └── LoginLanguageSwitch/
     ├── usage.ts
     └── constant.ts
 ```
@@ -46,27 +53,113 @@ cornerstone-apps-login/
 
 | 路径 | 名称 | 说明 |
 |------|------|------|
-| `/login` | `Login` | 登录页（`isBasic: true`，白名单路由） |
+| `/` | `Login` | 登录页（`isBasic: true`，`whiteRoute: true`） |
 
 ### 导出
 
 ```typescript
-// 模块 Library
-export { Lib } from './library';
-
-// 用户 Store
-export { useUserStore } from './src';
-
-// 认证守卫
-export { createAuthGuard } from './src/routes/guard';
+export { Lib } from './library'
+export { createAuthGuard } from './src/routes/guard'  // 占位实现，实际守卫在 apps-home
+export { useLoginEvent, useLoginSuccess } from './src'
 ```
 
-### 宿主接入
+::: info 认证守卫归属
+真正的路由守卫（Token 校验、动态路由触发）在 **`apps-home`**，不在本模块。详见 [认证与登录](/guide/development/authentication)。
+:::
+
+---
+
+## @grow-admin-cornerstone/apps-home
+
+登录后的首页布局模块，提供 Home 布局壳、路由守卫与动态路由注册。
+
+### 目录结构
+
+```
+cornerstone-apps-home/
+├── index.ts
+├── library.ts
+├── package.json
+└── src/
+    ├── routes/
+    │   ├── index.ts                  # Home 静态路由
+    │   ├── guard.ts                  # 登录守卫 + 动态路由触发
+    │   └── registerDynamicRoutes.ts  # 拉取菜单、注册子路由
+    ├── api/
+    │   └── routers.ts                # getMenuList() 接口
+    └── pages/
+        ├── home.vue                  # 布局壳（Teleport 挂载菜单）
+        └── use/useAppBootstrap.ts
+```
+
+### 路由
+
+| 路径 | 名称 | 说明 |
+|------|------|------|
+| `/home` | `Home` | 首页布局壳（`isBasic: true`） |
+
+### 核心职责
+
+- 在 `onSetup` 中注册 `createAuthGuard()` 路由守卫
+- 登录后首次进入受保护路由时，调用 `registerDynamicRoutes()` 拉取菜单并注册子路由
+- 将完整树形菜单写入 `authStore.backMenuList`，供 `rock-layouts` 侧边栏渲染
+
+详见 [路由与菜单](/guide/architecture/routing-and-menu)。
+
+---
+
+## @grow-admin-cornerstone/apps-workspace
+
+工作区示例业务模块，演示**路由配置与组件映射分离**的模式。
+
+### 目录结构
+
+```
+cornerstone-apps-workspace/
+├── index.ts
+├── library.ts
+├── package.json
+└── src/
+    ├── routes/
+    │   ├── config.ts     # 可序列化树形菜单/路由元数据（Mock 安全导出）
+    │   └── index.ts      # 组件映射 + resolveWorkspaceRoute()
+    └── pages/
+        ├── workspace.vue
+        └── settings.vue
+```
+
+### 导出
 
 ```typescript
-import { Lib as appsLoginLib, useUserStore } from '@grow-admin-cornerstone/apps-login';
+// 主入口
+export { WORKSPACE_ROUTE_CONFIGS, flattenWorkspaceRouteConfigs, resolveWorkspaceRoute } from './src/routes'
 
-app.use(appsLoginLib, appContext);
+// 子路径导出（供 Mock 引用，避免打包 .vue）
+import { WORKSPACE_ROUTE_CONFIGS } from '@grow-admin-cornerstone/apps-workspace/route-config'
+```
+
+### 路由配置模式
+
+| 文件 | 职责 | 含 `.vue` 组件 |
+|------|------|---------------|
+| `config.ts` | 树形菜单/路由元数据，供接口与 Mock 返回 | ❌ |
+| `index.ts` | `WORKSPACE_COMPONENTS` 映射 + `resolveWorkspaceRoute()` | ✅ |
+
+`library.ts` 中 `routes: []`，业务子路由不由静态注册，而是通过 `apps-home` 动态注入。
+
+---
+
+## 宿主接入
+
+```typescript
+import { Lib as appsLoginLib } from '@grow-admin-cornerstone/apps-login'
+import { Lib as appsHomeLib } from '@grow-admin-cornerstone/apps-home'
+import { Lib as appsWorkspaceLib } from '@grow-admin-cornerstone/apps-workspace'
+
+app
+  .use(appsLoginLib, appContext)
+  .use(appsHomeLib, appContext)
+  .use(appsWorkspaceLib, appContext)
 ```
 
 ## 创建新业务模块
@@ -97,30 +190,31 @@ mkdir -p DesignCornerstone/cornerstone-apps-<name>/src/{routes,pages}
 ### 3. 声明 Library
 
 ```typescript
-// library.ts
-import { install } from '@grow-admin-rock/base-package';
-import { RouteList } from '#/routes';
+import { install } from '@grow-admin-rock/base-package'
+import { RouteList } from '#/routes'
 
 export const Lib = {
   install,
   name: '@grow-admin-cornerstone/apps-<name>',
   version: '0.0.0',
   routes: RouteList,
-};
+}
 ```
 
 ### 4. 宿主注册
 
 在 `sample/package.json` 添加依赖，在 `initIoc.ts` 中 `.use(newLib, appContext)`。
 
+若业务页面需动态注册，参考 `apps-workspace` 的配置分离模式，由 `apps-home` 的 `registerDynamicRoutes` 统一注入。
+
 ## 命名规范
 
 | 部分 | 规范 | 示例 |
 |------|------|------|
-| 目录名 | `cornerstone-apps-<功能>` | `cornerstone-apps-login` |
-| 包名 | `@grow-admin-cornerstone/apps-<功能>` | `@grow-admin-cornerstone/apps-login` |
-| 路由 | 模块内 `src/routes/index.ts` 定义 | `/login` |
-| 页面 | 模块内 `src/pages/` 存放 | `login.vue` |
+| 目录名 | `cornerstone-apps-<功能>` | `cornerstone-apps-workspace` |
+| 包名 | `@grow-admin-cornerstone/apps-<功能>` | `@grow-admin-cornerstone/apps-workspace` |
+| 路由 | 模块内 `src/routes/index.ts` 定义 | `/home` |
+| 页面 | 模块内 `src/pages/` 存放 | `workspace.vue` |
 
 ## 开发规范
 
@@ -130,8 +224,10 @@ export const Lib = {
 | 路由守卫放在模块内 | 在宿主中编写业务守卫 |
 | peer 依赖 `@grow-admin-rock/components` | 安装组件驱动 |
 | 通过 `library.ts` 暴露能力 | 直接修改宿主代码添加业务逻辑 |
+| 动态路由配置与组件映射分离 | 在 Mock 中 import `.vue` 文件 |
 
 ## 下一步
 
+- [路由与菜单](/guide/architecture/routing-and-menu) — 动态路由注册机制
 - [业务模块开发指南](/guide/development/business-module)
 - [configs 构建配置](/guide/packages/configs)

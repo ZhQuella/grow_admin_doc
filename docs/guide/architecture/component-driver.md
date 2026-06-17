@@ -7,6 +7,54 @@ lang: zh-CN
 
 Grow Admin 通过**组件驱动桥接层**实现业务代码与具体 UI 组件库的解耦。业务模块只使用 `Grow*` 契约组件，组件库切换在宿主应用中统一配置。
 
+## 设计理念：为什么要组件驱动？
+
+### 传统做法的问题
+
+```vue
+<!-- 业务代码直接绑定 Element Plus -->
+<el-button type="primary">提交</el-button>
+```
+
+一旦遇到以下情况，成本陡增：
+
+- 公司设计规范要求换 Naive UI / Ant Design Vue
+- 不同子公司使用不同组件库，但共用同一套业务模块
+- 升级 major 版本时 API 大面积变更
+
+全局搜索替换不仅费时，还容易漏改样式、指令、命令式 API（`ElMessage` 等）。
+
+### 桥接层解决什么？
+
+Grow Admin 在业务与 UI 库之间插入**稳定契约层**：
+
+```
+业务 ──认识──▶ GrowButton ──映射──▶ ElButton / NButton / AButton
+              （不变）              （可替换）
+```
+
+| 原则 | 含义 |
+|------|------|
+| **只抽象共有能力** | 84 个三库都有的组件，不虚构统一 API |
+| **切换在宿主** | 业务包不安装、不感知具体 UI 库 |
+| **局部可覆盖** | `ComponentDriverProvider` 应对特殊子树 |
+
+### 带来的好处
+
+- **业务模块可发布为纯净 npm 包**（peer 依赖 `@grow-admin-rock/components`）
+- **切换 UI 库 ≈ 改宿主两处配置**（`projectSetting` + `vite preset`）
+- **契约清单 = 兼容承诺**，超出 84 个的由业务自行封装，不污染框架
+
+### 为什么不做一个「超级 UI 组件库」？
+
+大而全的二次封装往往：
+
+- Props 与原生库差异大，文档难维护
+- 新库特性滞后，成为瓶颈
+- 业务同学既要学 Grow API 又要学底层库
+
+**驱动映射**比**重新发明组件**更轻：Grow 组件本身是薄包装，主要做名称统一与驱动查找，行为尽量透传底层库。
+
 ## 三层结构
 
 ```
@@ -24,6 +72,15 @@ Grow* 契约组件（@grow-admin-rock/components）
 1. **业务模块只使用 `Grow*` 契约组件**，禁止直接 `import element-plus` / `naive-ui` / `ant-design-vue`
 2. **组件库切换在宿主应用统一配置**，业务模块无需关心底层实现
 3. **支持全局一种组件库 + 局部子树覆盖另一种**（通过 `ComponentDriverProvider`）
+
+### 运行时 vs 构建时：为何要两处配置？
+
+| 配置 | 控制什么 | 若不一致会怎样 |
+|------|----------|----------------|
+| `projectSetting.componentLibrary` | 运行时 Grow 组件映射到哪个驱动 | 组件能渲染但行为怪异 |
+| `vite.config preset` | 构建时三方组件自动导入、样式预处理 | 样式缺失、类型报错 |
+
+运行时决定「画什么」，构建时决定「怎么打包」——**双轨一致**才能既切换自由又构建正确。
 
 ## 契约组件（Grow*）
 
@@ -50,13 +107,16 @@ export enum RockComponent {
 </template>
 ```
 
-### 不包含的组件
-
-以下组件属于参考项目自行封装，**不纳入契约层**：
+### 框架内置、无驱动映射的组件
 
 | 组件 | 说明 |
 |------|------|
-| `GrowIconify` | 基于 Iconify 的自定义图标 |
+| `GrowIconify` | 框架自实现 Iconify 封装，全局注册，无三库驱动映射 |
+
+### 参考项目封装（不纳入契约层）
+
+| 组件 | 说明 |
+|------|------|
 | `GrowTable` | 基于 vxe-table 的表格封装 |
 | `GrowCubeTable` | 基于 @antv/s2 的多维表格 |
 | `GrowLocalePicker` | 自定义语言切换器 |
@@ -158,6 +218,7 @@ const driver = NaiveComponentDriver.builder()
 
 ## 下一步
 
+- [架构设计理念](/guide/architecture/design-philosophy) — 组件驱动在整体架构中的权衡
 - [切换组件库](/guide/development/switch-component-library) — 实操切换流程
 - [Grow 契约组件使用](/guide/development/grow-components) — 组件用法与 API
 - [命令式 API](/guide/development/imperative-api) — Message / Notification / Dialog

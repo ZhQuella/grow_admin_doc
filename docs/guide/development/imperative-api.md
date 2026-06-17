@@ -124,7 +124,7 @@ function showConfirm() {
 
 ## 完整示例
 
-`sample/src/components/DriverDemo.vue` 提供了可运行的演示：
+在任意业务页面中验证命令式 API（确保根组件已包裹 Provider，见 `sample/src/App.vue`）：
 
 ```vue
 <script setup lang="ts">
