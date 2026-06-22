@@ -36,7 +36,7 @@ lang: zh-CN
 | 命令 | 说明 |
 |------|------|
 | `pnpm install` | 安装依赖（自动 `postinstall` → `pnpm stub`） |
-| `pnpm serve` | 启动 sample 示例应用（默认 http://localhost:3000） |
+| `pnpm serve` | 启动 sample 示例应用（默认 `http://localhost:3000`） |
 | `pnpm build` | 生产构建（`scripts/build.ts --all`） |
 | `pnpm stub` | 预构建 `@grow-admin-config/vite` 配置包 |
 | `pnpm clean` | Turbo clean + 删除根 `node_modules` |
