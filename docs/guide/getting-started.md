@@ -52,7 +52,7 @@ pnpm install
 pnpm serve
 ```
 
-默认访问地址：**http://localhost:3000**
+默认访问地址：`http://localhost:3000`
 
 启动成功后，控制台应输出类似信息：
 
