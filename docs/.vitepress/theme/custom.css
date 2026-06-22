@@ -1,0 +1,18 @@
+/**
+ * Grow Admin 文档站主题色 — 与框架默认 themeColor #8b5cf6 对齐
+ */
+:root {
+  --vp-c-brand: #8b5cf6;
+  --vp-c-brand-light: #a78bfa;
+  --vp-c-brand-lighter: #c4b5fd;
+  --vp-c-brand-dark: #7c3aed;
+  --vp-c-brand-darker: #6d28d9;
+}
+
+.dark {
+  --vp-c-brand: #a78bfa;
+  --vp-c-brand-light: #c4b5fd;
+  --vp-c-brand-lighter: #ddd6fe;
+  --vp-c-brand-dark: #8b5cf6;
+  --vp-c-brand-darker: #7c3aed;
+}
