@@ -92,8 +92,7 @@ export enum RockComponent {
   Input = 'Input',
   Select = 'Select',
   Form = 'Form',
-  Table = 'Table',  // 注：Table 不在共有组件中
-  // ... 共 84 个
+  // ... 共 84 个（不含 Table 等三库非共有组件）
 }
 ```
 
@@ -186,7 +185,7 @@ const driver = EPComponentDriver.builder()
 
 ## 局部覆盖
 
-当某个页面需要使用与全局不同的组件库时，用 `ComponentDriverProvider` 包裹子树：
+全局默认一种 UI 库；个别页面需要另一种时，用 `ComponentDriverProvider` 包裹子树，并传入对应驱动包的 `builder().enableXxx().finish()`。
 
 ```vue
 <script setup>
@@ -201,12 +200,22 @@ const driver = NaiveComponentDriver.builder()
 
 <template>
   <ComponentDriverProvider :driver="driver">
+    <!-- 此区域内的 Grow* 组件走 Naive UI 驱动 -->
     <GrowButton>局部 Naive 按钮</GrowButton>
   </ComponentDriverProvider>
 </template>
 ```
 
-详见 [局部覆盖组件库](/guide/development/local-override)。
+按需启用示例（Element Plus 只开按钮和日期选择器）：
+
+```typescript
+EPComponentDriver.builder()
+  .enableButton()
+  .enableDatePicker()
+  .finish();
+```
+
+完整说明、三库 Builder 示例与注意事项见 [局部覆盖组件库](/guide/development/local-override)。
 
 ## 开发规范
 
@@ -215,6 +224,8 @@ const driver = NaiveComponentDriver.builder()
 | 模板中使用 `<GrowButton>` 等契约组件 | 直接 `import { ElButton } from 'element-plus'` |
 | 通过 `projectSetting.componentLibrary` 切换库 | 在业务模块内安装/切换驱动 |
 | 特殊场景使用 `ComponentDriverProvider` | 绕过桥接层直接使用三方组件 |
+
+完整规范见 [开发规范](/guide/development/dev-conventions)。
 
 ## 下一步
 

@@ -7,6 +7,26 @@ lang: zh-CN
 
 `Grow*` 契约组件是 Grow Admin 的核心 UI 抽象层。业务代码通过 `Grow` 前缀组件与 UI 库交互，无需关心底层是 Element Plus、Naive UI 还是 Ant Design Vue。
 
+## 在页面中使用（README 示例）
+
+契约组件以 **`Grow` 前缀**全局注册，模板中可直接使用：
+
+```vue
+<template>
+  <GrowButton type="primary">提交</GrowButton>
+  <GrowInput v-model="value" placeholder="请输入" />
+  <GrowSelect v-model="selected" :options="options" />
+</template>
+```
+
+在 `<script>` 中需要底层驱动组件时：
+
+```typescript
+import { useDriverComponent, RockComponent } from '@grow-admin-rock/components';
+
+const Button = useDriverComponent(RockComponent.Button);
+```
+
 ## 全局注册
 
 契约组件在 `componentsLib.onSetup` 阶段根据驱动字典全局注册，可直接在模板中使用，无需手动 import：
@@ -107,23 +127,19 @@ const buttonComponent = ComponentMap.get(RockComponent.Button);
 | `useDriverComponent(RockComponent.Button)` | 直接引用三方组件 |
 | 通过 `projectSetting` 切换后自动适配 | 在组件中硬编码 UI 库判断 |
 
-## 组件分类说明
+## 不包含的组件（不纳入 84 个共有契约）
 
-### 框架内置（无三库驱动映射）
+以下属于参考项目自行封装，**不纳入本项目契约层**。若业务需要，请在 `DesignCornerstone` 中自行实现：
 
 | 组件 | 说明 |
 |------|------|
-| `GrowIconify` | Iconify 图标，由 `rock-components` 全局注册，菜单/登录页均在使用 |
-
-### 参考项目封装（不纳入契约层）
-
-以下能力不在三库共有契约中，需在业务模块中自行封装：
-
-- `GrowTable`（vxe-table）
-- `GrowCubeTable`（@antv/s2）
-- `GrowLocalePicker`（请用 `SwitchLanguage` / `LoginLanguageSwitch` 替代）
+| `GrowIconify` | 基于 Iconify 的自定义图标组件 |
+| `GrowTable` | 基于 vxe-table 的表格封装 |
+| `GrowCubeTable` | 基于 @antv/s2 的多维表格 |
+| `GrowLocalePicker` | 自定义语言切换器（请用 `LoginLanguageSwitch` / `SwitchLanguage`） |
 
 ## 下一步
 
 - [命令式 API](/guide/development/imperative-api) — Message / Notification / Dialog
 - [局部覆盖组件库](/guide/development/local-override)
+- [开发规范](/guide/development/dev-conventions)

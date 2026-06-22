@@ -20,7 +20,7 @@ Grow Admin 是一个基于 **Vue 3 / Vite / TypeScript** 的 Monorepo 管理后�
 
 传统 Admin 框架通常将业务代码、组件封装、工具函数全部堆叠在单一应用中，模块之间耦合紧密，难以独立演进。
 
-Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 设计。建议先阅读 [架构设计理念](/guide/architecture/design-philosophy) 了解整体设计动机，再深入各专题章节。
+Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 设计。
 
 | 维度 | 传统 Admin | Grow Admin |
 |------|-----------|------------|
@@ -45,19 +45,69 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 - GitHub：[https://github.com/ZhQuella/grow_admin](https://github.com/ZhQuella/grow_admin)
 - 在线演示：[https://demo.gadmin.top/](https://demo.gadmin.top/)
 
+## 推荐阅读顺序
+
+文档按左侧菜单从 **入门 → 架构 → 组件库 → 开发 → 规范 → 包说明** 排列，建议按序阅读：
+
+1. **[快速上手](/guide/getting-started)** — 先跑起来
+2. **架构** — 懂目录、模块装配、路由菜单
+3. **组件库** — 写页面用 `Grow*` 组件，按需换 UI 库
+4. **开发指南** — 配项目、主题、登录、请求、写业务模块
+5. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+6. **包说明** — 查某个 npm 包是干什么的
+
 ## 文档导航
+
+### 入门
 
 | 章节 | 说明 |
 |------|------|
-| [架构设计理念](/guide/architecture/design-philosophy) | 为什么这样设计、有什么好处 |
-| [快速上手](/guide/getting-started) | 环境准备、安装、启动 |
+| [快速上手](/guide/getting-started) | 安装、启动、验证示例 |
+
+### 架构
+
+| 章节 | 说明 |
+|------|------|
+| [架构设计理念](/guide/architecture/design-philosophy) | 为什么这样设计 |
 | [项目结构](/guide/architecture/project-structure) | Monorepo 目录与分层 |
-| [IOC 模块化](/guide/architecture/ioc) | 依赖注入与 Library 机制 |
-| [组件驱动架构](/guide/architecture/component-driver) | Grow* 契约组件与驱动桥接 |
-| [路由与菜单](/guide/architecture/routing-and-menu) | 静态路由 + 动态注册 + 侧边菜单 |
+| [IOC 模块化](/guide/architecture/ioc) | Library 与模块装配 |
+| [路由与菜单](/guide/architecture/routing-and-menu) | 静态路由 + 动态菜单 |
+
+### 组件库
+
+| 章节 | 说明 |
+|------|------|
+| [组件驱动架构](/guide/architecture/component-driver) | Grow* 与驱动桥接原理 |
+| [Grow 契约组件](/guide/development/grow-components) | 模板里怎么用 |
+| [命令式 API](/guide/development/imperative-api) | Message / Dialog 等 |
+| [切换组件库](/guide/development/switch-component-library) | 全局换 Element / Naive / Antdv |
+| [局部覆盖组件库](/guide/development/local-override) | 单页换库（进阶） |
+
+### 开发指南
+
+| 章节 | 说明 |
+|------|------|
+| [项目配置](/guide/development/project-setting) | `projectSetting`、环境变量 |
+| [主题与颜色](/guide/development/theme-and-colors) | 主题色、CSS 变量、UnoCSS |
+| [主题与语言](/guide/development/theme-and-locale) | 亮暗模式、中英文切换 |
 | [认证与登录](/guide/development/authentication) | Token、守卫、登录流程 |
-| [开发指南](/guide/development/project-setting) | 配置、主题、Mock、HTTP、业务模块开发 |
-| [包说明](/guide/packages/design-rock) | DesignRock / DesignCornerstone / configs 各包职责 |
+| [HTTP 基础设施](/guide/development/http-infrastructure) | 请求封装与解包 |
+| [Mock 数据](/guide/development/mock) | 本地假接口 |
+| [业务模块开发](/guide/development/business-module) | 新建 Cornerstone 包 |
+
+### 规范与约定
+
+| 章节 | 说明 |
+|------|------|
+| [开发规范](/guide/development/dev-conventions) | 推荐做法、命令、包速查 |
+
+### 包说明
+
+| 章节 | 说明 |
+|------|------|
+| [DesignRock 核心层](/guide/packages/design-rock) | 框架 npm 包 |
+| [DesignCornerstone 业务层](/guide/packages/design-cornerstone) | 业务 npm 包 |
+| [构建配置](/guide/packages/configs) | Vite、TSConfig 等 |
 
 ::: tip 包管理器
 本项目使用 **pnpm** 管理 Monorepo 工作区，请使用 pnpm 安装依赖，不要使用 npm 或 yarn。

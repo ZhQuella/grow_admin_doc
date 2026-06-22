@@ -43,6 +43,8 @@ export const projectSetting: ProjectSetting = {
 
 若本地已有持久化配置，需清除站点 `localStorage` 或在设置抽屉点击「重置配置」才能看到新默认值。
 
+Pinia 内置默认值在 `DesignRock/rock-state/src/modules/appConfig.ts` 的 `themeColor`，一般**不必改**；以宿主 `projectSetting.ts` 为准即可。
+
 ## 增加 / 修改设置抽屉中的可选主题色
 
 设置抽屉的色块来自常量 **`APP_THEME_COLOR_LIST`**：
@@ -78,7 +80,9 @@ export const APP_THEME_COLOR_LIST: string[] = [
 ```
 
 ::: tip 注意
-运行时切换 `themeColor` 时，`useTheme` 会按主色**自动计算** hover / active 及 Element Plus 的 `--el-color-primary-light-*`，并写入 `:root` 行内样式。`variables.css` 里的静态值主要作**首屏回退**。
+- 运行时切换 `themeColor` 时，`useTheme` 会按主色**自动计算** hover / active 及 Element Plus 的 `--el-color-primary-light-*`，并写入 `:root` 行内样式。
+- `variables.css` 里的 `--primary-color-hover` 等主要作**首屏回退**；动态主色以 JS 计算结果为准。
+- 新增语义变量时，建议在 `:root` 与 `:root.dark` 各写一套。
 :::
 
 ## 在页面中使用颜色（UnoCSS）
@@ -96,7 +100,7 @@ UnoCSS 已映射到 CSS 变量（`configs/vite/src/plugins/unocss.ts`），**无
 | `shadow-card` | 卡片阴影（随主题变化） |
 | `surface-panel` | shortcut：`bg-component border border-border rounded-lg` |
 
-示例：
+示例（参考 `cornerstone-apps-login` 登录页）：
 
 ```vue
 <template>
@@ -109,7 +113,24 @@ UnoCSS 已映射到 CSS 变量（`configs/vite/src/plugins/unocss.ts`），**无
 </template>
 ```
 
-**新增 UnoCSS 语义色：** 在 `configs/vite/src/plugins/unocss.ts` 的 `theme.colors` 增加映射，并在 `variables.css` 定义对应变量。修改 UnoCSS 配置后需重启 dev server。
+**新增 UnoCSS 语义色：** 在 `configs/vite/src/plugins/unocss.ts` 的 `theme.colors` 增加映射，并在 `variables.css` 定义对应变量：
+
+```typescript
+// configs/vite/src/plugins/unocss.ts
+theme: {
+  colors: {
+    accent: 'var(--accent-color)', // 新增
+  },
+},
+```
+
+```css
+/* rock-styles/src/variables.css */
+:root { --accent-color: #f59e0b; }
+:root.dark { --accent-color: #fbbf24; }
+```
+
+修改 UnoCSS 配置后需重启 dev server。
 
 ## 三库主色同步
 
@@ -123,6 +144,8 @@ UnoCSS 已映射到 CSS 变量（`configs/vite/src/plugins/unocss.ts`），**无
 
 业务代码使用 `GrowButton type="primary"` 等即可，**不要**在业务里单独写各库主色。
 
+Ant Design Vue 构建期 Less 变量在 `configs/vite/src/presets/antd.ts` 的 `primary-color`；若默认主色与线上一致，可同步修改该文件（主要影响构建期 antd 基础样式）。
+
 ## 主题模式（亮 / 暗 / 跟随系统）
 
 | 配置项 | 位置 | 说明 |
@@ -130,7 +153,7 @@ UnoCSS 已映射到 CSS 变量（`configs/vite/src/plugins/unocss.ts`），**无
 | 默认模式 | `initAppConfig` → `themeMode: ThemeModeEnum.SYSTEM` | 跟随系统 |
 | 运行时切换 | 登录页 `LoginThemeSwitch` / 设置抽屉 `SettingTheme` | 写入 `useAppConfig` |
 | 暗色 class | `html.dark` | UnoCSS `dark:` 与 EP 暗色变量均依赖此类 |
-| 切换动画 | `rock-styles/src/theme-transition.css` | 约 0.35s |
+| 切换动画 | `rock-styles/src/theme-transition.css` | 约 0.35s，可在 `variables.css` 调整 `--theme-transition-duration` |
 
 ## 开发自检清单
 

@@ -50,6 +50,43 @@ DesignCornerstone/cornerstone-apps-workspace/
         └── settings.vue
 ```
 
+业务模块**不需要**自行安装驱动，依赖宿主应用完成初始化。
+
+### 宿主启动顺序（README 最小示例）
+
+`sample/src/plugin/initIoc.ts` 中顺序必须保持（完整列表见 [IOC 模块化](/guide/architecture/ioc)）：
+
+```typescript
+await installComponentDriver(app, appContext);  // 1. 安装驱动
+app
+  .use(IocPlugin, iocOptions)
+  .use(infrastructureLib, appContext)
+  .use(routeLib, appContext)
+  .use(appsLoginLib, appContext)
+  .use(componentsLib, appContext);              // 2. 注册 Grow 组件
+await appContext.load(app);
+```
+
+### 业务页面示例（apps-login）
+
+```vue
+<!-- DesignCornerstone/cornerstone-apps-login/src/pages/... -->
+<script lang="ts" setup>
+import { ref } from 'vue';
+
+const username = ref('');
+const password = ref('');
+</script>
+
+<template>
+  <div class="flex flex-col items-center gap-4 p-8">
+    <GrowInput v-model="username" placeholder="用户名" />
+    <GrowInput v-model="password" type="password" placeholder="密码" />
+    <GrowButton type="primary">登录</GrowButton>
+  </div>
+</template>
+```
+
 ## 声明 Library
 
 `library.ts` 是模块与宿主之间的契约：

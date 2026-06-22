@@ -24,6 +24,20 @@ Grow Admin 支持在 Element Plus、Naive UI、Ant Design Vue 三套 UI 组件�
 只改一处会导致样式缺失或组件行为异常。
 :::
 
+## 切换流程（运行时）
+
+```
+projectSetting.componentLibrary
+        ↓
+sample/src/init-components-driver.ts   ← 动态 import 对应驱动包
+        ↓
+driver.builder().enableAll()           ← 注册全部组件映射
+        ↓
+AppContext.DriverComponentDictionary
+        ↓
+componentsLib.onSetup → registerGrowComponent()  ← 全局注册 Grow* 组件
+```
+
 ## 切换到 Element Plus（默认）
 
 **第一步** — `sample/src/projectSetting.ts`：
@@ -53,6 +67,10 @@ pnpm serve
 
 控制台应输出：`[ComponentDriver] 已加载组件库驱动: element-plus`
 
+::: info Message / Dialog 自动绑定
+Element Plus 的 Message、Notification、Dialog 会在 `init-components-driver.ts` 中自动绑定（`ElMessage` / `ElNotification` / `ElMessageBox`），无需额外配置。
+:::
+
 ## 切换到 Naive UI
 
 **第一步** — `projectSetting.ts`：
@@ -70,7 +88,7 @@ componentLibrary: ComponentLibraryType.NaiveUI,
 **第三步** — 重启，确认控制台输出：`naive-ui`
 
 ::: info Provider 包裹
-Naive UI 的 `useMessage()` 等必须在 `GrowMessageProvider` 子树中调用。确保 `App.vue` 已正确包裹 Provider，参考 [命令式 API](/guide/development/imperative-api)。
+Naive UI 的 `useMessage()`、`useNotification()`、`useDialog()` 会在 `init-components-driver.ts` 中自动绑定；调用时须在 `GrowMessageProvider` 子树中。确保 `App.vue` 已正确包裹 Provider，参考 [命令式 API](/guide/development/imperative-api)。
 :::
 
 ## 切换到 Ant Design Vue
@@ -93,7 +111,22 @@ componentLibrary: ComponentLibraryType.AntDesignVue,
 
 1. 控制台出现 `[ComponentDriver] 已加载组件库驱动: xxx`
 2. 页面中 `<GrowButton>`、`<GrowInput>` 渲染为对应 UI 库风格
-3. 浏览器开发者工具中，对应 UI 库的 CSS 已加载
+3. 浏览器开发者工具中，对应 UI 库的 CSS 已加载（驱动包在入口自动引入样式）
+
+## 按环境使用不同组件库
+
+`projectSetting.ts` 在 `pnpm serve` 与 `pnpm build` 中均生效。若开发用 Element Plus、生产用 Naive UI，可在 `projectSetting.ts` 分支：
+
+```typescript
+export const projectSetting: ProjectSetting = {
+  componentLibrary: import.meta.env.PROD
+    ? ComponentLibraryType.NaiveUI
+    : ComponentLibraryType.ElementPlus,
+  // ...
+};
+```
+
+`vite.config.ts` 也需按 `mode` 传入不同 `preset`，或通过 `.env.development` / `.env.production` 配合脚本选择。
 
 ## 常见问题
 
@@ -104,13 +137,12 @@ componentLibrary: ComponentLibraryType.AntDesignVue,
 | 切换后组件行为异常 | 只改了 `projectSetting` 没改 `preset` | 两处必须同时切换 |
 | `ComponentMap is not defined` | 驱动包构建缓存问题 | 清除缓存：`rm -rf sample/node_modules/.vite` |
 
-## 开发环境与生产环境
+## 局部覆盖（特殊场景）
 
-`projectSetting.ts` 在 `pnpm serve` 和 `pnpm build` 中均生效，切换方式相同。
-
-若需按环境区分，可在 `projectSetting.ts` 中根据 `import.meta.env` 分支，同时调整 `vite.config.ts` 的 `preset`。
+若只是**某一个页面**要用与全局不同的 UI 库，不必改 `projectSetting`，用 `ComponentDriverProvider` 包裹子树即可。详见 [局部覆盖组件库](/guide/development/local-override)。
 
 ## 下一步
 
+- [局部覆盖组件库](/guide/development/local-override) — 单页换库
 - [Grow 契约组件使用](/guide/development/grow-components)
 - [命令式 API](/guide/development/imperative-api)

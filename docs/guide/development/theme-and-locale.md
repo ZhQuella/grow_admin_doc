@@ -99,13 +99,17 @@ import { ThemeModeEnum } from '@grow-admin-rock/constants'
 import { LOCALE, useLocale } from '@grow-admin-rock/locale'
 import { useAppConfig } from '@grow-admin-rock/state'
 
+// 主题
 const appConfig = useAppConfig()
-appConfig.setThemeMode(ThemeModeEnum.DARK)
+appConfig.setThemeMode(ThemeModeEnum.DARK)    // 暗色
+appConfig.setThemeMode(ThemeModeEnum.LIGHT)   // 亮色
+appConfig.setThemeMode(ThemeModeEnum.SYSTEM)  // 跟随系统
 appConfig.setThemeColor('#8b5cf6')
 
+// 语言
 const { changeLocale } = useLocale()
-await changeLocale(LOCALE.zh)
-await changeLocale(LOCALE.en)
+await changeLocale(LOCALE.zh) // 简体中文（默认）
+await changeLocale(LOCALE.en) // English
 ```
 
 | 能力 | 包 | API |

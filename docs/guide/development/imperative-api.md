@@ -36,6 +36,7 @@ Naive UI 的 `useMessage()` 等必须在 `GrowMessageProvider` 子树的组件 `
       <GrowMessageProvider>
         <GrowDialogProvider>
           <router-view />
+          <!-- 业务页面作为 Provider 的子组件 -->
         </GrowDialogProvider>
       </GrowMessageProvider>
     </GrowNotificationProvider>
@@ -124,7 +125,7 @@ function showConfirm() {
 
 ## 完整示例
 
-在任意业务页面中验证命令式 API（确保根组件已包裹 Provider，见 `sample/src/App.vue`）：
+`sample/src/components/DriverDemo.vue` 提供了可运行演示，启动 `pnpm serve` 后点击按钮即可验证（若 sample 中已挂载该组件）：
 
 ```vue
 <script setup lang="ts">
@@ -154,7 +155,7 @@ function handleNotice() {
 </template>
 ```
 
-启动 `pnpm serve` 后点击页面按钮即可验证。
+也可在任意业务页面中按同样方式调用（确保根组件已包裹 Provider，见 `sample/src/App.vue`）。
 
 ## API 对照速查
 
