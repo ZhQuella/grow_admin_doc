@@ -32,6 +32,31 @@ Grow Admin 用 **Rock（框架）/ Cornerstone（业务）/ sample（宿主）/ 
 
 ## 顶层目录
 
+与 README 一致的核心结构：
+
+```
+grow_admin/
+├── DesignRock/              # 框架核心层
+│   ├── rock-components/     # 契约组件（Grow* 前缀）
+│   ├── rock-layouts/        # 布局壳（设置抽屉、菜单、标签页等）
+│   ├── rock-state/          # 应用状态（主题、配置持久化）
+│   ├── rock-styles/         # 全局样式与 CSS 变量
+│   ├── rock-component-driver/              # 驱动桥接基础包
+│   ├── rock-component-driver-element-plus/   # Element Plus 驱动
+│   ├── rock-component-driver-naive/          # Naive UI 驱动
+│   ├── rock-component-driver-antdv/          # Ant Design Vue 驱动
+│   ├── rock-ioc/            # 依赖注入
+│   └── ...
+├── DesignCornerstone/       # 业务模块层
+│   ├── cornerstone-apps-login/     # 登录模块
+│   ├── cornerstone-apps-home/      # 首页（布局 + 动态路由）
+│   └── cornerstone-apps-workspace/ # 工作区（页面 + 路由配置）
+├── configs/                 # 共享构建配置（含 UnoCSS 主题色映射）
+└── sample/                  # 宿主示例应用
+```
+
+仓库内还有 `scripts/`、`package.json`、`pnpm-workspace.yaml`、`turbo.json` 等，用于 Monorepo 与构建调度。
+
 ```
 grow_admin/
 ├── DesignRock/              # 框架核心层（磐石）

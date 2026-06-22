@@ -5,7 +5,9 @@ lang: zh-CN
 
 # DesignRock 核心层包说明
 
-`DesignRock`（磐石）是 Grow Admin 的框架核心层，所有包以 `@grow-admin-rock/*` 命名，提供与具体业务无关的基础设施。
+`DesignRock`（磐石）是 Grow Admin 的框架核心层，所有包以 `@grow-admin-rock/*` 命名。
+
+README「相关包说明」速查表见 [开发规范 - 相关包速查](/guide/development/dev-conventions#相关包速查)。
 
 ## 包总览
 

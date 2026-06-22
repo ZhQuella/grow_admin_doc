@@ -129,7 +129,11 @@ sample/src/plugin/initIoc.ts
 
 ## 下一步
 
-- 了解 [项目结构](/guide/architecture/project-structure) 与 Monorepo 分层
-- 阅读 [IOC 模块化](/guide/architecture/ioc) 理解模块装配机制
-- 学习 [路由与菜单](/guide/architecture/routing-and-menu) 了解动态路由注册
-- 学习 [切换组件库](/guide/development/switch-component-library) 在三套 UI 库之间切换
+按推荐学习路径继续：
+
+1. [项目结构](/guide/architecture/project-structure) — 文件夹都是干什么的
+2. [IOC 模块化](/guide/architecture/ioc) — 模块怎么装进 sample
+3. [路由与菜单](/guide/architecture/routing-and-menu) — 菜单从哪来
+4. [Grow 契约组件](/guide/development/grow-components) — 开始写页面
+
+完整路径见 [简介 - 推荐阅读顺序](/guide/#推荐阅读顺序)。
