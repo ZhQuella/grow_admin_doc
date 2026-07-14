@@ -16,9 +16,22 @@ module.exports = {
     ],
     nav: [
       { text: '指南', link: '/guide/' },
+      { text: '组件', link: '/components/' },
       { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
     ],
     sidebar: {
+      "/components/": [
+        {
+          text: '组件',
+          items: [
+            { text: '概览', link: '/components/' },
+            { text: 'SearchBar 高级搜索栏', link: '/components/search-bar' },
+            { text: 'ColumnBar 表格列设置', link: '/components/column-bar' },
+            { text: 'AbstractEle 动态表单项', link: '/components/abstract-ele' },
+            { text: '其他组件', link: '/components/other' }
+          ]
+        }
+      ],
       "/guide/": [
         {
           text: '入门',
@@ -37,24 +50,41 @@ module.exports = {
           ]
         },
         {
+          text: '配置与主题',
+          items: [
+            { text: '项目配置', link: '/guide/development/project-setting' },
+            { text: '主题与颜色', link: '/guide/development/theme-and-colors' },
+            { text: '主题与语言', link: '/guide/development/theme-and-locale' }
+          ]
+        },
+        {
+          text: '认证与权限',
+          items: [
+            { text: '认证与登录', link: '/guide/development/authentication' },
+            { text: '权限模式', link: '/guide/development/permission-mode' }
+          ]
+        },
+        {
+          text: '网络与数据',
+          items: [
+            { text: 'HTTP 基础设施', link: '/guide/development/http-infrastructure' },
+            { text: 'Mock 数据', link: '/guide/development/mock' }
+          ]
+        },
+        {
           text: '组件库',
           items: [
             { text: '组件驱动架构', link: '/guide/architecture/component-driver' },
             { text: 'Grow 契约组件', link: '/guide/development/grow-components' },
+            { text: '组件文档（SearchBar 等）', link: '/components/' },
             { text: '命令式 API', link: '/guide/development/imperative-api' },
             { text: '切换组件库', link: '/guide/development/switch-component-library' },
             { text: '局部覆盖组件库', link: '/guide/development/local-override' }
           ]
         },
         {
-          text: '开发指南',
+          text: '业务开发',
           items: [
-            { text: '项目配置', link: '/guide/development/project-setting' },
-            { text: '主题与颜色', link: '/guide/development/theme-and-colors' },
-            { text: '主题与语言', link: '/guide/development/theme-and-locale' },
-            { text: '认证与登录', link: '/guide/development/authentication' },
-            { text: 'HTTP 基础设施', link: '/guide/development/http-infrastructure' },
-            { text: 'Mock 数据', link: '/guide/development/mock' },
             { text: '业务模块开发', link: '/guide/development/business-module' }
           ]
         },

@@ -47,14 +47,18 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 
 ## 推荐阅读顺序
 
-文档按左侧菜单从 **入门 → 架构 → 组件库 → 开发 → 规范 → 包说明** 排列，建议按序阅读：
+文档按「先跑起来 → 懂结构 → 配好壳 → 打通权限与接口 → 写页面 → 拆模块」排列，建议按序阅读：
 
 1. **[快速上手](/guide/getting-started)** — 先跑起来
 2. **架构** — 懂目录、模块装配、路由菜单
-3. **组件库** — 写页面用 `Grow*` 组件，按需换 UI 库
-4. **开发指南** — 配项目、主题、登录、请求、写业务模块
-5. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
-6. **包说明** — 查某个 npm 包是干什么的
+3. **配置与主题** — 改项目名、主题色、语言
+4. **认证与权限** — 登录、守卫、权限模式
+5. **网络与数据** — 请求封装与 Mock
+6. **组件库** — 用 `Grow*` 写页面，按需换 UI 库
+7. **[组件文档](/components/)** — SearchBar / ColumnBar 等具体用法
+8. **业务开发** — 新建 Cornerstone 包
+9. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+10. **包说明** — 查某个 npm 包是干什么的
 
 ## 文档导航
 
@@ -73,6 +77,28 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [IOC 模块化](/guide/architecture/ioc) | Library 与模块装配 |
 | [路由与菜单](/guide/architecture/routing-and-menu) | 静态路由 + 动态菜单 |
 
+### 配置与主题
+
+| 章节 | 说明 |
+|------|------|
+| [项目配置](/guide/development/project-setting) | `projectSetting`、环境变量 |
+| [主题与颜色](/guide/development/theme-and-colors) | 主题色、CSS 变量、UnoCSS |
+| [主题与语言](/guide/development/theme-and-locale) | 亮暗模式、中英文切换 |
+
+### 认证与权限
+
+| 章节 | 说明 |
+|------|------|
+| [认证与登录](/guide/development/authentication) | Token、守卫、登录流程 |
+| [权限模式](/guide/development/permission-mode) | BACK / FRONT / MIXTURE 配置与开发 |
+
+### 网络与数据
+
+| 章节 | 说明 |
+|------|------|
+| [HTTP 基础设施](/guide/development/http-infrastructure) | 请求封装与解包 |
+| [Mock 数据](/guide/development/mock) | 本地假接口 |
+
 ### 组件库
 
 | 章节 | 说明 |
@@ -83,16 +109,20 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [切换组件库](/guide/development/switch-component-library) | 全局换 Element / Naive / Antdv |
 | [局部覆盖组件库](/guide/development/local-override) | 单页换库（进阶） |
 
-### 开发指南
+### 组件文档
 
 | 章节 | 说明 |
 |------|------|
-| [项目配置](/guide/development/project-setting) | `projectSetting`、环境变量 |
-| [主题与颜色](/guide/development/theme-and-colors) | 主题色、CSS 变量、UnoCSS |
-| [主题与语言](/guide/development/theme-and-locale) | 亮暗模式、中英文切换 |
-| [认证与登录](/guide/development/authentication) | Token、守卫、登录流程 |
-| [HTTP 基础设施](/guide/development/http-infrastructure) | 请求封装与解包 |
-| [Mock 数据](/guide/development/mock) | 本地假接口 |
+| [组件概览](/components/) | 契约 / 预设分类与入口 |
+| [SearchBar](/components/search-bar) | 高级搜索栏 |
+| [ColumnBar](/components/column-bar) | 表格列设置 |
+| [AbstractEle](/components/abstract-ele) | 动态表单项 |
+| [其他组件](/components/other) | Iconify、SplitPane 等 |
+
+### 业务开发
+
+| 章节 | 说明 |
+|------|------|
 | [业务模块开发](/guide/development/business-module) | 新建 Cornerstone 包 |
 
 ### 规范与约定

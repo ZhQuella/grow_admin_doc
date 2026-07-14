@@ -62,7 +62,7 @@ const Button = useDriverComponent(RockComponent.Button);
 
 ### 数据展示
 
-`GrowCard`、`GrowTag`、`GrowAvatar`、`GrowBadge`、`GrowEmpty`、`GrowDescriptions`、`GrowDescriptionsItem`、`GrowList`、`GrowListItem`、`GrowTree`、`GrowTimeline`、`GrowTimelineItem`、`GrowStatistic`、`GrowNumberAnimation`、`GrowEllipsis`、`GrowText`、`GrowSkeleton`、`GrowResult`、`GrowProgress`、`GrowPageHeader`
+`GrowCard`、`GrowTag`、`GrowAvatar`、`GrowBadge`、`GrowEmpty`、`GrowDescriptions`、`GrowDescriptionsItem`、`GrowList`、`GrowListItem`、`GrowTree`、`GrowTable`、`GrowTableColumn`、`GrowTimeline`、`GrowTimelineItem`、`GrowStatistic`、`GrowNumberAnimation`、`GrowEllipsis`、`GrowText`、`GrowSkeleton`、`GrowResult`、`GrowProgress`、`GrowPageHeader`
 
 ### 反馈
 
@@ -127,19 +127,32 @@ const buttonComponent = ComponentMap.get(RockComponent.Button);
 | `useDriverComponent(RockComponent.Button)` | 直接引用三方组件 |
 | 通过 `projectSetting` 切换后自动适配 | 在组件中硬编码 UI 库判断 |
 
-## 不包含的组件（不纳入 84 个共有契约）
+## 预设业务组件
 
-以下属于参考项目自行封装，**不纳入本项目契约层**。若业务需要，请在 `DesignCornerstone` 中自行实现：
+除三库共有契约外，`@grow-admin-rock/components` 还内置若干**预设组件**（`isPresetComponent`），用于搜索、列设置、图标等场景：
 
-| 组件 | 说明 |
+| 组件 | 文档 |
 |------|------|
-| `GrowIconify` | 基于 Iconify 的自定义图标组件 |
-| `GrowTable` | 基于 vxe-table 的表格封装 |
-| `GrowCubeTable` | 基于 @antv/s2 的多维表格 |
-| `GrowLocalePicker` | 自定义语言切换器（请用 `LoginLanguageSwitch` / `SwitchLanguage`） |
+| `GrowSearchBar` | [SearchBar](/components/search-bar) |
+| `GrowColumnBar` | [ColumnBar](/components/column-bar) |
+| `GrowAbstractEle` | [AbstractEle](/components/abstract-ele) |
+| `GrowIconify` / `GrowSplitPane` | [其他组件](/components/other) |
+
+更多入口：[组件文档](/components/)。
+
+## 不纳入契约的旧参考封装
+
+以下为历史参考项目中的重封装方案，**不等于**本仓库已提供的组件名；落地时请以本仓库 `RockComponent` 与驱动为准：
+
+| 名称 | 说明 |
+|------|------|
+| 参考版 `GrowTable`（vxe-table） | 若需 vxe-table 能力，请在业务侧自行封装，勿与契约 `GrowTable` 混淆 |
+| `GrowCubeTable` | 基于 @antv/s2，尚未纳入 |
+| 参考版独立 LocalePicker | 请用布局内 `LoginLanguageSwitch` / `SwitchLanguage` |
 
 ## 下一步
 
+- [组件文档](/components/) — SearchBar / ColumnBar 等
 - [命令式 API](/guide/development/imperative-api) — Message / Notification / Dialog
 - [局部覆盖组件库](/guide/development/local-override)
 - [开发规范](/guide/development/dev-conventions)

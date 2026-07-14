@@ -16,6 +16,9 @@ hero:
       text: "开始使用"
       link: "/guide/"
     - theme: alt
+      text: "组件文档"
+      link: "/components/"
+    - theme: alt
       text: "Demo 演示"
       link: "https://demo.gadmin.top/"
       target: _blank
