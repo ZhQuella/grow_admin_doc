@@ -114,6 +114,7 @@ Mock 接口 `sample/mock/auth.ts` 提供：
 
 ## 下一步
 
+- [权限模式](/guide/development/permission-mode) — 动态菜单来源与角色过滤
 - [路由与菜单](/guide/architecture/routing-and-menu) — 动态路由注册
 - [Mock 数据](/guide/development/mock) — 开发环境接口模拟
 - [HTTP 基础设施](/guide/development/http-infrastructure) — 请求封装与 Transform

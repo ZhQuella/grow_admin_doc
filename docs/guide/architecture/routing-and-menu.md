@@ -66,7 +66,7 @@ Grow Admin 选择 **骨架静态 + 业务动态**：
         ↓  Mock / 真实接口  GET /api/menu/list
 apps-home/registerDynamicRoutes.ts
         ├─ flatten → router.addRoute('Home', route)   ← 仅叶子节点
-        └─ tree    → authStore.backMenuList            ← 保留树形结构
+        └─ tree    → authStore（按 permissionMode）      ← 保留树形结构
         ↓
 rock-layouts/menu（MenuTreeNode 递归渲染）
         ↓ 点击叶子菜单
@@ -154,7 +154,7 @@ export async function registerDynamicRoutes() {
     router.addRoute('Home', route)
   })
 
-  authStore.setBackMenuList(toMenuList(menuList))
+  authStore.setBackMenuList(toMenuList(menuList)) // 实际按 permissionMode 分支，见权限模式文档
 }
 ```
 
@@ -242,7 +242,7 @@ import { WORKSPACE_ROUTE_CONFIGS } from '@grow-admin-cornerstone/apps-workspace/
 | 用途 | 数据结构 | 处理方式 |
 |------|----------|----------|
 | Vue Router | 扁平叶子路由 | `flattenWorkspaceRouteConfigs()` → `addRoute('Home', route)` |
-| 侧边菜单 | 树形 `Menu[]` | `toMenuList()` → `authStore.backMenuList` |
+| 侧边菜单 | 树形 `Menu[]` | `toMenuList()` → `backMenuList` / `frontMenuList`（按模式） |
 
 **字段映射规则**（`toMenuItem`）：
 
@@ -251,11 +251,11 @@ import { WORKSPACE_ROUTE_CONFIGS } from '@grow-admin-cornerstone/apps-workspace/
 | 目录（有 `children`） | `name` 字符串（如 `WorkspaceCatalog`） | ❌ | 展开/收起，不跳转 |
 | 叶子（无 `children`） | 完整路径（如 `/home/workspace`） | ✅ | `router.push(path)` |
 
-菜单状态存储在 `@grow-admin-rock/state` 的 `authStore.backMenuList`，侧边栏从该字段读取并渲染。
+菜单状态写入 `backMenuList` / `frontMenuList`，侧边栏应通过 `useAuthMenuList()`（或 `getMenuList`）按 `permissionMode` 取生效树。详见 [权限模式](/guide/development/permission-mode)。
 
 ## 菜单渲染（rock-layouts）
 
-`@grow-admin-rock/layouts` 的 `Menu` 组件从 `authStore.backMenuList` 读取数据，通过 `MenuTreeNode` **递归组件**渲染树形菜单：
+`@grow-admin-rock/layouts` 的 `Menu` 组件从 `useAuthMenuList()` 读取数据，通过 `MenuTreeNode` **递归组件**渲染树形菜单：
 
 ```
 Menu（menu.vue）
@@ -313,7 +313,7 @@ Home 页面通过 Teleport 将 Menu 挂载到布局插槽：
 | `sample/mock/routers.ts` | 开发环境 Mock 菜单接口 |
 | `rock-layouts/src/menu/menu.vue` | 侧边菜单容器 |
 | `rock-layouts/src/menu/MenuTreeNode.vue` | 菜单树递归节点 |
-| `rock-state/src/modules/authStore.ts` | `backMenuList` 菜单状态 |
+| `rock-state/src/modules/authStore.ts` | `backMenuList` / `frontMenuList` / `getMenuList` |
 | `rock-middleware-router/` | 路由表 IoC 注册、`RouteOperator` |
 
 ## 开发自检清单
@@ -344,6 +344,7 @@ operator.redo()
 
 ## 下一步
 
+- [权限模式](/guide/development/permission-mode) — BACK / FRONT / MIXTURE 菜单来源与角色过滤
 - [架构设计理念](/guide/architecture/design-philosophy) — 路由设计在整体架构中的位置
 - [认证与登录](/guide/development/authentication) — Token 与守卫细节
 - [业务模块开发](/guide/development/business-module) — 创建新业务模块

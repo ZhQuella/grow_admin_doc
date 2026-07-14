@@ -43,9 +43,19 @@ export const projectSetting: ProjectSetting = {
 ### 权限模式
 
 ```typescript
-permissionMode: PermissionModeEnum.ROUTE_MAPPING,
+import { PermissionModeEnum, CacheTypeEnum } from '@grow-admin-rock/constants'
+
+permissionMode: PermissionModeEnum.MIXTURE, // BACK | FRONT | MIXTURE
 permissionCacheType: CacheTypeEnum.LOCAL,
 ```
+
+| 值 | 说明 |
+|----|------|
+| `BACK` | 仅接口菜单 |
+| `FRONT` | 仅前端路由表 + 角色过滤 |
+| `MIXTURE` | 前后端合集（同名以后端为准） |
+
+详细配置、角色白名单、合集规则与开发步骤见 [权限模式](/guide/development/permission-mode)。
 
 ### 主题与布局
 
