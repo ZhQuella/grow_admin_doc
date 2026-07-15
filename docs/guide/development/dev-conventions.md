@@ -117,6 +117,7 @@ pnpm --filter grow-admin-sample preview
 | `@grow-admin-rock/state` | `useAppConfig`、`useTheme`、`useAuthStore`（含 `backMenuList`） |
 | `@grow-admin-rock/middleware-router` | 路由表 IoC、`RouteTable`、`RouteOperator` |
 | `@grow-admin-rock/styles` | 全局 CSS 变量、UnoCSS 入口、主题过渡 |
+| `@grow-admin-rock/code-sandbox` | Monaco 编辑器、依赖注入、Vue SFC 沙箱预览 |
 | `@grow-admin-rock/constants` | `APP_THEME_COLOR_LIST` 等设计常量 |
 | `@grow-admin-rock/component-driver` | 抽象驱动、`ComponentDriverProvider`、Builder |
 | `@grow-admin-rock/component-driver-element-plus` | Element Plus 映射（84 个） |

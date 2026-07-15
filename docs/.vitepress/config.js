@@ -17,9 +17,23 @@ module.exports = {
     nav: [
       { text: '指南', link: '/guide/' },
       { text: '组件', link: '/components/' },
+      { text: '代码沙箱', link: '/code-sandbox/' },
       { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
     ],
     sidebar: {
+      "/code-sandbox/": [
+        {
+          text: '代码沙箱',
+          items: [
+            { text: '概述', link: '/code-sandbox/' },
+            { text: '基础用法', link: '/code-sandbox/usage' },
+            { text: 'GrowCodeEditor', link: '/code-sandbox/code-editor' },
+            { text: 'GrowCodeDeps', link: '/code-sandbox/code-deps' },
+            { text: 'GrowCodeSandbox', link: '/code-sandbox/preview' },
+            { text: '工具 API 与注意点', link: '/code-sandbox/api' }
+          ]
+        }
+      ],
       "/components/": [
         {
           text: '组件',
@@ -76,10 +90,18 @@ module.exports = {
           items: [
             { text: '组件驱动架构', link: '/guide/architecture/component-driver' },
             { text: 'Grow 契约组件', link: '/guide/development/grow-components' },
-            { text: '组件文档（SearchBar 等）', link: '/components/' },
+            { text: '组件文档', link: '/components/' },
             { text: '命令式 API', link: '/guide/development/imperative-api' },
             { text: '切换组件库', link: '/guide/development/switch-component-library' },
             { text: '局部覆盖组件库', link: '/guide/development/local-override' }
+          ]
+        },
+        {
+          text: '代码沙箱',
+          items: [
+            { text: '概述', link: '/code-sandbox/' },
+            { text: '基础用法', link: '/code-sandbox/usage' },
+            { text: '工具 API 与注意点', link: '/code-sandbox/api' }
           ]
         },
         {

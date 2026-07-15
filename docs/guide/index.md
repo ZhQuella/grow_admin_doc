@@ -47,7 +47,7 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 
 ## 推荐阅读顺序
 
-文档按「先跑起来 → 懂结构 → 配好壳 → 打通权限与接口 → 写页面 → 拆模块」排列，建议按序阅读：
+文档按「先跑起来 → 懂结构 → 配好壳 → 打通权限与接口 → 写页面 → 沙箱 → 拆模块」排列，建议按序阅读：
 
 1. **[快速上手](/guide/getting-started)** — 先跑起来
 2. **架构** — 懂目录、模块装配、路由菜单
@@ -56,9 +56,10 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 5. **网络与数据** — 请求封装与 Mock
 6. **组件库** — 用 `Grow*` 写页面，按需换 UI 库
 7. **[组件文档](/components/)** — SearchBar / ColumnBar 等具体用法
-8. **业务开发** — 新建 Cornerstone 包
-9. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
-10. **包说明** — 查某个 npm 包是干什么的
+8. **[代码沙箱](/code-sandbox/)** — 在线编辑 Vue SFC 与宿主内预览
+9. **业务开发** — 新建 Cornerstone 包
+10. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+11. **包说明** — 查某个 npm 包是干什么的
 
 ## 文档导航
 
@@ -118,6 +119,17 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [ColumnBar](/components/column-bar) | 表格列设置 |
 | [AbstractEle](/components/abstract-ele) | 动态表单项 |
 | [其他组件](/components/other) | Iconify、SplitPane 等 |
+
+### 代码沙箱
+
+| 章节 | 说明 |
+|------|------|
+| [概述](/code-sandbox/) | 能力概览与演示入口 |
+| [基础用法](/code-sandbox/usage) | 仅预览 / 三分屏 |
+| [GrowCodeEditor](/code-sandbox/code-editor) | Monaco 编辑器 |
+| [GrowCodeDeps](/code-sandbox/code-deps) | 依赖注入 |
+| [GrowCodeSandbox](/code-sandbox/preview) | SFC 编译预览 |
+| [工具 API](/code-sandbox/api) | 工具函数与注意点 |
 
 ### 业务开发
 

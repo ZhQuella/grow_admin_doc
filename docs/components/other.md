@@ -44,4 +44,5 @@ import { GrowSplitPane } from '@grow-admin-rock/components/split-pane'
 ## 相关
 
 - [组件文档首页](/components/)
+- [代码沙箱](/code-sandbox/)
 - [Grow 契约组件](/guide/development/grow-components)
