@@ -15,6 +15,7 @@ lang: zh-CN
 ::: tip 先读什么？
 - 想了解 Grow 怎么跟三套 UI 库对接 → [组件驱动架构](/guide/architecture/component-driver)
 - 契约组件通用写法 → [Grow 契约组件](/guide/development/grow-components)
+- 在线编辑与 SFC 预览 → [代码沙箱](/code-sandbox/)
 - 本页起是**具体组件 API / 示例**说明
 :::
 
@@ -33,6 +34,7 @@ lang: zh-CN
 | 组件 | 说明 |
 |------|------|
 | [其他组件](/components/other) | Iconify、SplitPane 等 |
+| [代码沙箱](/code-sandbox/) | 独立模块：编辑器 / 依赖 / SFC 预览 |
 
 ## 引入方式
 

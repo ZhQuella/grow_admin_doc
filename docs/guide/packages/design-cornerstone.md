@@ -21,6 +21,7 @@ lang: zh-CN
 | `@grow-admin-cornerstone/apps-login` | 账号登录模块 | 可用 |
 | `@grow-admin-cornerstone/apps-home` | 登录后首页布局壳 + 动态路由注册 | 可用 |
 | `@grow-admin-cornerstone/apps-workspace` | 工作区示例业务页（路由配置 + 页面） | 可用 |
+| `@grow-admin-cornerstone/apps-sandbox` | 代码沙箱演示（编辑器 / 依赖 / 预览） | 可用 |
 
 ---
 
@@ -206,6 +207,49 @@ export const Lib = {
 在 `sample/package.json` 添加依赖，在 `initIoc.ts` 中 `.use(newLib, appContext)`。
 
 若业务页面需动态注册，参考 `apps-workspace` 的配置分离模式，由 `apps-home` 的 `registerDynamicRoutes` 统一注入。
+
+---
+
+## @grow-admin-cornerstone/apps-sandbox
+
+代码沙箱工具演示模块，基于 `@grow-admin-rock/code-sandbox`。
+
+### 目录结构
+
+```
+cornerstone-apps-sandbox/
+├── index.ts
+├── library.ts
+├── package.json
+└── src/
+    ├── index.ts
+    ├── routes/
+    │   ├── index.ts
+    │   ├── menuList.ts      # 侧栏菜单：沙箱 / 工具 / 编辑器
+    │   ├── mergeMenu.ts
+    │   ├── config.ts
+    │   └── route-config.ts
+    └── pages/
+        ├── sandbox-overview/     # 三分屏：编辑器 + 依赖 + 预览
+        ├── code-sandbox-demo/    # 仅 GrowCodeSandbox
+        └── code-editor-demo/     # 仅 GrowCodeEditor
+```
+
+### 菜单
+
+| 标题 | 说明 |
+|------|------|
+| 沙箱工具 | `GrowCodeEditor` + `GrowCodeDeps` + `GrowCodeSandbox` |
+| 代码沙箱 | 仅预览完整 Vue SFC |
+| 代码编辑器 | 仅 Monaco 编辑器（可切换语言） |
+
+### 导出
+
+```typescript
+export { Lib } from './library'
+```
+
+宿主装配后，菜单由模块 `menuList` 合并进侧栏。组件 API 见 [代码沙箱](/code-sandbox/)。
 
 ## 命名规范
 

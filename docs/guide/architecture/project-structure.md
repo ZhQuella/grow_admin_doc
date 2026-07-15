@@ -46,11 +46,13 @@ grow_admin/
 │   ├── rock-component-driver-naive/          # Naive UI 驱动
 │   ├── rock-component-driver-antdv/          # Ant Design Vue 驱动
 │   ├── rock-ioc/            # 依赖注入
+│   ├── rock-code-sandbox/   # 在线代码编辑与沙箱预览
 │   └── ...
 ├── DesignCornerstone/       # 业务模块层
 │   ├── cornerstone-apps-login/     # 登录模块
 │   ├── cornerstone-apps-home/      # 首页（布局 + 动态路由）
-│   └── cornerstone-apps-workspace/ # 工作区（页面 + 路由配置）
+│   ├── cornerstone-apps-workspace/ # 工作区（页面 + 路由配置）
+│   └── cornerstone-apps-sandbox/   # 代码沙箱演示
 ├── configs/                 # 共享构建配置（含 UnoCSS 主题色映射）
 └── sample/                  # 宿主示例应用
 ```
@@ -92,7 +94,8 @@ DesignRock/
 ├── rock-locale/                       # 国际化
 ├── rock-hooks/                        # 通用 Hooks
 ├── rock-utils/                        # 工具函数（含 VueUse 重导出）
-└── rock-styles/                       # 全局样式
+├── rock-styles/                       # 全局样式
+└── rock-code-sandbox/                 # 在线代码编辑与 Vue SFC 沙箱预览
 ```
 
 ## DesignCornerstone — 业务模块层
@@ -103,7 +106,8 @@ DesignRock/
 DesignCornerstone/
 ├── cornerstone-apps-login/      # 登录模块
 ├── cornerstone-apps-home/       # 登录后首页（布局壳 + 动态路由注册）
-└── cornerstone-apps-workspace/  # 工作区业务页（路由配置 + 页面组件）
+├── cornerstone-apps-workspace/  # 工作区业务页（路由配置 + 页面组件）
+└── cornerstone-apps-sandbox/    # 代码沙箱演示（编辑器 / 依赖 / 预览）
 ```
 
 业务模块通过 Library 约定接入宿主应用，不自行安装组件驱动。

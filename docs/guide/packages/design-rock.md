@@ -32,6 +32,7 @@ README「相关包说明」速查表见 [开发规范 - 相关包速查](/guide/
 | `@grow-admin-rock/hooks` | 通用 Hooks（设置、断点等） |
 | `@grow-admin-rock/utils` | 工具函数（含 VueUse 重导出） |
 | `@grow-admin-rock/styles` | 全局样式与 Reset CSS |
+| `@grow-admin-rock/code-sandbox` | 在线代码编辑与 Vue SFC 沙箱预览 |
 
 ---
 
@@ -314,3 +315,25 @@ import '@grow-admin-rock/styles'
 ```
 
 包含 Reset CSS、CSS 变量（`variables.css`）、亮/暗主题 token 与主题切换过渡动画（`theme-transition.css`）。
+
+---
+
+## @grow-admin-rock/code-sandbox
+
+在线代码编辑与 Vue SFC 沙箱预览（Monaco + `@vue/compiler-sfc`）。预览挂载在宿主 Vue 树内，可继续使用 `Grow*` 组件与 IOC。
+
+**主要导出：**
+
+| 导出 | 说明 |
+|------|------|
+| `GrowCodeEditor` | Monaco 代码编辑器 |
+| `GrowCodeDeps` | 依赖注入面板（host / npm） |
+| `GrowCodeSandbox` | SFC 编译预览 |
+| `composeVueSfc` / `parseVueSfc` | 组装 / 解析 SFC |
+| `createPreviewComponent` | 编译 SFC 为可挂载组件 |
+| `DEFAULT_SANDBOX_DEPENDENCIES` | 默认锁定依赖 |
+| `mergeDependencies` / `normalizeDependencies` | 依赖合并规范化 |
+
+目录：`DesignRock/rock-code-sandbox`。
+
+完整 API、用法与注意事项见 [代码沙箱](/code-sandbox/)。演示模块见 [apps-sandbox](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-sandbox)。
