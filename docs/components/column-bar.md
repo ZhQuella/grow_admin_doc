@@ -69,12 +69,13 @@ function onConfirm(columns: ColumnBarItem[]) {
 
 | 事件 | 参数 | 说明 |
 |------|------|------|
-| `confirm` | `(columns: ColumnBarItem[])` | 确认或弹层关闭时回传列树（已更新 `visible`） |
+| `confirm` | `(columns: ColumnBarItem[])` | 点击确认 / 系统默认时回传列树（已更新 `visible`） |
 
 ## 内置规则
 
 - `field` 为 `serial` / `operate` 的节点会自动 `disabled`，不可取消勾选。
 - 支持全选 / 半选，以及「系统默认」恢复初次可见状态。
+- 弹层打开后会再同步勾选（兼容 Popover 懒挂载；打包部署后更明显）。
 
 ## 与 GrowTable 配合
 
