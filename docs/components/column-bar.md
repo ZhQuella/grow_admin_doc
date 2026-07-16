@@ -74,8 +74,9 @@ function onConfirm(columns: ColumnBarItem[]) {
 ## 内置规则
 
 - `field` 为 `serial` / `operate` 的节点会自动 `disabled`，不可取消勾选。
-- 支持全选 / 半选，以及「系统默认」恢复初次可见状态。
-- 弹层打开后会再同步勾选（兼容 Popover 懒挂载；打包部署后更明显）。
+- 支持全选 / 半选；「系统默认」恢复**首次传入**的列显隐（不会被后续确认覆盖）。
+- 弹层打开后会再同步勾选（兼容 Popover 懒挂载）。
+- 点击「确认」或「系统默认」时触发 `confirm` 并关闭弹层。
 
 ## 与 GrowTable 配合
 
