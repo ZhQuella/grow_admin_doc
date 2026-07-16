@@ -17,7 +17,12 @@ module.exports = {
     nav: [
       { text: '指南', link: '/guide/' },
       { text: '组件', link: '/components/' },
-      { text: '代码沙箱', link: '/code-sandbox/' },
+      {
+        text: '低代码集成',
+        items: [
+          { text: '代码沙箱', link: '/code-sandbox/' }
+        ]
+      },
       { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
     ],
     sidebar: {
