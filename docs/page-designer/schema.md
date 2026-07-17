@@ -12,8 +12,8 @@ lang: zh-CN
 ```ts
 type DraggableConfig = {
   pageConfig: Record<string, any>      // 页面级配置
-  dataSource: Record<string, any>    // 数据源
-  apiOutlined: Record<string, any>   // 接口大纲
+  dataSource: DesignerDataSourceItem[] // 数据源（数组）
+  apiOutlined: DesignerApiOutlinedItem[] // 数据请求（数组）
   structures: StructureNode[]        // 树形结构（画布顺序）
   renderArgument: Record<string, RenderArgument> // 节点元信息
   styles: Record<string, CSSPropertiesLike>      // uuid → 样式
@@ -23,6 +23,8 @@ type DraggableConfig = {
 ```
 
 每个画布节点有唯一 `uuid`（如 nanoid）。`styles` / `props` / `events` / `renderArgument` 均以 uuid 为 key。
+
+`dataSource`、`apiOutlined` 的字段、表单能力与交互说明见 [数据源与数据请求](/page-designer/data)。
 
 ## structures（结构树）
 
@@ -88,4 +90,4 @@ GrowDesigner  ──编辑──►  DraggableConfig / PageSchema
                          GrowRenderer  ──►  真实页面
 ```
 
-保存后端时建议持久化完整 schema（至少 `structures` + `renderArgument` + `props` + `styles` + `events`），回读后既可继续编辑，也可只读渲染。
+保存后端时建议持久化完整 schema（至少 `structures` + `renderArgument` + `props` + `styles` + `events`，以及按需的 `dataSource` / `apiOutlined`），回读后既可继续编辑，也可只读渲染。
