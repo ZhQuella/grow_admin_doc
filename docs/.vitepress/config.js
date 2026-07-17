@@ -20,12 +20,24 @@ module.exports = {
       {
         text: '低代码集成',
         items: [
-          { text: '代码沙箱', link: '/code-sandbox/' }
+          { text: '代码沙箱', link: '/code-sandbox/' },
+          { text: '页面设计器', link: '/page-designer/' }
         ]
       },
       { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
     ],
     sidebar: {
+      "/page-designer/": [
+        {
+          text: '页面设计器',
+          items: [
+            { text: '概述', link: '/page-designer/' },
+            { text: '基础用法', link: '/page-designer/usage' },
+            { text: '样式面板', link: '/page-designer/style' },
+            { text: '数据模型', link: '/page-designer/schema' }
+          ]
+        }
+      ],
       "/code-sandbox/": [
         {
           text: '代码沙箱',
@@ -107,6 +119,15 @@ module.exports = {
             { text: '概述', link: '/code-sandbox/' },
             { text: '基础用法', link: '/code-sandbox/usage' },
             { text: '工具 API 与注意点', link: '/code-sandbox/api' }
+          ]
+        },
+        {
+          text: '页面设计器',
+          items: [
+            { text: '概述', link: '/page-designer/' },
+            { text: '基础用法', link: '/page-designer/usage' },
+            { text: '样式面板', link: '/page-designer/style' },
+            { text: '数据模型', link: '/page-designer/schema' }
           ]
         },
         {

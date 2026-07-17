@@ -33,6 +33,7 @@ README「相关包说明」速查表见 [开发规范 - 相关包速查](/guide/
 | `@grow-admin-rock/utils` | 工具函数（含 VueUse 重导出） |
 | `@grow-admin-rock/styles` | 全局样式与 Reset CSS |
 | `@grow-admin-rock/code-sandbox` | 在线代码编辑与 Vue SFC 沙箱预览 |
+| `@grow-admin-rock/designer` | 低代码页面设计器（`GrowDesigner` / `GrowRenderer`） |
 
 ---
 
@@ -337,3 +338,20 @@ import '@grow-admin-rock/styles'
 目录：`DesignRock/rock-code-sandbox`。
 
 完整 API、用法与注意事项见 [代码沙箱](/code-sandbox/)。演示模块见 [apps-sandbox](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-sandbox)。
+
+---
+
+## @grow-admin-rock/designer
+
+低代码页面设计器：拖拽物料、配置属性 / 样式 / 事件，输出可渲染 schema。
+
+**主要导出：**
+
+| 导出 | 说明 |
+|------|------|
+| `GrowDesigner` | 可视化编辑器（画布 + 左右面板） |
+| `GrowRenderer` | 按 schema 渲染页面 |
+
+目录：`DesignRock/rock-designer`。
+
+完整说明见 [页面设计器](/page-designer/)。演示模块见 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)。
