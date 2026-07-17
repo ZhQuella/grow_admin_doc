@@ -47,7 +47,7 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 
 ## 推荐阅读顺序
 
-文档按「先跑起来 → 懂结构 → 配好壳 → 打通权限与接口 → 写页面 → 沙箱 → 拆模块」排列，建议按序阅读：
+文档按「先跑起来 → 懂结构 → 配好壳 → 打通权限与接口 → 写页面 → 沙箱 / 页面设计器 → 拆模块」排列，建议按序阅读：
 
 1. **[快速上手](/guide/getting-started)** — 先跑起来
 2. **架构** — 懂目录、模块装配、路由菜单
@@ -57,9 +57,10 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 6. **组件库** — 用 `Grow*` 写页面，按需换 UI 库
 7. **[组件文档](/components/)** — SearchBar / ColumnBar 等具体用法
 8. **[代码沙箱](/code-sandbox/)** — 在线编辑 Vue SFC 与宿主内预览
-9. **业务开发** — 新建 Cornerstone 包
-10. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
-11. **包说明** — 查某个 npm 包是干什么的
+9. **[页面设计器](/page-designer/)** — 拖拽式低代码设计器与样式 / schema
+10. **业务开发** — 新建 Cornerstone 包
+11. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+12. **包说明** — 查某个 npm 包是干什么的
 
 ## 文档导航
 
@@ -130,6 +131,15 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [GrowCodeDeps](/code-sandbox/code-deps) | 依赖注入 |
 | [GrowCodeSandbox](/code-sandbox/preview) | SFC 编译预览 |
 | [工具 API](/code-sandbox/api) | 工具函数与注意点 |
+
+### 页面设计器
+
+| 章节 | 说明 |
+|------|------|
+| [概述](/page-designer/) | 设计器能力与界面分区 |
+| [基础用法](/page-designer/usage) | 接入、画布操作、渲染 |
+| [样式面板](/page-designer/style) | 尺寸 / 边框 / display 等 |
+| [数据模型](/page-designer/schema) | structures / props / styles |
 
 ### 业务开发
 

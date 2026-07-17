@@ -22,6 +22,7 @@ lang: zh-CN
 | `@grow-admin-cornerstone/apps-home` | 登录后首页布局壳 + 动态路由注册 | 可用 |
 | `@grow-admin-cornerstone/apps-workspace` | 工作区示例业务页（路由配置 + 页面） | 可用 |
 | `@grow-admin-cornerstone/apps-sandbox` | 代码沙箱演示（编辑器 / 依赖 / 预览） | 可用 |
+| `@grow-admin-cornerstone/apps-designer` | 低代码页面设计器演示（`GrowDesigner`） | 可用 |
 
 ---
 
@@ -250,6 +251,45 @@ export { Lib } from './library'
 ```
 
 宿主装配后，菜单由模块 `menuList` 合并进侧栏。组件 API 见 [代码沙箱](/code-sandbox/)。
+
+---
+
+## @grow-admin-cornerstone/apps-designer
+
+低代码页面设计器演示模块，基于 `@grow-admin-rock/designer`。
+
+### 目录结构
+
+```
+cornerstone-apps-designer/
+├── index.ts
+├── library.ts
+├── package.json
+└── src/
+    ├── index.ts
+    ├── routes/
+    │   ├── index.ts
+    │   ├── menuList.ts
+    │   ├── mergeMenu.ts
+    │   ├── config.ts
+    │   └── route-config.ts
+    └── pages/
+        └── designer-playground/   # GrowDesigner 演示页
+```
+
+### 菜单
+
+| 标题 | 说明 |
+|------|------|
+| 页面设计器 | 挂载 `GrowDesigner` 的拖拽设计画布 |
+
+### 导出
+
+```typescript
+export { Lib } from './library'
+```
+
+完整能力与 schema 说明见 [页面设计器](/page-designer/)。
 
 ## 命名规范
 
