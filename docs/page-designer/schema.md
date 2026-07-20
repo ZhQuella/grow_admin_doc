@@ -28,6 +28,8 @@ type DraggableConfig = {
 
 `dataSource`、`apiOutlined` 见 [数据源与数据请求](/page-designer/data)；绑定求值见 [变量绑定](/page-designer/variable-bind)。
 
+`dataSource`、`apiOutlined` 的字段、表单能力与交互说明见 [数据源与数据请求](/page-designer/data)。
+
 ## structures（结构树）
 
 ```ts
