@@ -55,11 +55,18 @@ lang: zh-CN
 - 宽高写在 `styles` 中；选区外框会同步尺寸相关属性，使选中框与内容一致
 - 映射组件在「外框已承接尺寸」时，内部可用 `width/height: 100%` 铺满（**行内级除外**，避免再次撑满整行）
 
+## 文字样式
+
+标题 / 正文 / 短语在样式面板中还有 **文字** 分组（`ElementText`）：颜色、字号、粗体 / 斜体 / 下划线 / 删除线、对齐、字距、行高等。
+
+源码：`GrowDesigner/optionComponent/ElementText/`。
+
 ## 实现位置（便于对照源码）
 
 | 能力 | 路径 |
 |------|------|
 | 样式分组入口 | `GrowDesigner/components/eleOptions/styleConfig.vue` |
 | 尺寸 / 圆角 / 边框 / 背景 / 阴影 / 布局 | `GrowDesigner/optionComponent/Element*` |
+| 文字 | `GrowDesigner/optionComponent/ElementText` |
 | 选区外框与 display | `GrowDesigner/components/draggableItem` |
 | 样式应用到映射节点 | `GrowDesigner/components/abstractionComponent` |
