@@ -60,6 +60,14 @@ type DesignerDataSourceItem = {
 }
 ```
 
+### 与变量绑定
+
+- 数据源 `name` 会出现在变量绑定弹窗列表中，引用形式为 `state.{name}`
+- `data` 必须是合法 JS 表达式（字符串需加引号，如 `"你好"`）
+- 保存或删除数据源后，画布 / 预览中已绑定该变量的属性会重新求值
+
+完整说明见 [变量绑定](/page-designer/variable-bind)。
+
 ## 数据请求
 
 用于配置远程接口：地址、方法、参数、生命周期处理函数与默认数据。
@@ -166,5 +174,6 @@ shared/
 
 ## 相关文档
 
+- [变量绑定](/page-designer/variable-bind) — 将数据源接到组件属性
 - [数据模型](/page-designer/schema) — `draggableConfig` 顶层字段
 - [基础用法](/page-designer/usage) — 左侧面板一览

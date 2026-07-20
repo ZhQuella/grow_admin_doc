@@ -140,7 +140,8 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [基础用法](/page-designer/usage) | 接入、画布操作、渲染 |
 | [样式面板](/page-designer/style) | 尺寸 / 边框 / display 等 |
 | [数据源与数据请求](/page-designer/data) | 数据源 / 接口配置与字段 |
-| [数据模型](/page-designer/schema) | structures / props / styles |
+| [变量绑定](/page-designer/variable-bind) | 属性绑定 state、表达式求值 |
+| [数据模型](/page-designer/schema) | structures / props / propBindModes |
 
 ### 业务开发
 

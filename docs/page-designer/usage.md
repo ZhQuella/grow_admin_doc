@@ -32,7 +32,7 @@ import { GrowDesigner } from '@grow-admin-rock/designer'
 </script>
 ```
 
-设计器内部通过 `provide` 注入画布配置（结构、样式、属性等），一般无需再包一层。
+设计器内部通过 `provide` 注入画布配置（结构、样式、属性、数据源运行时 state 等），一般无需再包一层。
 
 ## 画布操作
 
@@ -45,6 +45,8 @@ import { GrowDesigner } from '@grow-admin-rock/designer'
 | 添加子项 | 仅 `isAdd` 类容器（如表单项）显示「添加」 |
 | 清空 | 工具栏「清空」清除整页结构 |
 
+弹窗 / 抽屉在画布上为占位卡片；通过选中后的工具栏打开 **模拟编辑层**，在层内拖入子节点。
+
 ## 左侧面板
 
 | 面板 | 说明 |
@@ -55,7 +57,7 @@ import { GrowDesigner } from '@grow-admin-rock/designer'
 | 数据源 | 页面静态 / 变量数据，数组写入 `dataSource` |
 | 数据请求 | 远程接口与处理函数，数组写入 `apiOutlined` |
 
-数据源与数据请求的字段、表单与排序说明见 [数据源与数据请求](/page-designer/data)。
+数据源与数据请求见 [数据源与数据请求](/page-designer/data)。将数据源接到组件属性见 [变量绑定](/page-designer/variable-bind)。
 
 ## 右侧面板
 
@@ -63,24 +65,31 @@ import { GrowDesigner } from '@grow-admin-rock/designer'
 
 | Tab | 说明 |
 |------|------|
-| 属性 | 组件 props（文案、类型、开关等） |
+| 属性 | 组件 props；部分字段为「输入 + 变量绑定」 |
 | 样式 | 见 [样式面板](/page-designer/style) |
 | 事件 | 交互事件配置（可按业务扩展） |
+| 高级 | 节点渲染相关高级项（按组件开放） |
 
 ## 预览与渲染
 
-- 工具栏「预览」用于设计态预览（可按产品接入弹层 / 路由）
-- 正式渲染使用 `GrowRenderer`，传入与设计器相同结构的 schema：
+- 工具栏「预览」：弹层内用 `GrowRenderer` 渲染当前 schema（含 `dataSource`、`propBindModes`，绑定字段会求值）
+- 正式渲染同样使用 `GrowRenderer`，传入完整 schema：
 
 ```vue
 <template>
-  <GrowRenderer :config="pageSchema" />
+  <GrowRenderer :schema="pageSchema" />
 </template>
 
 <script setup lang="ts">
 import { GrowRenderer } from '@grow-admin-rock/designer'
-// pageSchema 含 structures / props / styles / events 等
+// pageSchema 建议含：
+// structures / renderArgument / props / styles / events
+// dataSource / propBindModes / pageConfig / apiOutlined（按需）
 </script>
 ```
+
+::: warning
+属性名为 **`schema`**（不是 `config`）。缺少 `dataSource` / `propBindModes` 时，绑定字段会按字面量表达式显示，无法解析为真实值。
+:::
 
 数据字段说明见 [数据模型](/page-designer/schema)。

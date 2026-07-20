@@ -343,14 +343,14 @@ import '@grow-admin-rock/styles'
 
 ## @grow-admin-rock/designer
 
-低代码页面设计器：拖拽物料、配置属性 / 样式 / 事件，输出可渲染 schema。
+低代码页面设计器：拖拽物料、配置属性 / 样式 / 事件，支持数据源与变量绑定，输出可渲染 schema。
 
 **主要导出：**
 
 | 导出 | 说明 |
 |------|------|
 | `GrowDesigner` | 可视化编辑器（画布 + 左右面板） |
-| `GrowRenderer` | 按 schema 渲染页面 |
+| `GrowRenderer` | 按 `:schema` 渲染页面（含绑定求值） |
 
 目录：`DesignRock/rock-designer`。
 

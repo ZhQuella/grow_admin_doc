@@ -35,6 +35,7 @@ module.exports = {
             { text: '基础用法', link: '/page-designer/usage' },
             { text: '样式面板', link: '/page-designer/style' },
             { text: '数据源与数据请求', link: '/page-designer/data' },
+            { text: '变量绑定', link: '/page-designer/variable-bind' },
             { text: '数据模型', link: '/page-designer/schema' }
           ]
         }
@@ -129,6 +130,7 @@ module.exports = {
             { text: '基础用法', link: '/page-designer/usage' },
             { text: '样式面板', link: '/page-designer/style' },
             { text: '数据源与数据请求', link: '/page-designer/data' },
+            { text: '变量绑定', link: '/page-designer/variable-bind' },
             { text: '数据模型', link: '/page-designer/schema' }
           ]
         },
