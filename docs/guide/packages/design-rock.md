@@ -34,6 +34,7 @@ README「相关包说明」速查表见 [开发规范 - 相关包速查](/guide/
 | `@grow-admin-rock/styles` | 全局样式与 Reset CSS |
 | `@grow-admin-rock/code-sandbox` | 在线代码编辑与 Vue SFC 沙箱预览 |
 | `@grow-admin-rock/designer` | 低代码页面设计器（`GrowDesigner` / `GrowRenderer`） |
+| `@grow-admin-rock/report-designer` | 报表设计器（`GrowReportDesigner` / `GrowReportRenderer`） |
 
 ---
 
@@ -351,7 +352,29 @@ import '@grow-admin-rock/styles'
 |------|------|
 | `GrowDesigner` | 可视化编辑器（画布 + 左右面板） |
 | `GrowRenderer` | 按 `:schema` 渲染页面（含绑定求值） |
+| `DesignerDataSourcePanel` 等 | 页面级数据面板（报表设计器可复用） |
+| `GROW_RUNTIME_STATE` / `runApiOutlinedList` 等 | 运行时 state 与 API 执行 |
 
 目录：`DesignRock/rock-designer`。
 
 完整说明见 [页面设计器](/page-designer/)。演示模块见 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)。
+
+---
+
+## @grow-admin-rock/report-designer
+
+基于 ECharts 的报表设计器：网格布局、图表视觉配置、页面级数据 + 区块数据绑定，导出 `ReportSchema` 并由渲染器拉数展示。
+
+**主要导出：**
+
+| 导出 | 说明 |
+|------|------|
+| `GrowReportDesigner` | 可视化编辑器（`getSchema` / `runtimeState`） |
+| `GrowReportRenderer` | 按 `:schema` 渲染报表（可选 `httpClient`） |
+| `createReportSchema` | 组装带默认 pageConfig 的 schema |
+| `buildEChartsOption` / `createDefaultChartConfig` | 图表 option 编译与默认配置 |
+| `REPORT_CHART_TYPE_OPTIONS` 等 | 图表类型常量 |
+
+目录：`DesignRock/rock-report-designer`。
+
+完整说明见 [报表设计器](/report-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**报表设计器**）。
