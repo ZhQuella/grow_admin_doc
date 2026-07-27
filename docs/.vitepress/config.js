@@ -21,12 +21,25 @@ module.exports = {
         text: '低代码集成',
         items: [
           { text: '代码沙箱', link: '/code-sandbox/' },
-          { text: '页面设计器', link: '/page-designer/' }
+          { text: '页面设计器', link: '/page-designer/' },
+          { text: '报表设计器', link: '/report-designer/' }
         ]
       },
       { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
     ],
     sidebar: {
+      "/report-designer/": [
+        {
+          text: '报表设计器',
+          items: [
+            { text: '概述', link: '/report-designer/' },
+            { text: '基础用法', link: '/report-designer/usage' },
+            { text: '数据绑定', link: '/report-designer/data-binding' },
+            { text: '数据模型', link: '/report-designer/schema' },
+            { text: '图表配置', link: '/report-designer/chart-config' }
+          ]
+        }
+      ],
       "/page-designer/": [
         {
           text: '页面设计器',
@@ -132,6 +145,16 @@ module.exports = {
             { text: '数据源与数据请求', link: '/page-designer/data' },
             { text: '变量绑定', link: '/page-designer/variable-bind' },
             { text: '数据模型', link: '/page-designer/schema' }
+          ]
+        },
+        {
+          text: '报表设计器',
+          items: [
+            { text: '概述', link: '/report-designer/' },
+            { text: '基础用法', link: '/report-designer/usage' },
+            { text: '数据绑定', link: '/report-designer/data-binding' },
+            { text: '数据模型', link: '/report-designer/schema' },
+            { text: '图表配置', link: '/report-designer/chart-config' }
           ]
         },
         {

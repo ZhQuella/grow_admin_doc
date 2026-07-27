@@ -40,6 +40,8 @@ lang: zh-CN
 5. **变量绑定**：属性支持绑定 `state.xxx`（来自数据源），画布与预览实时求值
 6. **渲染分离**：编辑态 `GrowDesigner`，运行态 `GrowRenderer` 消费同一套 schema
 
+与 [报表设计器](/report-designer/) 的关系：报表复用本模块的页面级数据面板与运行时；图表区块用独立的 `dataBinding` 注入 data，见 [报表 · 数据绑定](/report-designer/data-binding)。
+
 ## 推荐阅读
 
 1. [基础用法](/page-designer/usage) — 接入演示模块、画布操作

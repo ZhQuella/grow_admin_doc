@@ -47,7 +47,7 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 
 ## 推荐阅读顺序
 
-文档按「先跑起来 → 懂结构 → 配好壳 → 打通权限与接口 → 写页面 → 沙箱 / 页面设计器 → 拆模块」排列，建议按序阅读：
+文档按「先跑起来 → 懂结构 → 配好壳 → 打通权限与接口 → 写页面 → 沙箱 / 设计器 → 拆模块」排列，建议按序阅读：
 
 1. **[快速上手](/guide/getting-started)** — 先跑起来
 2. **架构** — 懂目录、模块装配、路由菜单
@@ -58,9 +58,10 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 7. **[组件文档](/components/)** — SearchBar / ColumnBar 等具体用法
 8. **[代码沙箱](/code-sandbox/)** — 在线编辑 Vue SFC 与宿主内预览
 9. **[页面设计器](/page-designer/)** — 拖拽式低代码设计器与样式 / schema
-10. **业务开发** — 新建 Cornerstone 包
-11. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
-12. **包说明** — 查某个 npm 包是干什么的
+10. **[报表设计器](/report-designer/)** — 图表看板布局、数据绑定与 ECharts 渲染
+11. **业务开发** — 新建 Cornerstone 包
+12. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+13. **包说明** — 查某个 npm 包是干什么的
 
 ## 文档导航
 
@@ -142,6 +143,16 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [数据源与数据请求](/page-designer/data) | 数据源 / 接口配置与字段 |
 | [变量绑定](/page-designer/variable-bind) | 属性绑定 state、表达式求值 |
 | [数据模型](/page-designer/schema) | structures / props / propBindModes |
+
+### 报表设计器
+
+| 章节 | 说明 |
+|------|------|
+| [概述](/report-designer/) | 能力概览与界面分区 |
+| [基础用法](/report-designer/usage) | 接入、设计器 / 渲染器 API |
+| [数据绑定](/report-designer/data-binding) | 页面 state → 区块图表 data |
+| [数据模型](/report-designer/schema) | ReportSchema / layout |
+| [图表配置](/report-designer/chart-config) | chartConfig 与 option 编译 |
 
 ### 业务开发
 
