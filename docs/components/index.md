@@ -16,7 +16,7 @@ lang: zh-CN
 - 想了解 Grow 怎么跟三套 UI 库对接 → [组件驱动架构](/guide/architecture/component-driver)
 - 契约组件通用写法 → [Grow 契约组件](/guide/development/grow-components)
 - 在线编辑与 SFC 预览 → [代码沙箱](/code-sandbox/)
-- 拖拽页面 / 报表设计 → [页面设计器](/page-designer/)、[报表设计器](/report-designer/)
+- 拖拽页面 / 报表设计 / 数据库建模 → [页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据库建模](/schema-designer/)
 - 本页起是**具体组件 API / 示例**说明
 :::
 
@@ -38,6 +38,7 @@ lang: zh-CN
 | [代码沙箱](/code-sandbox/) | 独立模块：编辑器 / 依赖 / SFC 预览 |
 | [页面设计器](/page-designer/) | 低代码页面设计 |
 | [报表设计器](/report-designer/) | 图表看板设计与渲染 |
+| [数据库建模](/schema-designer/) | 表 / 字段 / 关联可视化建模 |
 
 ## 引入方式
 

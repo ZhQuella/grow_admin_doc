@@ -35,6 +35,7 @@ README「相关包说明」速查表见 [开发规范 - 相关包速查](/guide/
 | `@grow-admin-rock/code-sandbox` | 在线代码编辑与 Vue SFC 沙箱预览 |
 | `@grow-admin-rock/designer` | 低代码页面设计器（`GrowDesigner` / `GrowRenderer`） |
 | `@grow-admin-rock/report-designer` | 报表设计器（`GrowReportDesigner` / `GrowReportRenderer`） |
+| `@grow-admin-rock/schema-designer` | 可视化数据库建模（`GrowSchemaDesigner`） |
 
 ---
 
@@ -378,3 +379,23 @@ import '@grow-admin-rock/styles'
 目录：`DesignRock/rock-report-designer`。
 
 完整说明见 [报表设计器](/report-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**报表设计器**）。
+
+---
+
+## @grow-admin-rock/schema-designer
+
+基于 Vue Flow 的可视化数据库建模：表 / 字段 / 关联（1:1、1:N、N:N），导出可持久化的 `DatabaseSchema` JSON。当前方言为 MySQL。
+
+**主要导出：**
+
+| 导出 | 说明 |
+|------|------|
+| `GrowSchemaDesigner` | 可视化编辑器（`v-model` / `getSchema` / `setSchema` / `exportJson`） |
+| `createDatabaseSchema` / `createSchemaTable` / `createSchemaColumn` | schema 工厂 |
+| `exportSchemaJson` | 序列化为可持久化 JSON 字符串 |
+| `MYSQL_COLUMN_TYPE_OPTIONS` / `RELATION_TYPE_OPTIONS` | 字段类型与关联类型选项 |
+| `clampIdentifier` / `MAX_*_NAME_LENGTH` | 标识符截断与长度常量 |
+
+目录：`DesignRock/rock-schema-designer`。
+
+完整说明见 [数据库建模](/schema-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**数据库建模**）。
