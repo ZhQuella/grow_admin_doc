@@ -22,7 +22,7 @@ lang: zh-CN
 | `@grow-admin-cornerstone/apps-home` | 登录后首页布局壳 + 动态路由注册 | 可用 |
 | `@grow-admin-cornerstone/apps-workspace` | 工作区示例业务页（路由配置 + 页面） | 可用 |
 | `@grow-admin-cornerstone/apps-sandbox` | 代码沙箱演示（编辑器 / 依赖 / 预览） | 可用 |
-| `@grow-admin-cornerstone/apps-designer` | 低代码页面设计器 + 报表设计器演示 | 可用 |
+| `@grow-admin-cornerstone/apps-designer` | 页面 / 报表设计器 + 数据库建模演示 | 可用 |
 
 ---
 
@@ -256,7 +256,7 @@ export { Lib } from './library'
 
 ## @grow-admin-cornerstone/apps-designer
 
-低代码设计器演示模块，基于 `@grow-admin-rock/designer` 与 `@grow-admin-rock/report-designer`。
+低代码设计器演示模块，基于 `@grow-admin-rock/designer`、`@grow-admin-rock/report-designer` 与 `@grow-admin-rock/schema-designer`。
 
 ### 目录结构
 
@@ -275,7 +275,8 @@ cornerstone-apps-designer/
     │   └── route-config.ts
     └── pages/
         ├── designer-playground/          # GrowDesigner 演示页
-        └── report-designer-playground/   # GrowReportDesigner 演示页
+        ├── report-designer-playground/   # GrowReportDesigner 演示页
+        └── schema-designer-playground/   # GrowSchemaDesigner 演示页
 ```
 
 ### 菜单
@@ -284,6 +285,7 @@ cornerstone-apps-designer/
 |------|------|
 | 低代码设计器 | 挂载 `GrowDesigner` 的拖拽设计画布 |
 | 报表设计器 | 挂载 `GrowReportDesigner` 的图表看板设计器 |
+| 数据库建模 | 挂载 `GrowSchemaDesigner` 的表结构建模画布 |
 
 ### 导出
 
@@ -291,7 +293,7 @@ cornerstone-apps-designer/
 export { Lib } from './library'
 ```
 
-完整能力见 [页面设计器](/page-designer/)、[报表设计器](/report-designer/)。
+完整能力见 [页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据库建模](/schema-designer/)。
 
 ## 命名规范
 

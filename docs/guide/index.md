@@ -59,9 +59,10 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 8. **[代码沙箱](/code-sandbox/)** — 在线编辑 Vue SFC 与宿主内预览
 9. **[页面设计器](/page-designer/)** — 拖拽式低代码设计器与样式 / schema
 10. **[报表设计器](/report-designer/)** — 图表看板布局、数据绑定与 ECharts 渲染
-11. **业务开发** — 新建 Cornerstone 包
-12. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
-13. **包说明** — 查某个 npm 包是干什么的
+11. **[数据库建模](/schema-designer/)** — 可视化表 / 字段 / 关联与 schema 导出
+12. **业务开发** — 新建 Cornerstone 包
+13. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+14. **包说明** — 查某个 npm 包是干什么的
 
 ## 文档导航
 
@@ -153,6 +154,15 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [数据绑定](/report-designer/data-binding) | 页面 state → 区块图表 data |
 | [数据模型](/report-designer/schema) | ReportSchema / layout |
 | [图表配置](/report-designer/chart-config) | chartConfig 与 option 编译 |
+
+### 数据库建模
+
+| 章节 | 说明 |
+|------|------|
+| [概述](/schema-designer/) | 能力概览与界面分区 |
+| [基础用法](/schema-designer/usage) | 接入、画布操作、设计器 API |
+| [数据模型](/schema-designer/schema) | DatabaseSchema / 表 / 字段 |
+| [表关联](/schema-designer/relations) | 1:1 / 1:N / N:N 与参照动作 |
 
 ### 业务开发
 
