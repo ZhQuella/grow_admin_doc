@@ -15,7 +15,7 @@ lang: zh-CN
 | 主要组件 | `GrowSchemaDesigner` |
 | 当前方言 | PostgreSQL（`dialect: 'postgresql'`） |
 
-与 [页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据准备](/data-prep/) 同属低代码工具链：前二者面向 UI / 看板，本模块面向 **表结构与表间关系**；数据准备消费已建模的 Schema 做分析层 Dataset。
+与 [页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据准备](/data-prep/) 同属低代码工具链：本模块面向 **表结构与表间关系**（PostgreSQL）；数据准备消费已发布建模；页面 / 报表经 `state` 消费查询结果（后续亦可对接建模侧 SQL 查询管理）。
 
 ## 界面分区
 

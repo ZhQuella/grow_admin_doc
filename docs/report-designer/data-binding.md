@@ -118,4 +118,5 @@ type ReportBlockDataBinding = {
 - [数据模型](/report-designer/schema) — schema 中的 `dataBinding` 字段
 - [图表配置](/report-designer/chart-config) — `buildEChartsOption` 注入点
 - [页面设计器 · 变量绑定](/page-designer/variable-bind) — state 求值约定
-- [数据准备](/data-prep/) — Dataset 配置与查询（独立模块，经页面请求写入 state 后绑定）
+- [数据准备](/data-prep/) — Dataset 配置与查询（经页面请求写入 state 后绑定）
+- [数据库建模](/schema-designer/) — PostgreSQL 物理模型（上游元数据）

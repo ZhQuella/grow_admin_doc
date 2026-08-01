@@ -96,9 +96,14 @@ const onSaved = (value: DataPrepDataset) => {
 
 `ensureDemoDataset()` 会在本地尚无数据时写入一份「订单区域汇总」示例 Dataset，便于预览查询演示。
 
+## 与页面 / 报表对接
+
+数据准备负责「怎么算」；展示侧（[页面设计器](/page-designer/)、[报表设计器](/report-designer/)）统一通过 `apiOutlined` / 计算属性把查询结果写入 `state`，再绑定组件或图表。当前演示可用 Mock：`POST /mock/data-prep/query`。
+
 ## 相关文档
 
 - [数据模型](/data-prep/schema)
 - [表关联](/data-prep/joins)
 - [Mock 数据](/guide/development/mock)
-- [报表设计器 · 数据绑定](/report-designer/data-binding) — 报表经页面 state 取数
+- [报表设计器 · 数据绑定](/report-designer/data-binding)
+- [数据库建模](/schema-designer/)

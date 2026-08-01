@@ -138,6 +138,8 @@ type DataPrepSchemaBundle = {
 
 ## 工厂与导出
 
+引用的建模结构 `DataPrepDatabaseSchema` 与 schema-designer 的 `DatabaseSchema` 对齐，方言为 `postgresql`。
+
 ```ts
 import {
   createDataPrepDataset,
@@ -145,6 +147,7 @@ import {
   createDataPrepJoin,
   createDataPrepDimension,
   createDataPrepMeasure,
+  measureOutputKey,
   normalizeSchemaRefs,
   upsertSchemaRef,
   ensureUniqueAlias,
@@ -160,4 +163,5 @@ import {
 
 - [基础用法](/data-prep/usage)
 - [表关联](/data-prep/joins)
-- [报表 · 数据绑定](/report-designer/data-binding)
+- [报表 · 数据绑定](/report-designer/data-binding) — 经页面 state 消费查询结果
+- [数据库建模](/schema-designer/) — PostgreSQL 物理模型
