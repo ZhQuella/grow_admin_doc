@@ -33,8 +33,23 @@ Grow Admin 的 Mock 分为**开发环境文件 Mock**与 **IOC Mock 注册中心
 | `auth.ts` | `POST /api/login` | 账号密码登录（`admin` / `123456`） |
 | `login.ts` | `/api/verification/code` 等 | 验证码、手机登录、改密 |
 | `routers.ts` | `GET /api/menu/list` | 菜单/动态路由配置 |
+| `dataPrep.ts` | `/mock/data-prep/*` | Schema 列表 / Bundle、Dataset CRUD、聚合查询 |
 | `packages.ts` | — | 聚合各包 `registerMock` 注册的 Mock |
 | `_mock-server.ts` | — | 生产 Mock 服务入口（以 `_` 开头，dev 时忽略） |
+
+### 数据准备 Mock
+
+`dataPrep.ts` 只引用 `@grow-admin-rock/data-prep` 的**纯 TS**（`demoSchema` / `queryDataset`），避免 esbuild 拉入 `.vue`。主要接口：
+
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| GET | `/mock/data-prep/schemas` | 建模列表 |
+| GET | `/mock/data-prep/schema-bundle?id=` | 建模 + `tableRows` |
+| GET / POST | `/mock/data-prep/datasets` | Dataset 列表 / 保存 |
+| DELETE | `/mock/data-prep/dataset?id=` | 删除 Dataset |
+| POST | `/mock/data-prep/query` | 按 Dataset 聚合查询 |
+
+详见 [数据准备](/data-prep/)。
 
 ### 菜单 Mock 与 route-config 分离
 

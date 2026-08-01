@@ -12,6 +12,7 @@ lang: zh-CN
 - **低代码设计器** → `GrowDesigner`
 - **报表设计器** → `GrowReportDesigner`
 - **数据库建模** → `GrowSchemaDesigner`
+- **数据准备** → `GrowDataPrepDesigner`
 
 宿主（如 `sample`）需：
 

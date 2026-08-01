@@ -121,6 +121,7 @@ pnpm --filter grow-admin-sample preview
 | `@grow-admin-rock/designer` | 低代码页面设计器（`GrowDesigner` / `GrowRenderer`） |
 | `@grow-admin-rock/report-designer` | 报表设计器（`GrowReportDesigner` / `GrowReportRenderer`） |
 | `@grow-admin-rock/schema-designer` | 可视化数据库建模（`GrowSchemaDesigner`） |
+| `@grow-admin-rock/data-prep` | 数据准备 Dataset（`GrowDataPrepDesigner`） |
 | `@grow-admin-rock/constants` | `APP_THEME_COLOR_LIST` 等设计常量 |
 | `@grow-admin-rock/component-driver` | 抽象驱动、`ComponentDriverProvider`、Builder |
 | `@grow-admin-rock/component-driver-element-plus` | Element Plus 映射（84 个） |

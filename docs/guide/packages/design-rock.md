@@ -36,6 +36,7 @@ README「相关包说明」速查表见 [开发规范 - 相关包速查](/guide/
 | `@grow-admin-rock/designer` | 低代码页面设计器（`GrowDesigner` / `GrowRenderer`） |
 | `@grow-admin-rock/report-designer` | 报表设计器（`GrowReportDesigner` / `GrowReportRenderer`） |
 | `@grow-admin-rock/schema-designer` | 可视化数据库建模（`GrowSchemaDesigner`） |
+| `@grow-admin-rock/data-prep` | 数据准备 Dataset（`GrowDataPrepDesigner`） |
 
 ---
 
@@ -378,7 +379,7 @@ import '@grow-admin-rock/styles'
 
 目录：`DesignRock/rock-report-designer`。
 
-完整说明见 [报表设计器](/report-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**报表设计器**）。
+完整说明见 [报表设计器](/report-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**报表设计器**）。可绑定 [数据准备](/data-prep/) Dataset（笛卡尔图 Phase 1）。
 
 ---
 
@@ -399,3 +400,25 @@ import '@grow-admin-rock/styles'
 目录：`DesignRock/rock-schema-designer`。
 
 完整说明见 [数据库建模](/schema-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**数据库建模**）。
+
+---
+
+## @grow-admin-rock/data-prep
+
+可视化数据准备（分析层 Dataset）：从 Schema 选表、配置多表 Join、维度 / 度量，支持预览聚合与本地 / Mock 查询；报表笛卡尔图可绑定 Dataset。
+
+**主要导出：**
+
+| 导出 | 说明 |
+|------|------|
+| `GrowDataPrepDesigner` | 可视化编辑器（`v-model` / `@save`） |
+| `createDataPrepDataset` / `createDataPrepJoin` 等 | Dataset 工厂 |
+| `queryDatasetLocal` / `queryDataPrepDataset` | 本地聚合 / Mock 查询 |
+| `toCartesianSeriesPayload` | 查询结果 → 笛卡尔图轴 / 系列 |
+| `loadDatasetsFromStorage` / `upsertDatasetInStorage` | localStorage 读写 |
+| `ensureDemoDataset` | 写入演示用 Dataset |
+| `./core` | 无 Vue 的纯 TS 入口（供 Mock esbuild） |
+
+目录：`DesignRock/rock-data-prep`。
+
+完整说明见 [数据准备](/data-prep/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**数据准备**）。
