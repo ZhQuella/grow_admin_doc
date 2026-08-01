@@ -48,17 +48,13 @@ provide(GROW_RUNTIME_STATE)                       │
 单路绑定：
 
 ```ts
-type ReportDataBindMode = 'bind' | 'map'
+type ReportDataBindMode = 'bind' | 'map' | 'code'
 
 type ReportDataBindRef = {
   mode?: ReportDataBindMode
-  /** 绑定表达式，建议 state.xxx */
+  /** 路径 / 表达式 / 函数体（code 模式须 return） */
   source?: string
-  /**
-   * map 模式：
-   * - path: 从对象取字段，如 list / data.rows
-   * - fields: 对象数组时取多列，如 ['name','value']
-   */
+  /** 兼容旧配置：求值后再按 path / fields 提取 */
   mapping?: {
     path?: string
     fields?: string[]
@@ -66,12 +62,15 @@ type ReportDataBindRef = {
 }
 ```
 
+设计器交互与页面设计器一致：输入框直接填 `state.xxx`，或点 **f** 打开变量绑定弹窗写代码（`mode: 'code'`）。
+
 | 模式 | 行为 |
 |------|------|
-| `bind` | `source` 求值结果原样作为目标数据 |
-| `map` | 求值后再按 `path` / `fields` 提取 |
+| `bind` | 输入框快捷绑定 |
+| `code` | 弹窗编写 JS 函数体，可使用 `state`，须 `return` |
+| `map` | 兼容旧数据：求值后再按 `path` / `fields` 提取 |
 
-`source` 以 `state.` 开头时走 designer 的 `resolveBoundExpression`，否则按表达式求值。
+`code` 模式始终走 `resolveBoundExpression`；`bind` / `map` 下若 `source` 以 `state.` / `return` 开头等，同样按函数体求值。
 
 ## ReportBlockDataBinding
 

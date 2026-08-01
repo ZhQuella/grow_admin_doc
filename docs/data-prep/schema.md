@@ -51,7 +51,12 @@ type DataPrepSource = {
 ## 维度与度量
 
 ```ts
-type DataPrepAgg = 'sum' | 'avg' | 'count' | 'count_distinct' | 'max' | 'min'
+type DataPrepAgg =
+  | 'sum' | 'avg' | 'count' | 'count_distinct' | 'max' | 'min'
+  | 'ratio'        // 占比：本组 / 全部组合计
+  | 'running_sum'  // 累计：同系列按时间累加
+  | 'yoy' | 'mom'  // 同比 / 环比（增长率）
+  | 'yoy_diff' | 'mom_diff'  // 同比 / 环比差值
 
 type DataPrepDimension = {
   id: string
@@ -71,6 +76,19 @@ type DataPrepMeasure = {
 ```
 
 可用 `DATA_PREP_AGG_OPTIONS` 作为聚合下拉选项；`fieldKey(alias, column)` / `parseFieldKey(field)` 处理字段键。
+
+### 二次计算（基于分组求和）
+
+| 计算 | 公式 | 说明 |
+|------|------|------|
+| `ratio` 占比 | `本组求和 / 全部组合计` | 预览显示为百分比 |
+| `running_sum` 累计 | 同系列按时间顺序累加 | 有时间维时按期累加，否则按首维排序 |
+| `yoy` 同比 | `(本期 - 去年同期) / 去年同期` | 需可解析的时间维度 |
+| `mom` 环比 | `(本期 - 上期) / 上期` | 无法解析时间时取同系列相邻上期 |
+| `yoy_diff` 同比差值 | `本期 - 去年同期` | 绝对增减 |
+| `mom_diff` 环比差值 | `本期 - 上期` | 绝对增减 |
+
+支持的时间维度格式：`YYYY`、`YYYY-MM`、`YYYY-MM-DD`、`YYYY-Qn`、`2024年1月` 等。比率类结果为小数（预览中显示为百分比）；无对比期时为 `null`。
 
 ## 查询请求与结果
 
