@@ -110,7 +110,7 @@ const save = () => {
 
 ### 表配置要点
 
-- 字段类型来自 `MYSQL_COLUMN_TYPE_OPTIONS`（VARCHAR / INT / DECIMAL / JSON 等）
+- 字段类型来自 `SCHEMA_COLUMN_TYPE_OPTIONS`（VARCHAR / INTEGER / NUMERIC / JSONB 等）
 - `VARCHAR` / `CHAR` 可配长度；`DECIMAL` 可配精度与小数位
 - 设为主键时会取消其他列的主键，并将该列 `nullable` 置为 `false`
 - 删除被关联使用的字段会提示，确认后同步移除相关关联
@@ -123,7 +123,7 @@ import {
   createSchemaTable,
   createSchemaColumn,
   exportSchemaJson,
-  MYSQL_COLUMN_TYPE_OPTIONS,
+  SCHEMA_COLUMN_TYPE_OPTIONS,
   RELATION_TYPE_OPTIONS,
   clampIdentifier,
 } from '@grow-admin-rock/schema-designer'
@@ -131,7 +131,7 @@ import {
 
 | 函数 | 说明 |
 |------|------|
-| `createDatabaseSchema` | 空库脚手架（`version: 1`，`dialect: 'mysql'`） |
+| `createDatabaseSchema` | 空库脚手架（`version: 1`，`dialect: 'postgresql'`） |
 | `createSchemaTable` | 默认带 `id` 主键列 |
 | `createSchemaColumn` | 默认 `VARCHAR(255)`、可空 |
 | `exportSchemaJson` | 序列化为可持久化 JSON 字符串 |

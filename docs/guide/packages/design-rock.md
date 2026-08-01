@@ -385,7 +385,7 @@ import '@grow-admin-rock/styles'
 
 ## @grow-admin-rock/schema-designer
 
-基于 Vue Flow 的可视化数据库建模：表 / 字段 / 关联（1:1、1:N、N:N），导出可持久化的 `DatabaseSchema` JSON。当前方言为 MySQL。
+基于 Vue Flow 的可视化数据库建模：表 / 字段 / 关联（1:1、1:N、N:N），导出可持久化的 `DatabaseSchema` JSON。当前方言为 PostgreSQL。
 
 **主要导出：**
 
