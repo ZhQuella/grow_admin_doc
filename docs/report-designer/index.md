@@ -17,7 +17,7 @@ lang: zh-CN
 
 与 [页面设计器](/page-designer/) 的关系：页面设计器面向通用页面物料；报表设计器面向图表看板。二者在 **页面级** `dataSource` / `apiOutlined` / `computedProps` 上对齐，区块侧用 `dataBinding` 把 `state.xxx` 注入图表。
 
-与 [数据准备](/data-prep/) 的关系：笛卡尔图可将 `dataBinding.sourceMode` 设为 `dataset`，直接绑定 Dataset 的维度 / 度量，无需手写 state 映射。
+与 [数据准备](/data-prep/) 的关系：数据准备产出可查询的 Dataset；报表侧统一经页面 `state`（数据请求 / 计算属性）绑定，与页面设计器操作习惯一致。
 
 ## 界面分区
 
@@ -40,10 +40,9 @@ lang: zh-CN
 
 1. **网格布局**：`colNum=24`、`rowHeight=30`（可由 `pageConfig` 覆盖）
 2. **多图表类型**：直角坐标系（折线 / 柱状 / 散点 / K 线组合）及雷达、地图、热力、漏斗等
-3. **视觉与数据分离**：`chartConfig` 只存视觉；业务数据经 `dataBinding` 从页面 `state` 或 Dataset 注入
+3. **视觉与数据分离**：`chartConfig` 只存视觉；业务数据经 `dataBinding` 从页面 `state` 注入
 4. **页面级数据**：与页面设计器同一套 `dataSource` / `apiOutlined` / `computedProps`
-5. **Dataset 绑定（Phase 1）**：笛卡尔图可选绑 [数据准备](/data-prep/) 数据集
-6. **渲染分离**：编辑态 `GrowReportDesigner`，运行态 `GrowReportRenderer` 消费同一份 schema
+5. **渲染分离**：编辑态 `GrowReportDesigner`，运行态 `GrowReportRenderer` 消费同一份 schema
 
 ## 推荐阅读
 

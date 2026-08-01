@@ -5,7 +5,7 @@ lang: zh-CN
 
 # 数据模型
 
-设计器、预览查询与报表 Dataset 绑定共用 `DataPrepDataset`。
+设计器与预览查询共用 `DataPrepDataset`。
 
 ## DataPrepDataset
 
@@ -70,12 +70,15 @@ type DataPrepMeasure = {
   id: string
   name: string
   field: string
+  /** 查询结果行对象中的字段名；缺省回退为 id */
+  outputKey?: string
   agg: DataPrepAgg
   format?: 'number' | 'percent' | 'currency'
 }
 ```
 
-可用 `DATA_PREP_AGG_OPTIONS` 作为聚合下拉选项；`fieldKey(alias, column)` / `parseFieldKey(field)` 处理字段键。
+可用 `DATA_PREP_AGG_OPTIONS` 作为聚合下拉选项；`fieldKey(alias, column)` / `parseFieldKey(field)` 处理字段键。  
+查询结果取度量值时用 `measureOutputKey(measure)`（优先 `outputKey`，否则 `id`）。
 
 ### 二次计算（基于分组求和）
 
@@ -107,9 +110,11 @@ type DatasetQueryResult = {
 }
 ```
 
-- 设计器预览 / 报表运行时调用 `queryDataPrepDataset`
+度量列的 `columns[].key` 与 `rows[]` 中的字段名为该度量的 `outputKey`（未配置时为 `id`）。
+
+- 设计器预览调用 `queryDataPrepDataset`
 - 本地引擎：`queryDatasetLocal`（多表按 `joins` 拼行后再聚合）
-- 笛卡尔图适配：`toCartesianSeriesPayload(result, categoryFieldId, seriesFieldIds)`
+- 可选适配：`toCartesianSeriesPayload(result, categoryFieldId, seriesFieldIds)`
 
 ## Schema Bundle（Mock 行数据）
 
@@ -129,7 +134,7 @@ type DataPrepSchemaBundle = {
 |------|------|
 | `grow-admin:data-prep:datasets:v2` | Dataset 列表（`loadDatasetsFromStorage` / `upsertDatasetInStorage`） |
 
-保存时优先 POST Mock，并同步写入上述 localStorage，供报表 `resolveDatasetBinding` 读取。
+保存时优先 POST Mock，并同步写入上述 localStorage。
 
 ## 工厂与导出
 
