@@ -41,7 +41,7 @@ type ReportLayoutItem = {
   chartType: ReportChartType
   /** 图表视觉配置（对齐 ECharts，不含业务 data） */
   chartConfig?: ReportChartConfig
-  /** 区块数据绑定（页面 state 或 Dataset） */
+  /** 区块数据绑定（页面 state） */
   dataBinding?: ReportBlockDataBinding
 }
 ```

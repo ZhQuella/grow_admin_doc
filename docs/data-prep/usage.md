@@ -94,18 +94,16 @@ const onSaved = (value: DataPrepDataset) => {
 | `schema_demo_sales` | 销售库：`orders` / `customers` |
 | `schema_demo_region` | 区域库：`regions`（含同名列 `region`，便于跨库 Join） |
 
-`ensureDemoDataset()` 会在本地尚无数据时写入一份「订单区域汇总」示例 Dataset，供报表绑定演示。
+`ensureDemoDataset()` 会在本地尚无数据时写入一份「订单区域汇总」示例 Dataset，便于预览查询演示。
 
-## 与报表打通（最小路径）
+## 与页面 / 报表对接
 
-1. 在数据准备中保存 Dataset
-2. 打开报表设计器 → 笛卡尔图区块 →「数据绑定」
-3. 数据来源选 **数据集** → 选择 Dataset、类目维度、系列度量
-
-详见 [报表设计器 · 数据绑定](/report-designer/data-binding#数据集绑定-phase-1)。
+数据准备负责「怎么算」；展示侧（[页面设计器](/page-designer/)、[报表设计器](/report-designer/)）统一通过 `apiOutlined` / 计算属性把查询结果写入 `state`，再绑定组件或图表。当前演示可用 Mock：`POST /mock/data-prep/query`。
 
 ## 相关文档
 
 - [数据模型](/data-prep/schema)
 - [表关联](/data-prep/joins)
 - [Mock 数据](/guide/development/mock)
+- [报表设计器 · 数据绑定](/report-designer/data-binding)
+- [数据库建模](/schema-designer/)

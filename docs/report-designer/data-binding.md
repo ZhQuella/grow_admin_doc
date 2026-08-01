@@ -5,39 +5,25 @@ lang: zh-CN
 
 # 数据绑定
 
-报表区块支持两种数据来源（`sourceMode`）：
-
-| 模式 | 说明 | 适用 |
-|------|------|------|
-| `state`（默认） | 页面级请求写入 `state`，再绑 `state.xxx` | 全图表类型 |
-| `dataset` | 绑定 [数据准备](/data-prep/) Dataset 查询结果 | **笛卡尔图**（Phase 1） |
-
-### state 模式
-
-1. 左侧配置 `dataSource` / `apiOutlined` / `computedProps`，运行时写入 `state`
-2. 区块在「数据绑定」Tab 选择 `state.xxx`（或 map 提取）
-3. `buildEChartsOption` 把解析结果注入图表 data
+报表区块通过页面级 `state` 取数：左侧配置 `dataSource` / `apiOutlined` / `computedProps`，运行时写入 `state`，区块在「数据绑定」Tab 选择 `state.xxx`（或 map / 代码绑定），再由 `buildEChartsOption` 注入图表 data。
 
 页面数据面板的字段与交互与页面设计器一致，见 [数据源与数据请求](/page-designer/data)。
 
 ## 数据流
 
 ```
-sourceMode = state                         sourceMode = dataset
-─────────────────                          ────────────────────
-页面配置（左侧轨）                          DataPrepDataset（localStorage / Mock）
-  dataSource / apiOutlined / …                    │
-        │                                         ▼
-        ▼                                  resolveDatasetBinding
-buildRuntimeState → …                      → queryDataPrepDataset
-        │                                  → toCartesianSeriesPayload
-        ▼                                         │
-provide(GROW_RUNTIME_STATE)                       │
-        │                                         │
-        └──────────────┬──────────────────────────┘
-                       ▼
-              ReportBlockChart
-  → resolveBlockDataBinding 或 dataset payload
+页面配置（左侧轨）
+  dataSource / apiOutlined / …
+        │
+        ▼
+buildRuntimeState → …
+        │
+        ▼
+provide(GROW_RUNTIME_STATE)
+        │
+        ▼
+ReportBlockChart
+  → resolveBlockDataBinding
   → buildEChartsOption → ECharts setOption
 ```
 
@@ -48,17 +34,13 @@ provide(GROW_RUNTIME_STATE)                       │
 单路绑定：
 
 ```ts
-type ReportDataBindMode = 'bind' | 'map'
+type ReportDataBindMode = 'bind' | 'map' | 'code'
 
 type ReportDataBindRef = {
   mode?: ReportDataBindMode
-  /** 绑定表达式，建议 state.xxx */
+  /** 路径 / 表达式 / 函数体（code 模式须 return） */
   source?: string
-  /**
-   * map 模式：
-   * - path: 从对象取字段，如 list / data.rows
-   * - fields: 对象数组时取多列，如 ['name','value']
-   */
+  /** 兼容旧配置：求值后再按 path / fields 提取 */
   mapping?: {
     path?: string
     fields?: string[]
@@ -66,12 +48,15 @@ type ReportDataBindRef = {
 }
 ```
 
+设计器交互与页面设计器一致：输入框直接填 `state.xxx`，或点 **f** 打开变量绑定弹窗写代码（`mode: 'code'`）。
+
 | 模式 | 行为 |
 |------|------|
-| `bind` | `source` 求值结果原样作为目标数据 |
-| `map` | 求值后再按 `path` / `fields` 提取 |
+| `bind` | 输入框快捷绑定 |
+| `code` | 弹窗编写 JS 函数体，可使用 `state`，须 `return` |
+| `map` | 兼容旧数据：求值后再按 `path` / `fields` 提取 |
 
-`source` 以 `state.` 开头时走 designer 的 `resolveBoundExpression`，否则按表达式求值。
+`code` 模式始终走 `resolveBoundExpression`；`bind` / `map` 下若 `source` 以 `state.` / `return` 开头等，同样按函数体求值。
 
 ## ReportBlockDataBinding
 
@@ -142,8 +127,8 @@ type ReportBlockDataBinding = {
 
 | 组件 | 说明 |
 |------|------|
-| `BlockDataBindingPanel` | 按当前图表类型展示可绑字段；笛卡尔图可选 state / 数据集 |
-| `BindRefEditor` | 单路 bind / map 编辑，变量列表来自页面数据项 `name` → `state.{name}` |
+| `BlockDataBindingPanel` | 按当前图表类型展示可绑字段 |
+| `BindRefEditor` | 单路 bind / map / code 编辑，变量列表来自页面数据项 `name` → `state.{name}` |
 
 多系列时在 `seriesData`（state）或 `dataset.seriesFieldIds`（数据集）中按系列下标逐项配置，与 `chartConfig.seriesList` 顺序对齐。
 
@@ -161,4 +146,5 @@ type ReportBlockDataBinding = {
 - [数据模型](/report-designer/schema) — schema 中的 `dataBinding` 字段
 - [图表配置](/report-designer/chart-config) — `buildEChartsOption` 注入点
 - [页面设计器 · 变量绑定](/page-designer/variable-bind) — state 求值约定
-- [数据准备](/data-prep/) — Dataset 配置与查询
+- [数据准备](/data-prep/) — Dataset 配置与查询（经页面请求写入 state 后绑定）
+- [数据库建模](/schema-designer/) — PostgreSQL 物理模型（上游元数据）

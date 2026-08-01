@@ -60,7 +60,7 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 9. **[页面设计器](/page-designer/)** — 拖拽式低代码设计器与样式 / schema
 10. **[报表设计器](/report-designer/)** — 图表看板布局、数据绑定与 ECharts 渲染
 11. **[数据库建模](/schema-designer/)** — 可视化表 / 字段 / 关联与 schema 导出
-12. **[数据准备](/data-prep/)** — Dataset：选表、Join、维度 / 度量与报表绑定
+12. **[数据准备](/data-prep/)** — Dataset：选表、Join、维度 / 度量；经 state 对接页面 / 报表
 13. **业务开发** — 新建 Cornerstone 包
 14. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
 15. **包说明** — 查某个 npm 包是干什么的
@@ -170,7 +170,7 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | 章节 | 说明 |
 |------|------|
 | [概述](/data-prep/) | 能力概览与界面分区 |
-| [基础用法](/data-prep/usage) | 接入、操作流程、与报表打通 |
+| [基础用法](/data-prep/usage) | 接入、操作流程、与页面 / 报表对接 |
 | [数据模型](/data-prep/schema) | DataPrepDataset / 查询结果 |
 | [表关联](/data-prep/joins) | 多字段 Join 与并 / 或 |
 

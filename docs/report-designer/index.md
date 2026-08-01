@@ -17,7 +17,7 @@ lang: zh-CN
 
 与 [页面设计器](/page-designer/) 的关系：页面设计器面向通用页面物料；报表设计器面向图表看板。二者在 **页面级** `dataSource` / `apiOutlined` / `computedProps` 上对齐，区块侧用 `dataBinding` 把 `state.xxx` 注入图表。
 
-与 [数据准备](/data-prep/) 的关系：笛卡尔图可将 `dataBinding.sourceMode` 设为 `dataset`，直接绑定 Dataset 的维度 / 度量，无需手写 state 映射。
+与 [数据准备](/data-prep/)、[数据库建模](/schema-designer/) 的关系：二者为上游数据能力；报表不直选 Dataset，统一经页面 `state`（数据请求 / 计算属性）取数，与 [页面设计器](/page-designer/) 操作习惯一致。
 
 ## 界面分区
 

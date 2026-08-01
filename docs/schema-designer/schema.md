@@ -12,22 +12,24 @@ lang: zh-CN
 ```ts
 type DatabaseSchema = {
   version: 1
-  dialect: 'mysql'
+  dialect: 'postgresql'
   name: string
   comment?: string
   tables: SchemaTable[]
   relations: SchemaRelation[]
+  queries?: SchemaSqlQuery[]
 }
 ```
 
 | 字段 | 说明 |
 |------|------|
 | `version` | schema 协议版本，当前固定为 `1` |
-| `dialect` | 方言，当前仅 `mysql` |
-| `name` | 库名（标识符最长 64，经 `clampIdentifier` 截断） |
+| `dialect` | 方言，当前为 `postgresql` |
+| `name` | 库名（标识符最长 63，经 `clampIdentifier` 截断） |
 | `comment` | 库注释 |
 | `tables` | 表列表（含中间表） |
 | `relations` | 表间关联列表 |
+| `queries` | 建模侧 SQL 查询配置（可选） |
 
 可用 `createDatabaseSchema(patch?)` 生成带默认空表 / 关联数组的对象。
 
@@ -48,7 +50,7 @@ type SchemaTable = {
 | 字段 | 说明 |
 |------|------|
 | `id` | 表唯一 id（Vue Flow 节点 id） |
-| `name` | 表名（最长 64） |
+| `name` | 表名（最长 63） |
 | `columns` | 字段列表；新建表默认含 `id` BIGINT 主键自增 |
 | `position` | 画布坐标 |
 | `isJunction` | `true` 表示 N:N 自动生成的中间表 |
@@ -56,22 +58,23 @@ type SchemaTable = {
 ## SchemaColumn
 
 ```ts
-type MysqlColumnType =
-  | 'TINYINT' | 'SMALLINT' | 'INT' | 'BIGINT'
-  | 'DECIMAL' | 'FLOAT' | 'DOUBLE'
-  | 'VARCHAR' | 'CHAR' | 'TEXT' | 'MEDIUMTEXT' | 'LONGTEXT'
-  | 'DATE' | 'DATETIME' | 'TIMESTAMP' | 'TIME'
-  | 'BOOLEAN' | 'JSON' | 'BLOB'
+type SchemaColumnType =
+  | 'SMALLINT' | 'INTEGER' | 'BIGINT'
+  | 'NUMERIC' | 'REAL' | 'DOUBLE PRECISION'
+  | 'VARCHAR' | 'CHAR' | 'TEXT'
+  | 'DATE' | 'TIME' | 'TIMESTAMP' | 'TIMESTAMPTZ'
+  | 'BOOLEAN' | 'JSON' | 'JSONB' | 'BYTEA' | 'UUID'
 
 type SchemaColumn = {
   id: string
   name: string
-  type: MysqlColumnType
-  /** VARCHAR / CHAR 长度；DECIMAL 精度 */
+  type: SchemaColumnType
+  /** VARCHAR / CHAR 长度；NUMERIC 精度 */
   length?: number | null
-  /** DECIMAL 小数位 */
+  /** NUMERIC 小数位 */
   scale?: number | null
   primaryKey: boolean
+  /** 自增：PostgreSQL IDENTITY / SERIAL 语义 */
   autoIncrement: boolean
   unique: boolean
   nullable: boolean
@@ -81,7 +84,7 @@ type SchemaColumn = {
 }
 ```
 
-展示类型时：`VARCHAR` / `CHAR` 带长度写成 `VARCHAR(255)`；`DECIMAL` 写成 `DECIMAL(精度,小数位)`。
+展示类型时：`VARCHAR` / `CHAR` 带长度写成 `VARCHAR(255)`；`NUMERIC` 写成 `NUMERIC(精度,小数位)`。列类型选项见 `SCHEMA_COLUMN_TYPE_OPTIONS`。
 
 ## SchemaRelation
 
@@ -115,7 +118,7 @@ type SchemaRelation = {
 ```json
 {
   "version": 1,
-  "dialect": "mysql",
+  "dialect": "postgresql",
   "name": "demo_db",
   "comment": "",
   "tables": [
@@ -143,22 +146,9 @@ type SchemaRelation = {
       ]
     }
   ],
-  "relations": []
+  "relations": [],
+  "queries": []
 }
-```
-
-## 包导出类型
-
-```ts
-import type {
-  DatabaseSchema,
-  SchemaTable,
-  SchemaColumn,
-  SchemaRelation,
-  SchemaRelationType,
-  MysqlColumnType,
-  SchemaReferentialAction,
-} from '@grow-admin-rock/schema-designer'
 ```
 
 ## 相关文档

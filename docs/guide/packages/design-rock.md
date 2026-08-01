@@ -379,13 +379,13 @@ import '@grow-admin-rock/styles'
 
 目录：`DesignRock/rock-report-designer`。
 
-完整说明见 [报表设计器](/report-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**报表设计器**）。可绑定 [数据准备](/data-prep/) Dataset（笛卡尔图 Phase 1）。
+完整说明见 [报表设计器](/report-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**报表设计器**）。区块数据经页面 `state` 绑定；可与 [数据准备](/data-prep/) 查询结果对接（由数据请求写入 state）。
 
 ---
 
 ## @grow-admin-rock/schema-designer
 
-基于 Vue Flow 的可视化数据库建模：表 / 字段 / 关联（1:1、1:N、N:N），导出可持久化的 `DatabaseSchema` JSON。当前方言为 MySQL。
+基于 Vue Flow 的可视化数据库建模：表 / 字段 / 关联（1:1、1:N、N:N），导出可持久化的 `DatabaseSchema` JSON。当前方言为 PostgreSQL。
 
 **主要导出：**
 
@@ -394,8 +394,8 @@ import '@grow-admin-rock/styles'
 | `GrowSchemaDesigner` | 可视化编辑器（`v-model` / `getSchema` / `setSchema` / `exportJson`） |
 | `createDatabaseSchema` / `createSchemaTable` / `createSchemaColumn` | schema 工厂 |
 | `exportSchemaJson` | 序列化为可持久化 JSON 字符串 |
-| `MYSQL_COLUMN_TYPE_OPTIONS` / `RELATION_TYPE_OPTIONS` | 字段类型与关联类型选项 |
-| `clampIdentifier` / `MAX_*_NAME_LENGTH` | 标识符截断与长度常量 |
+| `SCHEMA_COLUMN_TYPE_OPTIONS` / `RELATION_TYPE_OPTIONS` | PostgreSQL 字段类型与关联类型选项 |
+| `clampIdentifier` / `MAX_*_NAME_LENGTH` | 标识符截断与长度常量（最长 63） |
 
 目录：`DesignRock/rock-schema-designer`。
 
@@ -405,7 +405,7 @@ import '@grow-admin-rock/styles'
 
 ## @grow-admin-rock/data-prep
 
-可视化数据准备（分析层 Dataset）：从 Schema 选表、配置多表 Join、维度 / 度量，支持预览聚合与本地 / Mock 查询；报表笛卡尔图可绑定 Dataset。
+可视化数据准备（分析层 Dataset）：从 Schema 选表、配置多表 Join、维度 / 度量（含输出 key），支持预览聚合与本地 / Mock 查询。查询结果经页面 / 报表的 `apiOutlined` 写入 `state` 后绑定展示，不在图表侧直选 Dataset。
 
 **主要导出：**
 
@@ -414,7 +414,7 @@ import '@grow-admin-rock/styles'
 | `GrowDataPrepDesigner` | 可视化编辑器（`v-model` / `@save`） |
 | `createDataPrepDataset` / `createDataPrepJoin` 等 | Dataset 工厂 |
 | `queryDatasetLocal` / `queryDataPrepDataset` | 本地聚合 / Mock 查询 |
-| `toCartesianSeriesPayload` | 查询结果 → 笛卡尔图轴 / 系列 |
+| `measureOutputKey` / `toCartesianSeriesPayload` | 结果字段名 / 笛卡尔图轴与系列适配 |
 | `loadDatasetsFromStorage` / `upsertDatasetInStorage` | localStorage 读写 |
 | `ensureDemoDataset` | 写入演示用 Dataset |
 | `./core` | 无 Vue 的纯 TS 入口（供 Mock esbuild） |

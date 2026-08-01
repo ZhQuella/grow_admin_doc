@@ -13,9 +13,9 @@ lang: zh-CN
 | 源码目录 | `DesignRock/rock-schema-designer` |
 | 演示模块 | `@grow-admin-cornerstone/apps-designer`（侧栏菜单：**设计器 → 数据库建模**） |
 | 主要组件 | `GrowSchemaDesigner` |
-| 当前方言 | MySQL（`dialect: 'mysql'`） |
+| 当前方言 | PostgreSQL（`dialect: 'postgresql'`） |
 
-与 [页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据准备](/data-prep/) 同属低代码工具链：前二者面向 UI / 看板，本模块面向 **表结构与表间关系**；数据准备消费已建模的 Schema 做分析层 Dataset。
+与 [页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据准备](/data-prep/) 同属低代码工具链：本模块面向 **表结构与表间关系**（PostgreSQL）；数据准备消费已发布建模；页面 / 报表经 `state` 消费查询结果（后续亦可对接建模侧 SQL 查询管理）。
 
 ## 界面分区
 
@@ -36,7 +36,7 @@ lang: zh-CN
 
 ## 核心能力
 
-1. **表与字段**：新建表默认带 `id` 主键；可配置 MySQL 类型、长度、主键 / 自增 / 唯一 / 可空 / 索引等
+1. **表与字段**：新建表默认带 `id` 主键；可配置 PostgreSQL 类型、长度、主键 / 自增(IDENTITY) / 唯一 / 可空 / 索引等
 2. **连线建关联**：从字段圆点拖拽到另一表字段，弹出抽屉选择 1:1 / 1:N / N:N 与参照动作
 3. **外键与中间表**：1:1 / 1:N 可自动补外键列；N:N 自动生成 `isJunction` 中间表
 4. **双向绑定**：支持 `v-model`（`modelValue`）与 `getSchema` / `setSchema`

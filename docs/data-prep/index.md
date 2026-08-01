@@ -5,7 +5,7 @@ lang: zh-CN
 
 # 数据准备
 
-基于 **Vue Flow** 的可视化数据准备（Dataset）：从已发布的数据库建模中选表、配置多表 Join、标记维度 / 度量，导出可持久化的 `DataPrepDataset`，供报表设计器绑定查询。
+基于 **Vue Flow** 的可视化数据准备（Dataset）：从已发布的数据库建模中选表、配置多表 Join、标记维度 / 度量，导出可持久化的 `DataPrepDataset` 并支持预览查询。
 
 | 项 | 说明 |
 |------|------|
@@ -13,23 +13,25 @@ lang: zh-CN
 | 源码目录 | `DesignRock/rock-data-prep` |
 | 演示模块 | `@grow-admin-cornerstone/apps-designer`（侧栏菜单：**设计器 → 数据准备**） |
 | 主要组件 | `GrowDataPrepDesigner` |
-| Phase 1 范围 | 前端可视化 + Mock 查询；笛卡尔图可绑 Dataset |
+| Phase 1 范围 | 前端可视化 + Mock 查询 |
 
 与其它低代码工具的分工：
 
 ```text
-Schema（有什么表、怎么连）          ← 数据库建模
-    ↓ 元数据
+数据库建模（PostgreSQL 物理模型）
+    ↓ 已发布元数据
 数据准备 Dataset（怎么算）          ← 本模块
-    ↓ 查询结果 / 字段目录
-报表（怎么展示）                    ← 报表设计器
+    ↓ 查询结果（经数据请求写入 state）
+    ├─→ 低代码设计器（页面组件绑定）
+    └─→ 报表设计器（图表 dataBinding）
 ```
 
 | 模块 | 定位 |
 |------|------|
-| [数据库建模](/schema-designer/) | 物理模型：表 / 字段 / 关系 |
-| **数据准备** | 分析模型：选表、Join、维度、度量 |
-| [报表设计器](/report-designer/) | 展示：布局 + 绑定 Dataset 或页面 state |
+| [数据库建模](/schema-designer/) | 物理模型：表 / 字段 / 关系（方言 PostgreSQL） |
+| **数据准备** | 分析模型：选表、Join、维度、度量、输出 key |
+| [页面设计器](/page-designer/) | 展示：页面物料 + 绑定 `state` |
+| [报表设计器](/report-designer/) | 展示：图表布局 + 绑定 `state` |
 
 ## 界面分区
 
@@ -52,7 +54,7 @@ Schema（有什么表、怎么连）          ← 数据库建模
 
 1. **跨建模选表**：添加表抽屉按建模 Tab 列出表卡片，可连续添加多张表
 2. **手动表关联**：侧栏或画布连线配置 INNER / LEFT / RIGHT；支持多组字段与「并 / 或」
-3. **维度 / 度量**：在表节点上切换字段角色；侧栏可改名称、聚合函数
+3. **维度 / 度量**：在表节点上切换字段角色；侧栏可改名称、度量输出 key、聚合函数
 4. **数据预览**：底部 `GrowDrawer` 展示聚合结果表
 5. **本地 + Mock**：Dataset 写入 `localStorage`；查询走 `sample/mock/dataPrep.ts`
 
