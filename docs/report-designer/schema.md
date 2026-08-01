@@ -41,7 +41,7 @@ type ReportLayoutItem = {
   chartType: ReportChartType
   /** 图表视觉配置（对齐 ECharts，不含业务 data） */
   chartConfig?: ReportChartConfig
-  /** 区块数据绑定（引用页面 state） */
+  /** 区块数据绑定（页面 state 或 Dataset） */
   dataBinding?: ReportBlockDataBinding
 }
 ```
@@ -53,7 +53,7 @@ type ReportLayoutItem = {
 | `title` / `showTitle` | 卡片标题 |
 | `chartType` | 见 [图表配置](/report-designer/chart-config) |
 | `chartConfig` | 视觉 option 片段 |
-| `dataBinding` | 见 [数据绑定](/report-designer/data-binding) |
+| `dataBinding` | 见 [数据绑定](/report-designer/data-binding)（含 `sourceMode` / `dataset`） |
 
 ## 页面级数据字段
 
@@ -89,6 +89,8 @@ import type {
   ReportBlockDataBinding,
   ReportDataBindRef,
   ReportDataBindMode,
+  ReportDatasetBinding,
+  ReportDataBindingSourceMode,
 } from '@grow-admin-rock/report-designer'
 ```
 
@@ -97,3 +99,4 @@ import type {
 - [基础用法](/report-designer/usage)
 - [数据绑定](/report-designer/data-binding)
 - [图表配置](/report-designer/chart-config)
+- [数据准备](/data-prep/)

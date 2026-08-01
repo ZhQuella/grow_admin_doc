@@ -23,7 +23,8 @@ module.exports = {
           { text: '代码沙箱', link: '/code-sandbox/' },
           { text: '页面设计器', link: '/page-designer/' },
           { text: '报表设计器', link: '/report-designer/' },
-          { text: '数据库建模', link: '/schema-designer/' }
+          { text: '数据库建模', link: '/schema-designer/' },
+          { text: '数据准备', link: '/data-prep/' }
         ]
       },
       { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
@@ -49,6 +50,17 @@ module.exports = {
             { text: '基础用法', link: '/schema-designer/usage' },
             { text: '数据模型', link: '/schema-designer/schema' },
             { text: '表关联', link: '/schema-designer/relations' }
+          ]
+        }
+      ],
+      "/data-prep/": [
+        {
+          text: '数据准备',
+          items: [
+            { text: '概述', link: '/data-prep/' },
+            { text: '基础用法', link: '/data-prep/usage' },
+            { text: '数据模型', link: '/data-prep/schema' },
+            { text: '表关联', link: '/data-prep/joins' }
           ]
         }
       ],
@@ -176,6 +188,15 @@ module.exports = {
             { text: '基础用法', link: '/schema-designer/usage' },
             { text: '数据模型', link: '/schema-designer/schema' },
             { text: '表关联', link: '/schema-designer/relations' }
+          ]
+        },
+        {
+          text: '数据准备',
+          items: [
+            { text: '概述', link: '/data-prep/' },
+            { text: '基础用法', link: '/data-prep/usage' },
+            { text: '数据模型', link: '/data-prep/schema' },
+            { text: '表关联', link: '/data-prep/joins' }
           ]
         },
         {

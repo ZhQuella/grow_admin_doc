@@ -15,7 +15,7 @@ lang: zh-CN
 | 主要组件 | `GrowSchemaDesigner` |
 | 当前方言 | MySQL（`dialect: 'mysql'`） |
 
-与 [页面设计器](/page-designer/)、[报表设计器](/report-designer/) 同属低代码工具链：前二者面向 UI / 看板，本模块面向 **表结构与表间关系**。
+与 [页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据准备](/data-prep/) 同属低代码工具链：前二者面向 UI / 看板，本模块面向 **表结构与表间关系**；数据准备消费已建模的 Schema 做分析层 Dataset。
 
 ## 界面分区
 
