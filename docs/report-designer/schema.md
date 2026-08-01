@@ -53,7 +53,7 @@ type ReportLayoutItem = {
 | `title` / `showTitle` | 卡片标题 |
 | `chartType` | 见 [图表配置](/report-designer/chart-config) |
 | `chartConfig` | 视觉 option 片段 |
-| `dataBinding` | 见 [数据绑定](/report-designer/data-binding) |
+| `dataBinding` | 见 [数据绑定](/report-designer/data-binding)（含 `sourceMode` / `dataset`） |
 
 ## 页面级数据字段
 
@@ -89,6 +89,8 @@ import type {
   ReportBlockDataBinding,
   ReportDataBindRef,
   ReportDataBindMode,
+  ReportDatasetBinding,
+  ReportDataBindingSourceMode,
 } from '@grow-admin-rock/report-designer'
 ```
 

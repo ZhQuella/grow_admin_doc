@@ -61,8 +61,22 @@ type ReportDataBindRef = {
 ## ReportBlockDataBinding
 
 ```ts
+type ReportDataBindingSourceMode = 'state' | 'dataset'
+
+type ReportDatasetBinding = {
+  datasetId: string
+  /** 类目维度字段 id → xAxisData */
+  categoryFieldId?: string
+  /** 与 seriesList 下标对齐的度量字段 id */
+  seriesFieldIds?: string[]
+}
+
 type ReportBlockDataBinding = {
-  /** 类目轴 / X 轴 data */
+  /** 数据来源：页面 state（默认）或数据准备 Dataset */
+  sourceMode?: ReportDataBindingSourceMode
+  /** sourceMode=dataset 时生效（本版仅笛卡尔图） */
+  dataset?: ReportDatasetBinding
+  /** 类目轴 / X 轴 data（state 模式） */
   xAxisData?: ReportDataBindRef
   /** Y 轴类目 data（热力等） */
   yAxisData?: ReportDataBindRef
@@ -80,6 +94,20 @@ type ReportBlockDataBinding = {
   radarIndicator?: ReportDataBindRef
 }
 ```
+
+## 数据集绑定（Phase 1）
+
+笛卡尔图（柱状 / 折线等）在「数据绑定」可选 **数据集**：
+
+1. 选择已保存的 Dataset（来自 [数据准备](/data-prep/)）
+2. 类目轴选一个**维度**
+3. 各系列选对应**度量**（与 `seriesList` 下标对齐）
+
+运行时：`ReportBlockChart` → `resolveDatasetBinding` → `queryDataPrepDataset` → `toCartesianSeriesPayload` → 注入 `xAxisData` / `seriesData`。
+
+::: tip
+需先在 **设计器 → 数据准备** 保存 Dataset（会写入 `localStorage`）。演示环境可用 `ensureDemoDataset()` 预置「订单区域汇总」。
+:::
 
 ### 注入规则（概要）
 
@@ -102,7 +130,7 @@ type ReportBlockDataBinding = {
 | `BlockDataBindingPanel` | 按当前图表类型展示可绑字段 |
 | `BindRefEditor` | 单路 bind / map / code 编辑，变量列表来自页面数据项 `name` → `state.{name}` |
 
-多系列时在 `seriesData` 中按系列下标逐项配置，与 `chartConfig.seriesList` 顺序对齐。
+多系列时在 `seriesData`（state）或 `dataset.seriesFieldIds`（数据集）中按系列下标逐项配置，与 `chartConfig.seriesList` 顺序对齐。
 
 ## 与页面设计器变量绑定的差异
 

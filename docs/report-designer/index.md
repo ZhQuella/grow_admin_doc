@@ -40,9 +40,10 @@ lang: zh-CN
 
 1. **网格布局**：`colNum=24`、`rowHeight=30`（可由 `pageConfig` 覆盖）
 2. **多图表类型**：直角坐标系（折线 / 柱状 / 散点 / K 线组合）及雷达、地图、热力、漏斗等
-3. **视觉与数据分离**：`chartConfig` 只存视觉；业务数据经 `dataBinding` 从页面 `state` 注入
+3. **视觉与数据分离**：`chartConfig` 只存视觉；业务数据经 `dataBinding` 从页面 `state` 或 Dataset 注入
 4. **页面级数据**：与页面设计器同一套 `dataSource` / `apiOutlined` / `computedProps`
-5. **渲染分离**：编辑态 `GrowReportDesigner`，运行态 `GrowReportRenderer` 消费同一份 schema
+5. **Dataset 绑定（Phase 1）**：笛卡尔图可选绑 [数据准备](/data-prep/) 数据集
+6. **渲染分离**：编辑态 `GrowReportDesigner`，运行态 `GrowReportRenderer` 消费同一份 schema
 
 ## 推荐阅读
 
