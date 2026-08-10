@@ -16,9 +16,6 @@ hero:
       text: "开始使用"
       link: "/guide/"
     - theme: alt
-      text: "组件文档"
-      link: "/components/"
-    - theme: alt
       text: "Demo 演示"
       link: "https://demo.gadmin.top/"
       target: _blank
@@ -35,8 +32,8 @@ features:
     details: Grow* 契约组件 + 驱动包，一套业务代码适配 Element Plus / Naive UI / Ant Design Vue
   - title: 🗂️ 动态路由与菜单
     details: 静态基础路由 + 接口驱动动态注册，目录与叶子节点职责分离
-  - title: 🔭 优秀的布局方案
-    details: 布局壳、侧边菜单、项目配置抽屉，支持亮/暗主题与主题色切换
+  - title: 🧩 低代码设计器
+    details: 数据库建模、数据准备、页面 / 报表设计器与代码沙箱组成可组合工具链
   - title: 💈 主题与国际化
     details: CSS 变量 + UnoCSS 语义色，登录页与设置抽屉均支持主题/语言切换
 ---

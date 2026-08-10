@@ -20,9 +20,17 @@ type DataPrepDataset = {
   /** @deprecated 兼容旧数据；读写请用 schemaRefs */
   schemaRef?: DataPrepSchemaRef
   sources: DataPrepSource[]
+  /** 主表来源 id；缺省取 sources[0] */
+  primarySourceId?: string
   joins: DataPrepJoin[]
-  dimensions: DataPrepDimension[]
-  measures: DataPrepMeasure[]
+  /** 维度 / 度量配置（每项：多维度 + 单度量公式） */
+  metricConfigs: DataPrepMetricConfig[]
+  /**
+   * 数据输出字段（有序）。
+   * 明细字段为 alias.column，度量字段为 measure.outputKey。
+   * 空数组表示尚未配置；预览 / 对外输出均按此投影。
+   */
+  outputFields: string[]
   updatedAt?: string
 }
 
@@ -45,53 +53,47 @@ type DataPrepSource = {
 |------|------|
 | `schemaRefs` | 本 Dataset 用到的建模；跨库时多项 |
 | `sources` | 画布表节点；`alias` 用于字段键 `alias.column` |
+| `primarySourceId` | 主表；Join 拼装与删除表时会维护 |
 | `joins` | 表关联，见 [表关联](/data-prep/joins) |
-| `dimensions` / `measures` | 分析字段目录 |
+| `metricConfigs` | 分析配置，见下方与 [公式度量](/data-prep/formulas) |
+| `outputFields` | 输出投影；**必填才能预览** |
 
-## 维度与度量
+::: warning 旧模型说明
+早期文档中的 `dimensions` / `measures` / 枚举型 `agg` **已废弃**。请统一使用 `metricConfigs` + `formula` + `outputFields`。
+:::
+
+## 维度 / 度量配置
 
 ```ts
-type DataPrepAgg =
-  | 'sum' | 'avg' | 'count' | 'count_distinct' | 'max' | 'min'
-  | 'ratio'        // 占比：本组 / 全部组合计
-  | 'running_sum'  // 累计：同系列按时间累加
-  | 'yoy' | 'mom'  // 同比 / 环比（增长率）
-  | 'yoy_diff' | 'mom_diff'  // 同比 / 环比差值
-
-type DataPrepDimension = {
+type DataPrepMetricConfig = {
   id: string
-  name: string
-  /** alias.column */
-  field: string
-  dataType?: string
-}
-
-type DataPrepMeasure = {
-  id: string
-  name: string
-  field: string
-  /** 查询结果行对象中的字段名；缺省回退为 id */
-  outputKey?: string
-  agg: DataPrepAgg
-  format?: 'number' | 'percent' | 'currency'
+  /** 维度字段（alias.column），顺序即分组顺序 */
+  dimensionFields: string[]
+  measure: {
+    name: string
+    /** 查询结果行中的字段名；缺省回退为配置 id */
+    outputKey?: string
+    /**
+     * 公式文本。字段引用写作 [alias.column]，
+     * 支持 SUM/AVG/COUNT/MAX/MIN 及四则运算、IF/AND/OR/NOT 等。
+     */
+    formula: string
+  }
 }
 ```
 
-可用 `DATA_PREP_AGG_OPTIONS` 作为聚合下拉选项；`fieldKey(alias, column)` / `parseFieldKey(field)` 处理字段键。  
-查询结果取度量值时用 `measureOutputKey(measure)`（优先 `outputKey`，否则 `id`）。
+| 字段 | 说明 |
+|------|------|
+| `dimensionFields` | 分组维度；可为空（全局聚合） |
+| `measure.name` | 展示名 |
+| `measure.outputKey` | 结果列名；写入 `outputFields` 时用此 key |
+| `measure.formula` | 在分组行集合上求值，见 [公式度量](/data-prep/formulas) |
 
-### 二次计算（基于分组求和）
+辅助函数：
 
-| 计算 | 公式 | 说明 |
-|------|------|------|
-| `ratio` 占比 | `本组求和 / 全部组合计` | 预览显示为百分比 |
-| `running_sum` 累计 | 同系列按时间顺序累加 | 有时间维时按期累加，否则按首维排序 |
-| `yoy` 同比 | `(本期 - 去年同期) / 去年同期` | 需可解析的时间维度 |
-| `mom` 环比 | `(本期 - 上期) / 上期` | 无法解析时间时取同系列相邻上期 |
-| `yoy_diff` 同比差值 | `本期 - 去年同期` | 绝对增减 |
-| `mom_diff` 环比差值 | `本期 - 上期` | 绝对增减 |
-
-支持的时间维度格式：`YYYY`、`YYYY-MM`、`YYYY-MM-DD`、`YYYY-Qn`、`2024年1月` 等。比率类结果为小数（预览中显示为百分比）；无对比期时为 `null`。
+- `measureOutputKey(measure, configId?)` — 优先 `outputKey`，否则 `configId`
+- `fieldKey(alias, column)` / `parseFieldKey(field)` — 字段键
+- `formulaFieldToken(field)` — 生成 `[alias.column]`
 
 ## 查询请求与结果
 
@@ -99,22 +101,30 @@ type DataPrepMeasure = {
 type DatasetQueryRequest = {
   dataset?: DataPrepDataset
   datasetId?: string
-  dimensionIds?: string[]
-  measureIds?: string[]
+  /** 指定配置 id；缺省为全部（按相同维度集合合并度量列） */
+  configIds?: string[]
   limit?: number
 }
 
 type DatasetQueryResult = {
-  columns: Array<{ key: string; title: string; role: 'dimension' | 'measure' }>
+  columns: Array<{
+    key: string
+    title: string
+    role: 'dimension' | 'measure' | 'detail'
+  }>
   rows: Record<string, unknown>[]
 }
 ```
 
-度量列的 `columns[].key` 与 `rows[]` 中的字段名为该度量的 `outputKey`（未配置时为 `id`）。
+查询引擎行为概要（`queryDatasetLocal`）：
 
-- 设计器预览调用 `queryDataPrepDataset`
-- 本地引擎：`queryDatasetLocal`（多表按 `joins` 拼行后再聚合）
-- 可选适配：`toCartesianSeriesPayload(result, categoryFieldId, seriesFieldIds)`
+1. 按 `joins` 拼多表行（见 [表关联](/data-prep/joins)）
+2. 按选中的 `metricConfigs` 做分组 + 公式聚合
+3. **仅当 `outputFields` 非空**时按列表投影列与行；否则返回空结果
+
+- 设计器预览：`queryDataPrepDataset`（HTTP）或本地引擎
+- 单配置试算：`previewMetricConfig`
+- 可选适配：`toCartesianSeriesPayload(result, categoryField, seriesFields)`
 
 ## Schema Bundle（Mock 行数据）
 
@@ -145,14 +155,18 @@ import {
   createDataPrepDataset,
   createDataPrepSource,
   createDataPrepJoin,
-  createDataPrepDimension,
-  createDataPrepMeasure,
+  createDataPrepMetricConfig,
   measureOutputKey,
+  fieldKey,
+  formulaFieldToken,
   normalizeSchemaRefs,
   upsertSchemaRef,
   ensureUniqueAlias,
   queryDatasetLocal,
+  previewMetricConfig,
   toCartesianSeriesPayload,
+  listOutputFieldCandidates,
+  FORMULA_FUNCTION_DOCS,
   type DataPrepDataset,
 } from '@grow-admin-rock/data-prep'
 ```
@@ -162,6 +176,7 @@ import {
 ## 相关文档
 
 - [基础用法](/data-prep/usage)
+- [公式度量](/data-prep/formulas)
 - [表关联](/data-prep/joins)
 - [报表 · 数据绑定](/report-designer/data-binding) — 经页面 state 消费查询结果
 - [数据库建模](/schema-designer/) — PostgreSQL 物理模型

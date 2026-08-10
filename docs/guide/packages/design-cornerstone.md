@@ -295,7 +295,7 @@ cornerstone-apps-designer/
 export { Lib } from './library'
 ```
 
-完整能力见 [页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据库建模](/schema-designer/)、[数据准备](/data-prep/)。
+完整能力见 [低代码设计器](/guide/designers/)、[页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据库建模](/schema-designer/)、[数据准备](/data-prep/)。
 
 ## 命名规范
 

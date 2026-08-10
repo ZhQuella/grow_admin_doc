@@ -9,11 +9,13 @@ lang: zh-CN
 
 页面数据面板的字段与交互与页面设计器一致，见 [数据源与数据请求](/page-designer/data)。
 
+若数据来自 [数据准备](/data-prep/)，请先通过页面「数据请求」调用查询接口，把结果写入某个 `state` 字段，再在本页绑定该字段——**报表不直选 Dataset**。
+
 ## 数据流
 
 ```
 页面配置（左侧轨）
-  dataSource / apiOutlined / …
+  dataSource / apiOutlined / computedProps / …
         │
         ▼
 buildRuntimeState → …
@@ -61,21 +63,7 @@ type ReportDataBindRef = {
 ## ReportBlockDataBinding
 
 ```ts
-type ReportDataBindingSourceMode = 'state' | 'dataset'
-
-type ReportDatasetBinding = {
-  datasetId: string
-  /** 类目维度字段 id → xAxisData */
-  categoryFieldId?: string
-  /** 与 seriesList 下标对齐的度量字段 id */
-  seriesFieldIds?: string[]
-}
-
 type ReportBlockDataBinding = {
-  /** 数据来源：页面 state（默认）或数据准备 Dataset */
-  sourceMode?: ReportDataBindingSourceMode
-  /** sourceMode=dataset 时生效（本版仅笛卡尔图） */
-  dataset?: ReportDatasetBinding
   /** 类目轴 / X 轴 data（state 模式） */
   xAxisData?: ReportDataBindRef
   /** Y 轴类目 data（热力等） */
@@ -95,20 +83,6 @@ type ReportBlockDataBinding = {
 }
 ```
 
-## 数据集绑定（Phase 1）
-
-笛卡尔图（柱状 / 折线等）在「数据绑定」可选 **数据集**：
-
-1. 选择已保存的 Dataset（来自 [数据准备](/data-prep/)）
-2. 类目轴选一个**维度**
-3. 各系列选对应**度量**（与 `seriesList` 下标对齐）
-
-运行时：`ReportBlockChart` → `resolveDatasetBinding` → `queryDataPrepDataset` → `toCartesianSeriesPayload` → 注入 `xAxisData` / `seriesData`。
-
-::: tip
-需先在 **设计器 → 数据准备** 保存 Dataset（会写入 `localStorage`）。演示环境可用 `ensureDemoDataset()` 预置「订单区域汇总」。
-:::
-
 ### 注入规则（概要）
 
 | 图表场景 | 注入目标 |
@@ -123,6 +97,17 @@ type ReportBlockDataBinding = {
 `chartConfig` **不写业务 data**。演示/空数据时系列默认 `data: []`，靠绑定注入真实值。
 :::
 
+## 对接数据准备（推荐做法）
+
+1. 在 [数据准备](/data-prep/) 配置并保存 Dataset，用预览确认 `columns` / `rows`
+2. 在报表左侧「数据请求」配置接口（演示可用 Mock `POST …/data-prep/query`），在 `fit` / `didFetch` 中把结果写入约定字段
+3. 或用「属性计算」把已有 state 整理成类目数组 / 系列数组
+4. 在区块「数据绑定」中：
+   - `xAxisData` → `state.xxx`（类目）
+   - `seriesData[i]` → 各系列数值数组
+
+也可在前端直接调用 `queryDatasetLocal` / `toCartesianSeriesPayload`，再把结果赋给数据源。
+
 ## 设计器 UI
 
 | 组件 | 说明 |
@@ -130,7 +115,7 @@ type ReportBlockDataBinding = {
 | `BlockDataBindingPanel` | 按当前图表类型展示可绑字段 |
 | `BindRefEditor` | 单路 bind / map / code 编辑，变量列表来自页面数据项 `name` → `state.{name}` |
 
-多系列时在 `seriesData`（state）或 `dataset.seriesFieldIds`（数据集）中按系列下标逐项配置，与 `chartConfig.seriesList` 顺序对齐。
+多系列时在 `seriesData` 中按系列下标逐项配置，与 `chartConfig.seriesList` 顺序对齐。
 
 ## 与页面设计器变量绑定的差异
 
@@ -138,13 +123,13 @@ type ReportBlockDataBinding = {
 |--|-----------|-----------|
 | 绑定位置 | 组件 props（`propBindModes`） | 区块 `dataBinding` |
 | 目标 | 任意属性表达式 | 轴 / 系列 / 整图 data |
-| 页面 state | `dataSource` + API | 相同 |
-| 映射 | 直接表达式 | 额外支持 `map` 抽字段 |
+| 页面 state | `dataSource` + API + 计算属性 | 相同 |
+| 映射 | 直接表达式 / 函数 | 额外支持 `map` 抽字段 |
 
 ## 相关文档
 
 - [数据模型](/report-designer/schema) — schema 中的 `dataBinding` 字段
 - [图表配置](/report-designer/chart-config) — `buildEChartsOption` 注入点
 - [页面设计器 · 变量绑定](/page-designer/variable-bind) — state 求值约定
-- [数据准备](/data-prep/) — Dataset 配置与查询（经页面请求写入 state 后绑定）
+- [数据准备](/data-prep/) — Dataset 配置与查询
 - [数据库建模](/schema-designer/) — PostgreSQL 物理模型（上游元数据）
