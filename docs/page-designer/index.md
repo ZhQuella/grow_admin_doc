@@ -11,7 +11,7 @@ lang: zh-CN
 |------|------|
 | 核心包 | `@grow-admin-rock/designer` |
 | 源码目录 | `DesignRock/rock-designer` |
-| 演示模块 | `@grow-admin-cornerstone/apps-designer`（侧栏菜单：**页面设计器**） |
+| 演示模块 | `@grow-admin-cornerstone/apps-designer`（侧栏菜单：**设计器 → 低代码设计器**） |
 | 主要组件 | `GrowDesigner`（编辑）、`GrowRenderer`（渲染） |
 
 ## 界面分区
@@ -27,29 +27,33 @@ lang: zh-CN
 
 | 区域 | 能力 |
 |------|------|
-| **左侧轨道** | 切换组件库、结构树、JSON 数据、数据源、数据请求等面板 |
+| **左侧轨道** | 组件库、查看数据、结构树、数据源、属性计算、数据监听、页面事件、数据请求 |
 | **画布** | 拖入 / 排序 / 选中；选中后显示工具条（拖拽手柄、复制、添加子项、删除） |
-| **右侧面板** | 对当前选中节点编辑 props、styles、events |
+| **右侧面板** | 对当前选中节点编辑 props、styles、events、高级项 |
 
 ## 核心能力
 
-1. **物料拖拽**：基础元素、表单、布局、展示类组件（映射到 `Grow*` 或原生标签）
+1. **物料拖拽**：基础元素、表单、布局、展示类与业务组件（映射到 `Grow*` 或原生标签）
 2. **样式可视化**：尺寸与间距、圆角、边框、背景、阴影、布局模式（display / flex）；文字类可配颜色 / 字号 / 对齐等
 3. **结构树与 JSON**：查看 / 定位节点，导出设计数据
-4. **数据源与数据请求**：静态数据、远程接口配置（数组写入 schema）
-5. **变量绑定**：属性支持绑定 `state.xxx`（来自数据源），画布与预览实时求值
-6. **渲染分离**：编辑态 `GrowDesigner`，运行态 `GrowRenderer` 消费同一套 schema
+4. **数据源 / 计算属性 / 数据请求**：静态数据、派生 state、远程接口配置
+5. **页面事件与数据监听**：生命周期脚本、state 监听
+6. **变量绑定 / 函数绑定**：属性支持 `text` / `bind` / `function` 三种模式
+7. **渲染分离**：编辑态 `GrowDesigner`，运行态 `GrowRenderer` 消费同一套 schema
 
 与 [报表设计器](/report-designer/) 的关系：报表复用本模块的页面级数据面板与运行时；图表区块用独立的 `dataBinding` 注入 data，见 [报表 · 数据绑定](/report-designer/data-binding)。
+
+工具链全景见 [低代码设计器总览](/guide/designers/)。
 
 ## 推荐阅读
 
 1. [基础用法](/page-designer/usage) — 接入演示模块、画布操作
 2. [样式面板](/page-designer/style) — 样式项、display 内外层约定
 3. [数据源与数据请求](/page-designer/data) — 左侧数据面板与字段说明
-4. [变量绑定](/page-designer/variable-bind) — 属性绑定数据源、表达式与求值
-5. [数据模型](/page-designer/schema) — `structures` / `props` / `styles` / `propBindModes`
+4. [变量绑定](/page-designer/variable-bind) — 属性绑定 state、函数绑定
+5. [事件与生命周期](/page-designer/events) — 组件事件、页面事件、监听、计算属性
+6. [数据模型](/page-designer/schema) — structures / props / propBindModes / pageConfig
 
 ::: tip 演示入口
-登录后打开侧栏 **页面设计器**（由 `apps-designer` 注册动态路由）。本地需在宿主中装配 `@grow-admin-rock/designer` 与对应 Cornerstone 模块。
+登录后打开侧栏 **设计器 → 低代码设计器**（由 `apps-designer` 注册动态路由）。本地需在宿主中装配 `@grow-admin-rock/designer` 与对应 Cornerstone 模块。
 :::

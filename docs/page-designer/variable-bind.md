@@ -5,18 +5,19 @@ lang: zh-CN
 
 # 变量绑定
 
-属性面板中带 **函数图标** 的输入项（`PropVariableBind`）支持两种模式：
+属性面板中带绑定能力的输入项支持最多三种模式（以该字段是否开放为准）：
 
-| 模式 | 说明 |
-|------|------|
-| **普通文本** | 直接输入字面量，写入 `props[uuid][字段]` |
-| **变量绑定** | 写入表达式（如 `state.title`），并在 `propBindModes` 中标记为 `bind` |
+| 模式 | `propBindModes` | 说明 |
+|------|-----------------|------|
+| **普通文本** | `text`（或缺省） | 直接输入字面量，写入 `props[uuid][字段]` |
+| **变量绑定** | `bind` | 写入表达式（如 `state.title`），渲染前求值 |
+| **函数绑定** | `function` | 写入函数体，运行时编译为回调（可用声明参数 + `state` / `refs`） |
 
-画布与预览会按数据源求值后展示；修改数据源保存后，引用该变量的组件会跟随更新。
+画布与预览会按数据源 / 计算属性求值后展示；修改数据源保存后，引用该变量的组件会跟随更新。
 
-## 使用方式
+## 变量绑定用法
 
-1. 在左侧 **数据源** 中新增项：填写 **名称**（如 `title`），在 **数据** 中写入 JS 字面量（如 `"你好"`、`123`、`true`、`{ a: 1 }`）
+1. 在左侧 **数据源**（或 **属性计算**）中新增项：填写 **名称**（如 `title`），在 **数据** 中写入 JS 字面量或表达式
 2. 选中画布组件，打开右侧 **属性**
 3. 在支持绑定的字段旁点击函数图标，打开「变量绑定」弹窗
 4. 从左侧变量列表点选（写入 `state.名称`），或自行编写表达式后确定
@@ -26,10 +27,20 @@ lang: zh-CN
 非绑定态打开弹窗时，**不会**把当前普通文本带入表达式框；仅已绑定态会带回现有表达式。
 :::
 
+## 函数绑定用法
+
+部分 props（如上传的各类回调、部分布局 / 展示组件的函数型属性）通过 `functionBind` 配置开放：
+
+1. 在属性面板对应字段打开「函数绑定」弹窗（`PropFunctionBind`）
+2. 按提示参数编写函数体；上下文始终包含 `state`、`refs`
+3. 确定后 `propBindModes` 记为 `function`；可「清除」恢复
+
+与变量绑定的差异：函数绑定的目标是**可调用函数**，不是求值后的静态值。
+
 ## 表达式约定
 
-- 运行时上下文为 `state`，键为数据源 **名称**
-- 引用写法：`state.xxx`（与数据源 `name` 对应）
+- 运行时上下文为 `state`，键为数据源 / 计算属性 **名称**
+- 引用写法：`state.xxx`（与 `name` 对应）
 - 也可写完整 JS 表达式，例如：`state.count + 1`、`state.user?.name`
 - 数据源 `data` 字段本身按 JS 表达式求值（与代码编辑器 `expression` 语言一致）
 
@@ -55,7 +66,7 @@ lang: zh-CN
 | 按钮 | 文字 `content` |
 | 链接 | 文字 `content`、链接地址 `href` |
 | 输入框、数字输入框、选择器、级联、开关、滑块、日期/时间选择器、单选、多选、树形选择、提及 | **默认值** → `modelValue` |
-| 上传 | **默认值** → `file-list` |
+| 上传 | **默认值** → `file-list`；以及各类回调 → 函数绑定 |
 
 ## 持久化：propBindModes
 
@@ -64,43 +75,41 @@ lang: zh-CN
 ```ts
 propBindModes: {
   [uuid: string]: {
-    [modelKey: string]: 'text' | 'bind'
+    [modelKey: string]: 'text' | 'bind' | 'function'
   }
 }
 ```
 
 - `text`：普通输入（或不存在该 key）
 - `bind`：`props` 中对应值为表达式，渲染前需求值
+- `function`：`props` 中对应值为函数体
 
 复制 / 删除节点时会同步处理 `propBindModes`。
 
 ## 运行时求值
 
 ```
-dataSource[]  ──buildRuntimeState──►  state
+dataSource[] + computedProps[]  ──buildRuntimeState──►  state
 props + propBindModes + state  ──resolveBoundProps──►  展示用 props
 ```
 
 - 设计器：`useOption` 提供 `runtimeState`；叶子节点与卡片标题等使用解析后的值
-- 预览 / `GrowRenderer`：schema 需包含 `dataSource`、`propBindModes`；内部同样求值
+- 预览 / `GrowRenderer`：schema 需包含 `dataSource`、`propBindModes`（及按需的 `computedProps`）；内部同样求值
 
 源码：`GrowRenderer/utils/resolveBoundProps.ts`。
 
 ## 组件结构（源码）
 
 ```
-optionComponent/PropVariableBind/
-  index.vue              # 输入框 + 绑定按钮
-  VariableBindDialog.vue # 变量列表 + GrowCodeEditor
-  constants.ts
-  use/useVariableList.ts
-
-static/propBindModes.ts  # 模式常量与归一化
-static/elementInfo/shared.ts  # variableBindInput / defaultValueBind
+optionComponent/PropVariableBind/   # 变量绑定
+optionComponent/PropFunctionBind/   # 函数绑定
+static/propBindModes.ts             # 模式常量与归一化
+static/elementInfo/shared.ts        # variableBindInput / functionBind / …
 ```
 
 ## 相关文档
 
-- [数据源与数据请求](/page-designer/data) — 配置 `dataSource`
-- [数据模型](/page-designer/schema) — `propBindModes` 字段
-- [基础用法](/page-designer/usage) — 预览与 `GrowRenderer`
+- [数据源与数据请求](/page-designer/data)
+- [事件与生命周期](/page-designer/events)
+- [数据模型](/page-designer/schema)
+- [代码沙箱](/code-sandbox/)

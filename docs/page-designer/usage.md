@@ -18,7 +18,7 @@ lang: zh-CN
 2. 在 IOC / Library 装配中注册该模块（与 `apps-sandbox` 类似）
 3. 由 `apps-home` 的动态路由合并菜单项
 
-具体装配方式见 [业务模块开发](/guide/development/business-module)、[DesignCornerstone](/guide/packages/design-cornerstone)。
+具体装配方式见 [业务模块开发](/guide/development/business-module)、[DesignCornerstone](/guide/packages/design-cornerstone)、[低代码设计器总览](/guide/designers/)。
 
 ## 在页面中使用 GrowDesigner
 
@@ -51,13 +51,16 @@ import { GrowDesigner } from '@grow-admin-rock/designer'
 
 | 面板 | 说明 |
 |------|------|
-| 组件库 | 按分组展示可拖拽物料（基础 / 表单 / 布局等） |
-| 结构树 | 树形定位节点并选中 |
+| 组件库 | 按分组展示可拖拽物料（基础 / 表单 / 布局 / 业务组件等） |
 | 查看数据 | 查看当前设计 JSON |
+| 结构树 | 树形定位节点并选中 |
 | 数据源 | 页面静态 / 变量数据，数组写入 `dataSource` |
+| 属性计算 | 基于 state 的派生数据，写入 `computedProps` |
+| 数据监听 | 监听 `state` 路径变化并执行脚本，写入 `pageConfig.watchers` |
+| 页面事件 | 页面生命周期脚本，写入 `pageConfig.events` |
 | 数据请求 | 远程接口与处理函数，数组写入 `apiOutlined` |
 
-数据源与数据请求见 [数据源与数据请求](/page-designer/data)。将数据源接到组件属性见 [变量绑定](/page-designer/variable-bind)。
+数据源与数据请求见 [数据源与数据请求](/page-designer/data)。将数据源接到组件属性见 [变量绑定](/page-designer/variable-bind)。事件与监听见 [事件与生命周期](/page-designer/events)。
 
 ## 右侧面板
 
@@ -65,14 +68,16 @@ import { GrowDesigner } from '@grow-admin-rock/designer'
 
 | Tab | 说明 |
 |------|------|
-| 属性 | 组件 props；部分字段为「输入 + 变量绑定」 |
+| 属性 | 组件 props；支持普通文本 / 变量绑定 / 函数绑定 |
 | 样式 | 见 [样式面板](/page-designer/style) |
-| 事件 | 交互事件配置（可按业务扩展） |
-| 高级 | 节点渲染相关高级项（按组件开放） |
+| 事件 | 组件交互事件（点击、变更等），脚本可访问 `state` / `refs` |
+| 高级 | 节点渲染相关高级项（如 `refName` 等，按组件开放） |
+
+未选中节点时，右侧可编辑页面级选项（`PageOptions`）。
 
 ## 预览与渲染
 
-- 工具栏「预览」：弹层内用 `GrowRenderer` 渲染当前 schema（含 `dataSource`、`propBindModes`，绑定字段会求值）
+- 工具栏「预览」：弹层内用 `GrowRenderer` 渲染当前 schema（含 `dataSource`、`computedProps`、`propBindModes`，绑定字段会求值）
 - 正式渲染同样使用 `GrowRenderer`，传入完整 schema：
 
 ```vue
@@ -84,7 +89,7 @@ import { GrowDesigner } from '@grow-admin-rock/designer'
 import { GrowRenderer } from '@grow-admin-rock/designer'
 // pageSchema 建议含：
 // structures / renderArgument / props / styles / events
-// dataSource / propBindModes / pageConfig / apiOutlined（按需）
+// dataSource / computedProps / propBindModes / pageConfig / apiOutlined（按需）
 </script>
 ```
 

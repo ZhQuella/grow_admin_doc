@@ -29,9 +29,22 @@ type DatabaseSchema = {
 | `comment` | 库注释 |
 | `tables` | 表列表（含中间表） |
 | `relations` | 表间关联列表 |
-| `queries` | 建模侧 SQL 查询配置（可选） |
+| `queries` | 建模侧 SQL 查询配置（可选，左轨「SQL 查询」面板维护；本版仅本地存档） |
 
 可用 `createDatabaseSchema(patch?)` 生成带默认空表 / 关联数组的对象。
+
+## SchemaSqlQuery
+
+```ts
+type SchemaSqlQuery = {
+  id: string
+  name: string
+  description?: string
+  sql: string
+}
+```
+
+操作说明见 [基础用法 · SQL 查询面板](/schema-designer/usage#sql-查询面板)。
 
 ## SchemaTable
 

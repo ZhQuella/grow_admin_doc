@@ -56,14 +56,15 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 5. **网络与数据** — 请求封装与 Mock
 6. **组件库** — 用 `Grow*` 写页面，按需换 UI 库
 7. **[组件文档](/components/)** — SearchBar / ColumnBar 等具体用法
-8. **[代码沙箱](/code-sandbox/)** — 在线编辑 Vue SFC 与宿主内预览
-9. **[页面设计器](/page-designer/)** — 拖拽式低代码设计器与样式 / schema
-10. **[报表设计器](/report-designer/)** — 图表看板布局、数据绑定与 ECharts 渲染
-11. **[数据库建模](/schema-designer/)** — 可视化表 / 字段 / 关联与 schema 导出
-12. **[数据准备](/data-prep/)** — Dataset：选表、Join、维度 / 度量；经 state 对接页面 / 报表
-13. **业务开发** — 新建 Cornerstone 包
-14. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
-15. **包说明** — 查某个 npm 包是干什么的
+8. **[低代码设计器总览](/guide/designers/)** — 建模 → 数据准备 → 页面 / 报表工具链
+9. **[代码沙箱](/code-sandbox/)** — 在线编辑 Vue SFC 与宿主内预览
+10. **[页面设计器](/page-designer/)** — 拖拽式低代码设计器与样式 / schema
+11. **[报表设计器](/report-designer/)** — 图表看板布局、数据绑定与 ECharts 渲染
+12. **[数据库建模](/schema-designer/)** — 可视化表 / 字段 / 关联与 schema 导出
+13. **[数据准备](/data-prep/)** — Dataset：选表、Join、公式度量；经 state 对接页面 / 报表
+14. **业务开发** — 新建 Cornerstone 包
+15. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+16. **包说明** — 查某个 npm 包是干什么的
 
 ## 文档导航
 
@@ -124,6 +125,17 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [AbstractEle](/components/abstract-ele) | 动态表单项 |
 | [其他组件](/components/other) | Iconify、SplitPane 等 |
 
+### 低代码设计器
+
+| 章节 | 说明 |
+|------|------|
+| [低代码设计器总览](/guide/designers/) | 工具链关系、演示菜单、接入要点 |
+| [代码沙箱](/code-sandbox/) | Monaco 编辑 + SFC 预览 |
+| [页面设计器](/page-designer/) | 拖拽页面与渲染 |
+| [报表设计器](/report-designer/) | 图表看板 |
+| [数据库建模](/schema-designer/) | PostgreSQL 可视化建模 |
+| [数据准备](/data-prep/) | Dataset 与公式度量 |
+
 ### 代码沙箱
 
 | 章节 | 说明 |
@@ -143,7 +155,8 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [基础用法](/page-designer/usage) | 接入、画布操作、渲染 |
 | [样式面板](/page-designer/style) | 尺寸 / 边框 / display 等 |
 | [数据源与数据请求](/page-designer/data) | 数据源 / 接口配置与字段 |
-| [变量绑定](/page-designer/variable-bind) | 属性绑定 state、表达式求值 |
+| [变量绑定](/page-designer/variable-bind) | 属性绑定 state、函数绑定 |
+| [事件与生命周期](/page-designer/events) | 组件事件、页面事件、监听、计算属性 |
 | [数据模型](/page-designer/schema) | structures / props / propBindModes |
 
 ### 报表设计器
@@ -171,7 +184,8 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 |------|------|
 | [概述](/data-prep/) | 能力概览与界面分区 |
 | [基础用法](/data-prep/usage) | 接入、操作流程、与页面 / 报表对接 |
-| [数据模型](/data-prep/schema) | DataPrepDataset / 查询结果 |
+| [数据模型](/data-prep/schema) | DataPrepDataset / metricConfigs / 查询结果 |
+| [公式度量](/data-prep/formulas) | 字段引用、聚合与逻辑函数 |
 | [表关联](/data-prep/joins) | 多字段 Join 与并 / 或 |
 
 ### 业务开发

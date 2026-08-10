@@ -20,7 +20,7 @@ lang: zh-CN
 2. 在 IOC / Library 装配中注册该模块
 3. 由 `apps-home` 的动态路由合并菜单项
 
-具体装配方式见 [业务模块开发](/guide/development/business-module)、[DesignCornerstone](/guide/packages/design-cornerstone)。
+具体装配方式见 [业务模块开发](/guide/development/business-module)、[DesignCornerstone](/guide/packages/design-cornerstone)、[低代码设计器总览](/guide/designers/)。
 
 ## 在页面中使用 GrowSchemaDesigner
 
@@ -91,29 +91,59 @@ const save = () => {
 | 操作 | 说明 |
 |------|------|
 | 拖拽表节点 | 移动位置，坐标写入 `table.position` |
-| 点击表 | 选中并打开「表配置」面板 |
+| 点击表 | 选中并打开浮层「表配置」面板 |
 | 字段圆点连线 | 打开创建关联抽屉（见 [表关联](/schema-designer/relations)） |
-| 点击关联线 | 选中并打开「关联配置」面板 |
+| 点击关联线 | 选中并打开浮层「关联配置」面板 |
 | 悬停关联线 → 垃圾桶 | 删除关联（N:N 会一并删中间表） |
 | Delete / Backspace | 选中关联时可删除（输入框内不触发） |
 | Controls / MiniMap | 缩放、平移、鸟瞰 |
 
-## 左侧面板
+## 左侧轨道与浮层
+
+左轨只负责「库级」面板；表 / 关联配置在**选中后的浮层**中编辑。
 
 | 轨道 | 说明 |
 |------|------|
-| 库信息 | 编辑 `name`、`comment`（标识符最长 64） |
+| 库信息 | 编辑 `name`、`comment`（标识符最长 63） |
+| SQL 查询 | 管理 `queries[]`（本版仅本地状态，不执行到真实库） |
+
+| 浮层 / 抽屉 | 说明 |
+|------|------|
 | 表配置 | 需先选中表：表名 / 注释、字段列表与字段属性 |
 | 关联配置 | 需先选中关联线：类型只读展示、可改 `onDelete` / `onUpdate` |
+| 创建关联抽屉 | 连线后选择 1:1 / 1:N / N:N 与参照动作 |
 
-未选中表或关联时，对应面板会提示先在画布中选择。
+未选中表或关联时，对应浮层不会打开。
 
 ### 表配置要点
 
 - 字段类型来自 `SCHEMA_COLUMN_TYPE_OPTIONS`（VARCHAR / INTEGER / NUMERIC / JSONB 等）
-- `VARCHAR` / `CHAR` 可配长度；`DECIMAL` 可配精度与小数位
+- `VARCHAR` / `CHAR` 可配长度；`DECIMAL` / `NUMERIC` 可配精度与小数位
 - 设为主键时会取消其他列的主键，并将该列 `nullable` 置为 `false`
 - 删除被关联使用的字段会提示，确认后同步移除相关关联
+
+### SQL 查询面板
+
+写入 schema 的 `queries` 字段：
+
+```ts
+type SchemaSqlQuery = {
+  id: string
+  name: string
+  description?: string
+  sql: string
+}
+```
+
+| 操作 | 说明 |
+|------|------|
+| 添加 | 打开表单填写名称、描述、SQL |
+| 编辑 / 复制新增 / 删除 | 列表项操作 |
+| 持久化 | 随 `getSchema` / `v-model` / 导出 JSON 一并保存 |
+
+::: info
+当前版本 SQL 查询为**配置存档**（本地状态），执行与后端对接可按业务扩展；数据准备侧消费的是已发布的表结构元数据，而非此处 SQL 文本。
+:::
 
 ## 工厂与工具函数
 
@@ -143,3 +173,4 @@ import {
 
 - [数据模型](/schema-designer/schema)
 - [表关联](/schema-designer/relations)
+- [低代码设计器总览](/guide/designers/)
