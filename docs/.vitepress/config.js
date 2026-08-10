@@ -37,7 +37,8 @@ module.exports = {
           { text: '页面设计器', link: '/page-designer/' },
           { text: '报表设计器', link: '/report-designer/' },
           { text: '数据库建模', link: '/schema-designer/' },
-          { text: '数据准备', link: '/data-prep/' }
+          { text: '数据准备', link: '/data-prep/' },
+          { text: '数据清洗', link: '/data-clean/' }
         ]
       },
       { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
@@ -77,6 +78,17 @@ module.exports = {
             { text: '数据模型', link: '/data-prep/schema' },
             { text: '公式度量', link: '/data-prep/formulas' },
             { text: '表关联', link: '/data-prep/joins' }
+          ]
+        }
+      ],
+      "/data-clean/": [
+        {
+          text: '数据清洗',
+          items: [
+            { text: '概述', link: '/data-clean/' },
+            { text: '基础用法', link: '/data-clean/usage' },
+            { text: '数据模型', link: '/data-clean/schema' },
+            { text: '节点与算子', link: '/data-clean/nodes' }
           ]
         }
       ],
@@ -224,6 +236,15 @@ module.exports = {
             { text: '数据模型', link: '/data-prep/schema' },
             { text: '公式度量', link: '/data-prep/formulas' },
             { text: '表关联', link: '/data-prep/joins' }
+          ]
+        },
+        {
+          text: '数据清洗',
+          items: [
+            { text: '概述', link: '/data-clean/' },
+            { text: '基础用法', link: '/data-clean/usage' },
+            { text: '数据模型', link: '/data-clean/schema' },
+            { text: '节点与算子', link: '/data-clean/nodes' }
           ]
         },
         {

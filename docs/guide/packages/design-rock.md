@@ -37,6 +37,7 @@ README「相关包说明」速查表见 [开发规范 - 相关包速查](/guide/
 | `@grow-admin-rock/report-designer` | 报表设计器（`GrowReportDesigner` / `GrowReportRenderer`） |
 | `@grow-admin-rock/schema-designer` | 可视化数据库建模（`GrowSchemaDesigner`） |
 | `@grow-admin-rock/data-prep` | 数据准备 Dataset（`GrowDataPrepDesigner`） |
+| `@grow-admin-rock/data-clean` | 数据清洗流（`GrowDataCleanDesigner`） |
 
 ---
 
@@ -424,3 +425,25 @@ import '@grow-admin-rock/styles'
 目录：`DesignRock/rock-data-prep`。
 
 完整说明见 [数据准备](/data-prep/)。工具链见 [低代码设计器](/guide/designers/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**数据准备**）。
+
+---
+
+## @grow-admin-rock/data-clean
+
+可视化数据清洗（声明式 ETL 流）：从组件库拖入源 / 清洗 / 合并 / 聚合 / 输出节点，连成有向无环图，产物为 `CleanFlow`（设计期编排，**调用时执行**）。M1 提供编排、部分节点配置 UI 与 Demo 采样预览；尚无本地执行引擎与 Mock HTTP。
+
+**主要导出：**
+
+| 导出 | 说明 |
+|------|------|
+| `GrowDataCleanDesigner` | 可视化编辑器（`v-model` / `@change` / `@save`；`getFlow` / `setFlow`） |
+| `createCleanFlow` / `createCleanFlowNode` / `createCleanFlowEdge` | 流 / 节点 / 边工厂 |
+| `cloneCleanFlow` / `defaultConfigForType` | 深拷贝 / 按类型默认 config |
+| `CATEGORY_META` / `NODE_TYPE_META` / `PALETTE_GROUPS` | 类别与组件库元数据 |
+| `TABLE_SOURCE_KIND_OPTIONS` / `DEMO_SOURCE_OPTIONS` | 表源种类与 demo 选项 |
+| `FILTER_OP_OPTIONS` / `FILTER_LOGIC_OPTIONS` / `SPLIT_MODE_OPTIONS` | 过滤与拆分 UI 选项 |
+| `buildDemoPreview` | M1 选中节点采样预览（非真实执行） |
+
+目录：`DesignRock/rock-data-clean`。
+
+完整说明见 [数据清洗](/data-clean/)。工具链见 [低代码设计器](/guide/designers/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**数据清洗**）。
