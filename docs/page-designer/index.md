@@ -43,7 +43,7 @@ lang: zh-CN
 
 与 [报表设计器](/report-designer/) 的关系：报表复用本模块的页面级数据面板与运行时；图表区块用独立的 `dataBinding` 注入 data，见 [报表 · 数据绑定](/report-designer/data-binding)。
 
-工具链全景见 [低代码设计器总览](/guide/designers/)。
+工具链全景见 [低代码设计器](/guide/designers/)。
 
 ## 推荐阅读
 

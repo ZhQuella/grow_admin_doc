@@ -50,7 +50,51 @@ lang: zh-CN
 
 完整签名与参数说明见包内常量 `FORMULA_FUNCTION_DOCS`。
 
-## 配置示例
+## 公式编辑器 UI
+
+在「维度 / 度量」配置面板点击公式区「点击编辑公式」，打开公式对话框：
+
+- 可从字段列表插入 `[alias.column]` token  
+- 可从函数文档（`FORMULA_FUNCTION_DOCS`）插入聚合 / 逻辑函数  
+- 分类通常包括 **agg**（聚合）与 **logic**（逻辑）  
+- 选中函数时可看到 signature、description、example、params  
+
+保存度量配置前公式必须非空，否则面板不会关闭。
+
+## 求值语义
+
+- 引擎按「当前分组内的行集合」计算聚合函数  
+- 无维度时：整表（Join 后）作为一组  
+- 有维度时：按 `dimensionFields` 顺序分组，每组算一次公式  
+- 非法数字参与运算时常按 0 处理；`IFERROR` 可捕获空 / 非有限结果  
+
+包内也可脱离 UI 试算：
+
+```ts
+import {
+  evaluateFormulaOnGroup,
+  previewMetricConfig,
+  extractFormulaFields,
+} from '@grow-admin-rock/data-prep'
+
+const fields = extractFormulaFields('SUM([orders.amount])')
+// fields === ['orders.amount']
+```
+
+## 更多示例
+
+```text
+# 客单价
+IFERROR(SUM([orders.amount]) / SUM([orders.quantity]), 0)
+
+# 有销量才汇总金额
+IF(SUM([orders.quantity]) > 0, SUM([orders.amount]), 0)
+
+# 多字段求和
+SUM([orders.amount], [orders.tax])
+```
+
+## 配置完整示例
 
 按区域汇总订单金额：
 
@@ -66,13 +110,14 @@ lang: zh-CN
 }
 ```
 
-输出时在 `outputFields` 中勾选维度 `orders.region` 与度量 `amount`，预览才会出现对应列。
+务必在 `outputFields` 中勾选 `orders.region` 与 `amount`，预览才会出列。
 
 ## 与输出字段的关系
 
-- 公式结果列名 = `measure.outputKey`（缺省回退配置 `id`）
-- 仅出现在 `outputFields` 中的列会出现在 `DatasetQueryResult`
-- 明细列用 `alias.column`；度量列用 `outputKey`（不是公式原文）
+- 公式结果列名 = `measure.outputKey`（缺省回退配置 `id`）  
+- 仅出现在 `outputFields` 中的列会出现在 `DatasetQueryResult`  
+- 明细列用 `alias.column`；度量列用 `outputKey`（不是公式原文）  
+- 删除度量配置后，实现侧会 prune 失效的输出字段  
 
 ## 相关文档
 

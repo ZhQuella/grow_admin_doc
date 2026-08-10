@@ -56,7 +56,7 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 5. **网络与数据** — 请求封装与 Mock
 6. **组件库** — 用 `Grow*` 写页面，按需换 UI 库
 7. **[组件文档](/components/)** — SearchBar / ColumnBar 等具体用法
-8. **[低代码设计器总览](/guide/designers/)** — 建模 → 数据准备 → 页面 / 报表工具链
+8. **[低代码设计器](/guide/designers/)** — 建模 → 数据准备 → 页面 / 报表工具链
 9. **[代码沙箱](/code-sandbox/)** — 在线编辑 Vue SFC 与宿主内预览
 10. **[页面设计器](/page-designer/)** — 拖拽式低代码设计器与样式 / schema
 11. **[报表设计器](/report-designer/)** — 图表看板布局、数据绑定与 ECharts 渲染
@@ -129,12 +129,9 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 
 | 章节 | 说明 |
 |------|------|
-| [低代码设计器总览](/guide/designers/) | 工具链关系、演示菜单、接入要点 |
-| [代码沙箱](/code-sandbox/) | Monaco 编辑 + SFC 预览 |
-| [页面设计器](/page-designer/) | 拖拽页面与渲染 |
-| [报表设计器](/report-designer/) | 图表看板 |
-| [数据库建模](/schema-designer/) | PostgreSQL 可视化建模 |
-| [数据准备](/data-prep/) | Dataset 与公式度量 |
+| [概述](/guide/designers/) | 工具链关系与模块一览 |
+| [协同工作](/guide/designers/collaboration) | 产物衔接、`state` 总线、端到端示例 |
+| [演示与接入](/guide/designers/playground) | 菜单对照、宿主装配、界面要点 |
 
 ### 代码沙箱
 

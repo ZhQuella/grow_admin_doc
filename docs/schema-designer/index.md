@@ -44,7 +44,7 @@ lang: zh-CN
 5. **双向绑定**：支持 `v-model`（`modelValue`）与 `getSchema` / `setSchema`
 6. **导出**：工具栏复制 / 下载，或 `exportSchemaJson` / 实例 `exportJson()`
 
-完整工具链见 [低代码设计器总览](/guide/designers/)。
+完整工具链见 [低代码设计器](/guide/designers/)。
 
 ## 推荐阅读
 

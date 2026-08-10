@@ -15,7 +15,7 @@ lang: zh-CN
 | 主要组件 | `GrowDataPrepDesigner` |
 | 当前范围 | 前端可视化 + 本地 / Mock 查询 |
 
-与其它低代码工具的分工（完整链路见 [低代码设计器总览](/guide/designers/)）：
+与其它低代码工具的分工（完整链路见 [低代码设计器](/guide/designers/)）：
 
 ```text
 数据库建模（PostgreSQL 物理模型）

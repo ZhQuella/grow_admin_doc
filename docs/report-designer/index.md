@@ -17,7 +17,7 @@ lang: zh-CN
 
 与 [页面设计器](/page-designer/) 的关系：页面设计器面向通用页面物料；报表设计器面向图表看板。二者在 **页面级** `dataSource` / `apiOutlined` / `computedProps` 上对齐，区块侧用 `dataBinding` 把 `state.xxx` 注入图表。
 
-与 [数据准备](/data-prep/)、[数据库建模](/schema-designer/) 的关系：二者为上游数据能力；报表**不直选** Dataset，统一经页面 `state`（数据请求 / 计算属性）取数，与 [页面设计器](/page-designer/) 操作习惯一致。工具链说明见 [低代码设计器总览](/guide/designers/)。
+与 [数据准备](/data-prep/)、[数据库建模](/schema-designer/) 的关系：二者为上游数据能力；报表**不直选** Dataset，统一经页面 `state`（数据请求 / 计算属性）取数，与 [页面设计器](/page-designer/) 操作习惯一致。工具链说明见 [低代码设计器](/guide/designers/)。
 
 ## 界面分区
 

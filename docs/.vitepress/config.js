@@ -1,16 +1,13 @@
 const path = require('path');
 
-/** 低代码工具链侧栏（总览页专用，避免套用整份指南导航） */
+/** 低代码设计器：与代码沙箱相同——本组「概述 + 子文档」 */
 const designersSidebar = [
   {
     text: '低代码设计器',
     items: [
-      { text: '低代码设计器总览', link: '/guide/designers/' },
-      { text: '代码沙箱', link: '/code-sandbox/' },
-      { text: '页面设计器', link: '/page-designer/' },
-      { text: '报表设计器', link: '/report-designer/' },
-      { text: '数据库建模', link: '/schema-designer/' },
-      { text: '数据准备', link: '/data-prep/' }
+      { text: '概述', link: '/guide/designers/' },
+      { text: '协同工作', link: '/guide/designers/collaboration' },
+      { text: '演示与接入', link: '/guide/designers/playground' }
     ]
   }
 ]
@@ -35,7 +32,7 @@ module.exports = {
       {
         text: '低代码集成',
         items: [
-          { text: '低代码设计器总览', link: '/guide/designers/' },
+          { text: '低代码设计器', link: '/guide/designers/' },
           { text: '代码沙箱', link: '/code-sandbox/' },
           { text: '页面设计器', link: '/page-designer/' },
           { text: '报表设计器', link: '/report-designer/' },
@@ -46,13 +43,12 @@ module.exports = {
       { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
     ],
     sidebar: {
-      // 须写在 /guide/ 之前：更长前缀优先，总览页用低代码侧栏而非整份指南
+      // 须写在 /guide/ 之前：更长前缀优先
       "/guide/designers": designersSidebar,
       "/report-designer/": [
         {
           text: '报表设计器',
           items: [
-            { text: '低代码设计器总览', link: '/guide/designers/' },
             { text: '概述', link: '/report-designer/' },
             { text: '基础用法', link: '/report-designer/usage' },
             { text: '数据绑定', link: '/report-designer/data-binding' },
@@ -65,7 +61,6 @@ module.exports = {
         {
           text: '数据库建模',
           items: [
-            { text: '低代码设计器总览', link: '/guide/designers/' },
             { text: '概述', link: '/schema-designer/' },
             { text: '基础用法', link: '/schema-designer/usage' },
             { text: '数据模型', link: '/schema-designer/schema' },
@@ -77,7 +72,6 @@ module.exports = {
         {
           text: '数据准备',
           items: [
-            { text: '低代码设计器总览', link: '/guide/designers/' },
             { text: '概述', link: '/data-prep/' },
             { text: '基础用法', link: '/data-prep/usage' },
             { text: '数据模型', link: '/data-prep/schema' },
@@ -90,7 +84,6 @@ module.exports = {
         {
           text: '页面设计器',
           items: [
-            { text: '低代码设计器总览', link: '/guide/designers/' },
             { text: '概述', link: '/page-designer/' },
             { text: '基础用法', link: '/page-designer/usage' },
             { text: '样式面板', link: '/page-designer/style' },
@@ -105,7 +98,6 @@ module.exports = {
         {
           text: '代码沙箱',
           items: [
-            { text: '低代码设计器总览', link: '/guide/designers/' },
             { text: '概述', link: '/code-sandbox/' },
             { text: '基础用法', link: '/code-sandbox/usage' },
             { text: 'GrowCodeEditor', link: '/code-sandbox/code-editor' },
@@ -180,12 +172,58 @@ module.exports = {
         {
           text: '低代码设计器',
           items: [
-            { text: '低代码设计器总览', link: '/guide/designers/' },
-            { text: '代码沙箱', link: '/code-sandbox/' },
-            { text: '页面设计器', link: '/page-designer/' },
-            { text: '报表设计器', link: '/report-designer/' },
-            { text: '数据库建模', link: '/schema-designer/' },
-            { text: '数据准备', link: '/data-prep/' }
+            { text: '概述', link: '/guide/designers/' },
+            { text: '协同工作', link: '/guide/designers/collaboration' },
+            { text: '演示与接入', link: '/guide/designers/playground' }
+          ]
+        },
+        {
+          text: '代码沙箱',
+          items: [
+            { text: '概述', link: '/code-sandbox/' },
+            { text: '基础用法', link: '/code-sandbox/usage' },
+            { text: '工具 API 与注意点', link: '/code-sandbox/api' }
+          ]
+        },
+        {
+          text: '页面设计器',
+          items: [
+            { text: '概述', link: '/page-designer/' },
+            { text: '基础用法', link: '/page-designer/usage' },
+            { text: '样式面板', link: '/page-designer/style' },
+            { text: '数据源与数据请求', link: '/page-designer/data' },
+            { text: '变量绑定', link: '/page-designer/variable-bind' },
+            { text: '事件与生命周期', link: '/page-designer/events' },
+            { text: '数据模型', link: '/page-designer/schema' }
+          ]
+        },
+        {
+          text: '报表设计器',
+          items: [
+            { text: '概述', link: '/report-designer/' },
+            { text: '基础用法', link: '/report-designer/usage' },
+            { text: '数据绑定', link: '/report-designer/data-binding' },
+            { text: '数据模型', link: '/report-designer/schema' },
+            { text: '图表配置', link: '/report-designer/chart-config' }
+          ]
+        },
+        {
+          text: '数据库建模',
+          items: [
+            { text: '概述', link: '/schema-designer/' },
+            { text: '基础用法', link: '/schema-designer/usage' },
+            { text: '数据模型', link: '/schema-designer/schema' },
+            { text: '表关联', link: '/schema-designer/relations' }
+          ]
+        },
+        {
+          text: '数据准备',
+          items: [
+            { text: '概述', link: '/data-prep/' },
+            { text: '基础用法', link: '/data-prep/usage' },
+            { text: '数据模型', link: '/data-prep/schema' },
+            { text: '公式度量', link: '/data-prep/formulas' },
+            { text: '表关联', link: '/data-prep/joins' }
           ]
         },
         {

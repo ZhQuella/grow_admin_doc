@@ -379,7 +379,7 @@ import '@grow-admin-rock/styles'
 
 目录：`DesignRock/rock-report-designer`。
 
-完整说明见 [报表设计器](/report-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**报表设计器**）。区块数据经页面 `state` 绑定；可与 [数据准备](/data-prep/) 查询结果对接（由数据请求写入 state）。工具链见 [低代码设计器总览](/guide/designers/)。
+完整说明见 [报表设计器](/report-designer/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**报表设计器**）。区块数据经页面 `state` 绑定；可与 [数据准备](/data-prep/) 查询结果对接（由数据请求写入 state）。工具链见 [低代码设计器](/guide/designers/)。
 
 ---
 
@@ -423,4 +423,4 @@ import '@grow-admin-rock/styles'
 
 目录：`DesignRock/rock-data-prep`。
 
-完整说明见 [数据准备](/data-prep/)。工具链见 [低代码设计器总览](/guide/designers/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**数据准备**）。
+完整说明见 [数据准备](/data-prep/)。工具链见 [低代码设计器](/guide/designers/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**数据准备**）。
