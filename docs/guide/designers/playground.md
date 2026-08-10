@@ -13,6 +13,7 @@ lang: zh-CN
 | 设计器 → 报表设计器 | `report-designer-playground` | `GrowReportDesigner` |
 | 设计器 → 数据库建模 | `schema-designer-playground` | `GrowSchemaDesigner` |
 | 设计器 → 数据准备 | `data-prep-playground` | `GrowDataPrepDesigner` |
+| 设计器 → 数据清洗 | `data-clean-playground` | `GrowDataCleanDesigner` |
 | 沙箱 → 沙箱工具 / 呈现沙箱 / 代码编辑器 | `sandbox-overview` 等 | `GrowCode*` |
 
 ## 接入要点（宿主）
@@ -21,6 +22,7 @@ lang: zh-CN
 2. `sample/src/plugin/initIoc.ts` 中 `.use(appsDesignerLib)` / `.use(appsSandboxLib)`  
 3. Mock 菜单合并设计器 / 沙箱结构（见 `sample/mock/routers.ts`）  
 4. 数据准备另需启用 `sample/mock/dataPrep.ts`  
+5. 数据清洗 M1 **无**独立 Mock；保存事件由宿主自行持久化  
 
 详细装配见 [业务模块开发](/guide/development/business-module)、[DesignCornerstone](/guide/packages/design-cornerstone)。
 
@@ -71,6 +73,18 @@ lang: zh-CN
 | 对接 | 查询结果经页面 / 报表 `state` 消费，不直选 Dataset |
 
 详见 [数据准备 · 基础用法](/data-prep/usage)。
+
+### 数据清洗
+
+| 区域 | 要点 |
+|------|------|
+| 工具栏 | 名称、草稿/已发布标签、预览（**须选中节点**）、保存 |
+| 左栏 | 组件库五类算子，拖入画布 |
+| 画布 | 右出左入连线；禁环；**Delete 删节点/边**；一对多 / 多对一 |
+| 右栏 | 节点配置（table / filter / condition / split-field / output 已完善） |
+| 预览 | Demo 采样，非真实执行；`getFlow` / `setFlow` 可受控 |
+
+详见 [数据清洗 · 基础用法](/data-clean/usage)。
 
 ### 代码沙箱
 

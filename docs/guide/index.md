@@ -56,15 +56,16 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 5. **网络与数据** — 请求封装与 Mock
 6. **组件库** — 用 `Grow*` 写页面，按需换 UI 库
 7. **[组件文档](/components/)** — SearchBar / ColumnBar 等具体用法
-8. **[低代码设计器](/guide/designers/)** — 建模 → 数据准备 → 页面 / 报表工具链
+8. **[低代码设计器](/guide/designers/)** — 建模 → 数据准备 / 清洗 → 页面 / 报表工具链
 9. **[代码沙箱](/code-sandbox/)** — 在线编辑 Vue SFC 与宿主内预览
 10. **[页面设计器](/page-designer/)** — 拖拽式低代码设计器与样式 / schema
 11. **[报表设计器](/report-designer/)** — 图表看板布局、数据绑定与 ECharts 渲染
 12. **[数据库建模](/schema-designer/)** — 可视化表 / 字段 / 关联与 schema 导出
 13. **[数据准备](/data-prep/)** — Dataset：选表、Join、公式度量；经 state 对接页面 / 报表
-14. **业务开发** — 新建 Cornerstone 包
-15. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
-16. **包说明** — 查某个 npm 包是干什么的
+14. **[数据清洗](/data-clean/)** — CleanFlow：声明式 ETL 编排（调用时执行）
+15. **业务开发** — 新建 Cornerstone 包
+16. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+17. **包说明** — 查某个 npm 包是干什么的
 
 ## 文档导航
 
@@ -184,6 +185,15 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [数据模型](/data-prep/schema) | DataPrepDataset / metricConfigs / 查询结果 |
 | [公式度量](/data-prep/formulas) | 字段引用、聚合与逻辑函数 |
 | [表关联](/data-prep/joins) | 多字段 Join 与并 / 或 |
+
+### 数据清洗
+
+| 章节 | 说明 |
+|------|------|
+| [概述](/data-clean/) | 能力概览、与数据准备边界、M1 范围 |
+| [基础用法](/data-clean/usage) | 接入、画布操作、组件 API |
+| [数据模型](/data-clean/schema) | CleanFlow / 节点 config / 工厂导出 |
+| [节点与算子](/data-clean/nodes) | 十五种节点、端口、过滤运算符 |
 
 ### 业务开发
 
