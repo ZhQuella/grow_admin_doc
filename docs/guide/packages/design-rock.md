@@ -430,7 +430,7 @@ import '@grow-admin-rock/styles'
 
 ## @grow-admin-rock/data-clean
 
-可视化数据清洗（声明式 ETL 流）：从组件库拖入源 / 清洗 / 合并 / 聚合 / 输出节点，连成有向无环图，产物为 `CleanFlow`（设计期编排，**调用时执行**）。M1 提供编排、部分节点配置 UI 与 Demo 采样预览；尚无本地执行引擎与 Mock HTTP。
+可视化数据清洗（声明式 ETL 流）：从组件库拖入源 / 清洗 / 合并 / 聚合 / 输出节点，连成有向无环图，产物为 `CleanFlow`（设计期编排，**调用时执行**）。提供全量节点配置 UI、本地管道预览（`runCleanFlowLocal`）与 Mock `/data-clean/*`；展示侧消费者绑定仍待对接。
 
 **主要导出：**
 
@@ -442,8 +442,10 @@ import '@grow-admin-rock/styles'
 | `CATEGORY_META` / `NODE_TYPE_META` / `PALETTE_GROUPS` | 类别与组件库元数据 |
 | `TABLE_SOURCE_KIND_OPTIONS` / `DEMO_SOURCE_OPTIONS` | 表源种类与 demo 选项 |
 | `FILTER_OP_OPTIONS` / `FILTER_LOGIC_OPTIONS` / `SPLIT_MODE_OPTIONS` | 过滤与拆分 UI 选项 |
-| `buildDemoPreview` | M1 选中节点采样预览（非真实执行） |
+| `runCleanFlowLocal` / `countOutputNodes` / `CLEAN_IMPLEMENTED_NODE_TYPES` | 本地管道执行与输出节点计数 |
+| `loadCleanTableRowsMap` / `fetchCleanDemoTables` / `fetchCleanTableRows` | Mock / Demo 表加载 |
+| `buildDemoPreview` | 旧版占位采样（兼容导出；设计器主路径已不用） |
 
-目录：`DesignRock/rock-data-clean`。
+目录：`DesignRock/rock-data-clean`。Mock：`sample/mock/dataClean.ts`。
 
 完整说明见 [数据清洗](/data-clean/)。工具链见 [低代码设计器](/guide/designers/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**数据清洗**）。

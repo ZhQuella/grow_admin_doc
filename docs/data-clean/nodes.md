@@ -5,7 +5,7 @@ lang: zh-CN
 
 # 节点与算子
 
-本文按 **类别** 说明组件库中的全部节点：中文名、端口数、配置字段、与相近节点的差异。类型定义见 [数据模型](/data-clean/schema)。
+本文按 **类别** 说明组件库中的全部节点：中文名、端口数、配置字段、与相近节点的差异。类型定义见 [数据模型](/data-clean/schema)。十五种节点均已提供配置 UI，并由 `runCleanFlowLocal` 实现本地变换。
 
 ## 类别与配色
 
@@ -39,7 +39,7 @@ lang: zh-CN
 | `out-right` / `out-right-top` / `out-right-bottom` | 普通输出 |
 | `out-true` / `out-false` | 条件分支「是 / 否」 |
 
-画布还禁止：自连、成环、同一 `source+target+sourceHandle` 重复边。
+画布还禁止：自连、成环、同一 `source+target+sourceHandle` 重复边；**整图仅允许一个 `output` 节点**。
 
 ---
 
@@ -51,14 +51,14 @@ lang: zh-CN
 |------|------|
 | 端口 | 入 0 / 出 1 |
 | 说明 | 从建模或数据准备选择表 / 输出 |
-| 配置 UI | **已实现** |
+| 配置 UI | **已实现**（含字段勾选） |
 
 | 配置字段 | 说明 |
 |----------|------|
 | `sourceKind` | `schema-table` \| `dataset-table` \| `dataset-output` |
 | `refId` / `refLabel` | 选中项 id 与展示名 |
 | `tableId` / `tableName` | 表标识 |
-| `fields` | 勾选列；空 = 全选（UI 尚未做字段多选，结构已预留） |
+| `fields` | `undefined`/`null` = 全部；非空数组 = 投影；`[]` = 无字段 |
 
 Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 
@@ -72,12 +72,14 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 入 0 / 出 1 |
 | 说明 | 从 HTTP 接口拉取数据 |
-| 配置 UI | M1 占位（类型已有 `url` / `method`） |
+| 配置 UI | **已实现** |
 
 | 配置字段 | 默认 |
 |----------|------|
-| `url` | `''` |
+| `url` | `''`（可填 `/demo/orders` 等；留空用包内默认样例帧） |
 | `method` | `'GET'` \| `'POST'` |
+
+本地预览通过 `resolveDemoApiFrame` 解析 Demo 帧，不发起真实跨域请求。
 
 ---
 
@@ -89,7 +91,7 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 1 / 1 |
 | 说明 | 填充 / 删除行 / 前后向填充 |
-| 配置 UI | 占位 |
+| 配置 UI | **已实现** |
 
 | 字段 | 取值 |
 |------|------|
@@ -103,13 +105,13 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 1 / 1 |
 | 说明 | 手机号 / 日期 / 金额等格式 |
-| 配置 UI | 占位 |
+| 配置 UI | **已实现** |
 
 | 字段 | 取值 |
 |------|------|
 | `field` | 目标列 |
 | `format` | `phone` \| `id-card` \| `date` \| `money` \| `regex` |
-| `pattern` | `regex` 时的模式 |
+| `pattern` | `regex` 时的模式（含捕获组时取第 1 组） |
 
 ### 去重 `dedupe`
 
@@ -117,7 +119,7 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 1 / 1 |
 | 说明 | 按字段组合去重 |
-| 配置 UI | 占位 |
+| 配置 UI | **已实现** |
 
 | 字段 | 取值 |
 |------|------|
@@ -130,7 +132,7 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 1 / 1 |
 | 说明 | 空格与大小写规范化 |
-| 配置 UI | 占位 |
+| 配置 UI | **已实现** |
 
 | 字段 | 取值 |
 |------|------|
@@ -143,7 +145,7 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 1 / 1 |
 | 说明 | 范围 / 正则 / 枚举校验 |
-| 配置 UI | 占位 |
+| 配置 UI | **已实现** |
 
 | 字段 | 取值 |
 |------|------|
@@ -151,6 +153,9 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 | `rule` | `range` \| `regex` \| `enum` |
 | `action` | `mark` \| `drop` \| `replace` |
 | `replaceValue` | `action=replace` 时替换值 |
+| `min` / `max` | `rule=range` |
+| `pattern` | `rule=regex` |
+| `enumValues` | `rule=enum`，逗号分隔合法值 |
 
 ### 条件过滤 `filter`
 
@@ -192,7 +197,7 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 1 / 1 |
 | 说明 | 将一个字段拆分为多个字段 |
-| 配置 UI | **已实现**；Demo 预览会跟配置变化 |
+| 配置 UI | **已实现**；预览随配置变化 |
 
 | 字段 | 说明 |
 |------|------|
@@ -240,7 +245,7 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | **2** / 1 |
 | 说明 | LEFT / INNER / RIGHT / FULL JOIN |
-| 配置 UI | 占位 |
+| 配置 UI | **已实现** |
 
 | 字段 | 说明 |
 |------|------|
@@ -256,12 +261,12 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | **2** / 1 |
 | 说明 | UNION 多路输入 |
-| 配置 UI | 占位 |
+| 配置 UI | **已实现** |
 
 | 字段 | 说明 |
 |------|------|
 | `dedupe` | 是否去重，默认 `false` |
-| `fieldMap` | 字段名映射 `Record<source, target>` |
+| `fieldMap` | 字段名映射；界面可用 `右字段:左字段` 逗号列表编辑 |
 
 ---
 
@@ -273,7 +278,7 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 1 / 1 |
 | 说明 | GROUP BY + 聚合度量 |
-| 配置 UI | 占位 |
+| 配置 UI | **已实现** |
 
 | 字段 | 说明 |
 |------|------|
@@ -288,7 +293,7 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 1 / 1 |
 | 说明 | 行 / 列维度透视 |
-| 配置 UI | 占位 |
+| 配置 UI | **已实现** |
 
 | 字段 | 说明 |
 |------|------|
@@ -305,7 +310,7 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 |------|------|
 | 端口 | 1 / **0** |
 | 说明 | 流终点，供报表 / 页面调用时执行 |
-| 配置 UI | **已实现**（名称 + 目标） |
+| 配置 UI | **已实现**（名称 + 目标 + 输出字段勾选） |
 
 | 字段 | 说明 |
 |------|------|
@@ -313,30 +318,31 @@ Demo 表示例（`DEMO_SOURCE_OPTIONS`）：
 | `target` | `report`（报表数据集）\| `lowcode`（低代码页面数据源）\| `api`（API 端点） |
 | `trigger` | `on-demand` \| `manual-preview`（预留） |
 | `consumers` | `{ id, name, kind: 'report'\|'page' }[]`（预留） |
+| `fields` | 最终输出投影；未配置默认全部，也可全部取消（`[]`） |
 
-界面提示：调用时执行；消费者绑定后续对接。
+界面提示：调用时执行；消费者绑定后续对接。画布上**只能有一个**输出节点。
 
 ---
 
 ## 节点速查表
 
-| type | 中文 | 类别 | 入/出 | 配置 UI |
-|------|------|------|-------|---------|
-| `table` | 数据表 | source | 0/1 | ✅ |
-| `api` | API 接口 | source | 0/1 | 占位 |
-| `null-handle` | 空值处理 | clean | 1/1 | 占位 |
-| `format` | 格式标准化 | clean | 1/1 | 占位 |
-| `dedupe` | 去重 | clean | 1/1 | 占位 |
-| `trim-case` | 去空格&大小写 | clean | 1/1 | 占位 |
-| `outlier` | 异常值处理 | clean | 1/1 | 占位 |
-| `filter` | 条件过滤 | clean | 1/1 | ✅ |
-| `condition` | 条件分支 | clean | 1/2 | ✅ |
-| `split-field` | 字段拆分 | clean | 1/1 | ✅ |
-| `join` | 关联合并 | merge | 2/1 | 占位 |
-| `union` | 纵向合并 | merge | 2/1 | 占位 |
-| `groupby` | 分组聚合 | agg | 1/1 | 占位 |
-| `pivot` | 透视表 | agg | 1/1 | 占位 |
-| `output` | 数据输出 | output | 1/0 | ✅ |
+| type | 中文 | 类别 | 入/出 | 配置 UI | 本地变换 |
+|------|------|------|-------|---------|----------|
+| `table` | 数据表 | source | 0/1 | ✅ | ✅ |
+| `api` | API 接口 | source | 0/1 | ✅ | ✅（Demo 帧） |
+| `null-handle` | 空值处理 | clean | 1/1 | ✅ | ✅ |
+| `format` | 格式标准化 | clean | 1/1 | ✅ | ✅ |
+| `dedupe` | 去重 | clean | 1/1 | ✅ | ✅ |
+| `trim-case` | 去空格&大小写 | clean | 1/1 | ✅ | ✅ |
+| `outlier` | 异常值处理 | clean | 1/1 | ✅ | ✅ |
+| `filter` | 条件过滤 | clean | 1/1 | ✅ | ✅ |
+| `condition` | 条件分支 | clean | 1/2 | ✅ | ✅ |
+| `split-field` | 字段拆分 | clean | 1/1 | ✅ | ✅ |
+| `join` | 关联合并 | merge | 2/1 | ✅ | ✅ |
+| `union` | 纵向合并 | merge | 2/1 | ✅ | ✅ |
+| `groupby` | 分组聚合 | agg | 1/1 | ✅ | ✅ |
+| `pivot` | 透视表 | agg | 1/1 | ✅ | ✅ |
+| `output` | 数据输出 | output | 1/0 | ✅ | ✅ |
 
 ## 相关文档
 
