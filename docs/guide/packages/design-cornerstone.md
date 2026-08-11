@@ -22,7 +22,7 @@ lang: zh-CN
 | `@grow-admin-cornerstone/apps-home` | 登录后首页布局壳 + 动态路由注册 | 可用 |
 | `@grow-admin-cornerstone/apps-workspace` | 工作区示例业务页（路由配置 + 页面） | 可用 |
 | `@grow-admin-cornerstone/apps-sandbox` | 代码沙箱演示（编辑器 / 依赖 / 预览） | 可用 |
-| `@grow-admin-cornerstone/apps-designer` | 页面 / 报表 / 数据库建模 / 数据准备 / 数据清洗演示 | 可用 |
+| `@grow-admin-cornerstone/apps-designer` | 页面 / 报表 / 数据库建模 / 数据准备 / 数据清洗 / 流程引擎演示 | 可用 |
 
 ---
 
@@ -256,7 +256,7 @@ export { Lib } from './library'
 
 ## @grow-admin-cornerstone/apps-designer
 
-低代码设计器演示模块，基于 `@grow-admin-rock/designer`、`@grow-admin-rock/report-designer`、`@grow-admin-rock/schema-designer`、`@grow-admin-rock/data-prep` 与 `@grow-admin-rock/data-clean`。
+低代码设计器演示模块，基于 `@grow-admin-rock/designer`、`@grow-admin-rock/report-designer`、`@grow-admin-rock/schema-designer`、`@grow-admin-rock/data-prep`、`@grow-admin-rock/data-clean` 与 `@grow-admin-rock/process-engine`。
 
 ### 目录结构
 
@@ -278,7 +278,8 @@ cornerstone-apps-designer/
         ├── report-designer-playground/   # GrowReportDesigner 演示页
         ├── schema-designer-playground/   # GrowSchemaDesigner 演示页
         ├── data-prep-playground/         # GrowDataPrepDesigner 演示页
-        └── data-clean-playground/        # GrowDataCleanDesigner 演示页
+        ├── data-clean-playground/        # GrowDataCleanDesigner 演示页
+        └── process-engine-playground/    # GrowProcessDesigner 演示页
 ```
 
 ### 菜单
@@ -290,6 +291,7 @@ cornerstone-apps-designer/
 | 数据库建模 | 挂载 `GrowSchemaDesigner` 的表结构建模画布 |
 | 数据准备 | 挂载 `GrowDataPrepDesigner` 的 Dataset 分析建模画布 |
 | 数据清洗 | 挂载 `GrowDataCleanDesigner` 的清洗流编排画布 |
+| 流程引擎 | 挂载 `GrowProcessDesigner` 的业务流程编排画布 |
 
 ### 导出
 
@@ -297,7 +299,7 @@ cornerstone-apps-designer/
 export { Lib } from './library'
 ```
 
-完整能力见 [低代码设计器](/guide/designers/)、[页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据库建模](/schema-designer/)、[数据准备](/data-prep/)、[数据清洗](/data-clean/)。
+完整能力见 [低代码设计器](/guide/designers/)、[页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据库建模](/schema-designer/)、[数据准备](/data-prep/)、[数据清洗](/data-clean/)、[流程引擎](/process-engine/)。
 
 ## 命名规范
 

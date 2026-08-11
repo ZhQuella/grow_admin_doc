@@ -104,7 +104,9 @@ DesignRock/
 ├── rock-designer/                     # 低代码页面设计器
 ├── rock-report-designer/              # 报表设计器（ECharts + 网格布局）
 ├── rock-schema-designer/              # 可视化数据库建模（Vue Flow）
-└── rock-data-prep/                    # 数据准备 Dataset（Vue Flow + 聚合）
+├── rock-data-prep/                    # 数据准备 Dataset（Vue Flow + 聚合）
+├── rock-data-clean/                   # 数据清洗 CleanFlow（Vue Flow + 本地管道）
+└── rock-process-engine/               # 流程引擎 ProcessFlow（Vue Flow，设计期）
 ```
 
 ## DesignCornerstone — 业务模块层
@@ -117,7 +119,7 @@ DesignCornerstone/
 ├── cornerstone-apps-home/       # 登录后首页（布局壳 + 动态路由注册）
 ├── cornerstone-apps-workspace/  # 工作区业务页（路由配置 + 页面组件）
 ├── cornerstone-apps-sandbox/    # 代码沙箱演示（编辑器 / 依赖 / 预览）
-└── cornerstone-apps-designer/   # 页面 / 报表 / 数据库建模 / 数据准备演示
+└── cornerstone-apps-designer/   # 页面 / 报表 / 建模 / 数据准备 / 清洗 / 流程引擎演示
 ```
 
 业务模块通过 Library 约定接入宿主应用，不自行安装组件驱动。

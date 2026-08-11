@@ -38,7 +38,8 @@ module.exports = {
           { text: '报表设计器', link: '/report-designer/' },
           { text: '数据库建模', link: '/schema-designer/' },
           { text: '数据准备', link: '/data-prep/' },
-          { text: '数据清洗', link: '/data-clean/' }
+          { text: '数据清洗', link: '/data-clean/' },
+          { text: '流程引擎', link: '/process-engine/' }
         ]
       },
       { text: 'Demo 演示', link: 'https://demo.gadmin.top/', target: '_blank' }
@@ -89,6 +90,17 @@ module.exports = {
             { text: '基础用法', link: '/data-clean/usage' },
             { text: '数据模型', link: '/data-clean/schema' },
             { text: '节点与算子', link: '/data-clean/nodes' }
+          ]
+        }
+      ],
+      "/process-engine/": [
+        {
+          text: '流程引擎',
+          items: [
+            { text: '概述', link: '/process-engine/' },
+            { text: '基础用法', link: '/process-engine/usage' },
+            { text: '数据模型', link: '/process-engine/schema' },
+            { text: '节点与连线', link: '/process-engine/nodes' }
           ]
         }
       ],
@@ -245,6 +257,15 @@ module.exports = {
             { text: '基础用法', link: '/data-clean/usage' },
             { text: '数据模型', link: '/data-clean/schema' },
             { text: '节点与算子', link: '/data-clean/nodes' }
+          ]
+        },
+        {
+          text: '流程引擎',
+          items: [
+            { text: '概述', link: '/process-engine/' },
+            { text: '基础用法', link: '/process-engine/usage' },
+            { text: '数据模型', link: '/process-engine/schema' },
+            { text: '节点与连线', link: '/process-engine/nodes' }
           ]
         },
         {
