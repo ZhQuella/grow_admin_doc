@@ -13,7 +13,7 @@ lang: zh-CN
 |------|------|------|------|----------|
 | 物理模型 | 数据库建模 | 人工建表 | `DatabaseSchema` | 不算业务指标、不画页面 |
 | 分析模型 | 数据准备 | 已发布建模元数据 | `DataPrepDataset` + 查询结果表 | 不直接绑图表 / 组件 |
-| ETL 管道 | 数据清洗 | 建模表 / Dataset 表或输出 | `CleanFlow`（声明式，调用时执行） | M1 不做真实跑数 / 不直绑图表 |
+| ETL 管道 | 数据清洗 | 建模表 / Dataset 表或输出 | `CleanFlow`（声明式，调用时执行） | 设计期可本地预览；不直绑图表 / 不写 `state` |
 | 页面展示 | 页面设计器 | 物料 + `state` | `DesignerSchema` | 不维护表结构 |
 | 报表展示 | 报表设计器 | 网格 + 页面级数据 | `ReportSchema` | **不直选** Dataset |
 | 脚本能力 | 代码沙箱 | 表达式 / SFC | 编辑与预览能力 | 不单独存业务 schema |
@@ -44,7 +44,7 @@ lang: zh-CN
 | 衔接 | 机制 | 说明 |
 |------|------|------|
 | 建模 → 数据准备 | 元数据接口 | 数据准备「添加表」拉取已发布 schema（演示：`GET …/data-prep/schemas`、`schema-bundle`） |
-| 建模 / 数据准备 → 数据清洗 | 源节点引用 | 「数据表」可选 `schema-table` / `dataset-table` / `dataset-output`（M1 为 demo 下拉） |
+| 建模 / 数据准备 → 数据清洗 | 源节点引用 | 「数据表」可选 `schema-table` / `dataset-table` / `dataset-output`（当前为 demo / Mock 下拉） |
 | 数据准备 → 展示 | **查询结果进 `state`** | 页面 / 报表用「数据请求」调 `POST …/data-prep/query`（或本地 `queryDatasetLocal`），在 `fit` / `didFetch` 里写入 `state`；也可用「属性计算」整理成类目 / 系列数组 |
 | 数据清洗 → 展示 | **调用时执行（规划）** | 输出节点 `target`: report / lowcode / api；消费者绑定后续对接。当前演示主路径仍是数据准备 → `state` |
 | 页面 ↔ 报表 | **同一套页面级数据模型** | 二者共用 `dataSource` / `apiOutlined` / `computedProps` 与 `buildRuntimeState`；报表区块再用 `dataBinding` 从 `state` 取数 |
@@ -92,7 +92,7 @@ lang: zh-CN
 
 页面设计器同理：用表格 / 统计卡片绑定同一批 `state` 字段即可，不必再配一套 Dataset。
 
-可选：**数据清洗** playground 中编排源表 → 过滤 / 拆分 → 输出流，保存 `CleanFlow` 快照；与图表的正式对接待执行引擎与消费者绑定落地后启用。详见 [数据清洗](/data-clean/)。
+可选：**数据清洗** playground 中编排源表 → 过滤 / 拆分 → 输出流，用本地管道预览结果并保存 `CleanFlow` 快照；与图表的正式对接待生产「调用时执行」与消费者绑定落地后启用。详见 [数据清洗](/data-clean/)。
 
 ## 6. 协作边界（避免误解）
 
@@ -101,7 +101,7 @@ lang: zh-CN
 | 报表里直接选 Dataset | 否；经 `state` 间接消费 |
 | 数据准备自动继承建模的外键当 Join | 否；`joins` 需在数据准备里手动配 |
 | 建模里的 SQL 查询会自动被数据准备执行 | 否；`queries` 本版为建模侧存档；分析查询走 Dataset |
-| 数据清洗预览 = 真实管道结果 | 否；M1 为 `buildDemoPreview` 占位采样 |
+| 数据清洗预览 = 生产调用结果 | 否；当前为 `runCleanFlowLocal` + Demo/Mock 表的设计期管道，未写入页面/报表 `state` |
 | 数据清洗已替代数据准备 | 否；二者互补（分析查询 vs ETL 流） |
 | 各设计器共用一份总 schema | 否；各自产物独立持久化，靠接口与 `state` 协作 |
 | 代码沙箱是「画布设计器」 | 否；是共享编辑 / 预览基础设施 |

@@ -35,7 +35,7 @@ Grow Admin 在 DesignRock 中提供一套可组合的低代码工具链：从 **
 |------|------|------|------|
 | [数据库建模](/schema-designer/) | `@grow-admin-rock/schema-designer` | `DatabaseSchema` | 表结构与关系 |
 | [数据准备](/data-prep/) | `@grow-admin-rock/data-prep` | `DataPrepDataset` | Join + 公式度量 |
-| [数据清洗](/data-clean/) | `@grow-admin-rock/data-clean` | `CleanFlow` | 声明式清洗流编排 |
+| [数据清洗](/data-clean/) | `@grow-admin-rock/data-clean` | `CleanFlow` | 声明式清洗流编排 + 本地管道预览 |
 | [页面设计器](/page-designer/) | `@grow-admin-rock/designer` | `DesignerSchema` | 拖拽页面 |
 | [报表设计器](/report-designer/) | `@grow-admin-rock/report-designer` | `ReportSchema` | 图表看板 |
 | [代码沙箱](/code-sandbox/) | `@grow-admin-rock/code-sandbox` | SFC / 表达式编辑 | Monaco + 预览 |
