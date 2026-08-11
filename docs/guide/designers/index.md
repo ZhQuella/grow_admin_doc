@@ -5,7 +5,7 @@ lang: zh-CN
 
 # 低代码设计器
 
-Grow Admin 在 DesignRock 中提供一套可组合的低代码工具链：从 **物理建模** 到 **分析准备 / 数据清洗**，再到 **页面 / 报表展示**；**代码沙箱** 作为共享能力，被各设计器内嵌（事件脚本、公式、变量绑定等）。
+Grow Admin 在 DesignRock 中提供一套可组合的低代码工具链：从 **物理建模** 到 **分析准备 / 数据清洗**，再到 **页面 / 报表展示**；另有独立的 **流程引擎** 做业务流转编排。**代码沙箱** 作为共享能力，被各设计器内嵌（事件脚本、公式、变量绑定等）。
 
 演示入口由 `@grow-admin-cornerstone/apps-designer`（设计器菜单）与 `@grow-admin-cornerstone/apps-sandbox`（沙箱菜单）注册；宿主 `sample` 经 IOC 装配后，登录即可在侧栏打开。
 
@@ -27,6 +27,10 @@ Grow Admin 在 DesignRock 中提供一套可组合的低代码工具链：从 **
 报表设计器 (report-designer) → ReportSchema + GrowReportRenderer
   ↑ 当前演示主路径仍是「数据准备查询 → state」；清洗流消费者绑定规划中
 
+流程引擎 (process-engine)  （业务流转，与数据管道并行）
+  → ProcessFlow（人工 / 事件 / 系统 / 状态 / 决策 / 分支；设计期）
+        ↓ 运行时执行与 formKey ↔ 页面对接规划中
+
 代码沙箱 (code-sandbox)
   → 被上述设计器内嵌；亦可独立演示（apps-sandbox）
 ```
@@ -36,6 +40,7 @@ Grow Admin 在 DesignRock 中提供一套可组合的低代码工具链：从 **
 | [数据库建模](/schema-designer/) | `@grow-admin-rock/schema-designer` | `DatabaseSchema` | 表结构与关系 |
 | [数据准备](/data-prep/) | `@grow-admin-rock/data-prep` | `DataPrepDataset` | Join + 公式度量 |
 | [数据清洗](/data-clean/) | `@grow-admin-rock/data-clean` | `CleanFlow` | 声明式清洗流编排 + 本地管道预览 |
+| [流程引擎](/process-engine/) | `@grow-admin-rock/process-engine` | `ProcessFlow` | 业务流转设计期编排 |
 | [页面设计器](/page-designer/) | `@grow-admin-rock/designer` | `DesignerSchema` | 拖拽页面 |
 | [报表设计器](/report-designer/) | `@grow-admin-rock/report-designer` | `ReportSchema` | 图表看板 |
 | [代码沙箱](/code-sandbox/) | `@grow-admin-rock/code-sandbox` | SFC / 表达式编辑 | Monaco + 预览 |

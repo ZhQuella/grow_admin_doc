@@ -14,11 +14,12 @@ lang: zh-CN
 | 物理模型 | 数据库建模 | 人工建表 | `DatabaseSchema` | 不算业务指标、不画页面 |
 | 分析模型 | 数据准备 | 已发布建模元数据 | `DataPrepDataset` + 查询结果表 | 不直接绑图表 / 组件 |
 | ETL 管道 | 数据清洗 | 建模表 / Dataset 表或输出 | `CleanFlow`（声明式，调用时执行） | 设计期可本地预览；不直绑图表 / 不写 `state` |
+| 业务流转 | 流程引擎 | 人工规则 / 表单 key（规划） | `ProcessFlow`（声明式，设计期） | 无运行时引擎；不替代数据清洗 |
 | 页面展示 | 页面设计器 | 物料 + `state` | `DesignerSchema` | 不维护表结构 |
 | 报表展示 | 报表设计器 | 网格 + 页面级数据 | `ReportSchema` | **不直选** Dataset |
 | 脚本能力 | 代码沙箱 | 表达式 / SFC | 编辑与预览能力 | 不单独存业务 schema |
 
-一句话：**建模管「有什么表」，数据准备管「怎么算」，数据清洗管「怎么洗」，页面 / 报表管「怎么看」，沙箱管「怎么写逻辑」。**
+一句话：**建模管「有什么表」，数据准备管「怎么算」，数据清洗管「怎么洗」，流程引擎管「怎么批」，页面 / 报表管「怎么看」，沙箱管「怎么写逻辑」。**
 
 ## 2. 衔接点：靠什么串起来
 
@@ -47,6 +48,7 @@ lang: zh-CN
 | 建模 / 数据准备 → 数据清洗 | 源节点引用 | 「数据表」可选 `schema-table` / `dataset-table` / `dataset-output`（当前为 demo / Mock 下拉） |
 | 数据准备 → 展示 | **查询结果进 `state`** | 页面 / 报表用「数据请求」调 `POST …/data-prep/query`（或本地 `queryDatasetLocal`），在 `fit` / `didFetch` 里写入 `state`；也可用「属性计算」整理成类目 / 系列数组 |
 | 数据清洗 → 展示 | **调用时执行（规划）** | 输出节点 `target`: report / lowcode / api；消费者绑定后续对接。当前演示主路径仍是数据准备 → `state` |
+| 流程引擎 → 页面 | **formKey / 运行时（规划）** | 人工节点可配 `formKey`；执行引擎与待办通道未接通。当前仅保存 `ProcessFlow` 定义 |
 | 页面 ↔ 报表 | **同一套页面级数据模型** | 二者共用 `dataSource` / `apiOutlined` / `computedProps` 与 `buildRuntimeState`；报表区块再用 `dataBinding` 从 `state` 取数 |
 | 各设计器 → 沙箱 | **内嵌编辑器** | 事件脚本、变量 / 函数绑定、公式编辑、SQL 文本等，底层是 `GrowCodeEditor` 等，不各自造轮子 |
 
@@ -103,6 +105,8 @@ lang: zh-CN
 | 建模里的 SQL 查询会自动被数据准备执行 | 否；`queries` 本版为建模侧存档；分析查询走 Dataset |
 | 数据清洗预览 = 生产调用结果 | 否；当前为 `runCleanFlowLocal` + Demo/Mock 表的设计期管道，未写入页面/报表 `state` |
 | 数据清洗已替代数据准备 | 否；二者互补（分析查询 vs ETL 流） |
+| 流程引擎 = 数据清洗 | 否；流程管业务审批/编排，清洗管数据管道 |
+| 流程引擎已可跑实例 | 否；当前仅设计期编排，无运行时引擎 |
 | 各设计器共用一份总 schema | 否；各自产物独立持久化，靠接口与 `state` 协作 |
 | 代码沙箱是「画布设计器」 | 否；是共享编辑 / 预览基础设施 |
 
@@ -111,9 +115,10 @@ lang: zh-CN
 1. **建模**：在「设计器 → 数据库建模」建表、字段与关联，导出 / 保存 schema  
 2. **数据准备**：在「设计器 → 数据准备」选表、连线 Join、配置维度 / 公式度量与输出字段，预览并保存 Dataset  
 3. **数据清洗**（可选）：在「设计器 → 数据清洗」拖拽编排清洗流，配置过滤 / 分支 / 拆分等，保存 `CleanFlow`  
-4. **展示**：
+4. **流程引擎**（可选）：在「设计器 → 流程引擎」编排审批 / 事件 / 系统节点，保存 `ProcessFlow`  
+5. **展示**：
    - 页面：配置数据源 / 数据请求，把查询结果写入 `state`，组件属性绑定 `state.xxx`  
    - 报表：同样配置页面级数据，再在区块「数据绑定」中把 `state.xxx` 注入轴 / 系列  
-5. **脚本**：事件 / 计算属性 / 函数绑定需要时再写（基于代码沙箱）
+6. **脚本**：事件 / 计算属性 / 函数绑定需要时再写（基于代码沙箱）
 
-深入阅读：[数据准备 · 对接](/data-prep/usage#与页面--报表对接)、[数据清洗 · 对接](/data-clean/usage#与页面--报表对接规划)、[报表 · 数据绑定](/report-designer/data-binding)、[页面 · 变量绑定](/page-designer/variable-bind)、[页面 · 事件](/page-designer/events)。
+深入阅读：[数据准备 · 对接](/data-prep/usage#与页面--报表对接)、[数据清洗 · 对接](/data-clean/usage#与页面--报表对接规划)、[流程引擎](/process-engine/)、[报表 · 数据绑定](/report-designer/data-binding)、[页面 · 变量绑定](/page-designer/variable-bind)、[页面 · 事件](/page-designer/events)。

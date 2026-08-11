@@ -14,6 +14,7 @@ lang: zh-CN
 | 设计器 → 数据库建模 | `schema-designer-playground` | `GrowSchemaDesigner` |
 | 设计器 → 数据准备 | `data-prep-playground` | `GrowDataPrepDesigner` |
 | 设计器 → 数据清洗 | `data-clean-playground` | `GrowDataCleanDesigner` |
+| 设计器 → 流程引擎 | `process-engine-playground` | `GrowProcessDesigner` |
 | 沙箱 → 沙箱工具 / 呈现沙箱 / 代码编辑器 | `sandbox-overview` 等 | `GrowCode*` |
 
 ## 接入要点（宿主）
@@ -23,6 +24,7 @@ lang: zh-CN
 3. Mock 菜单合并设计器 / 沙箱结构（见 `sample/mock/routers.ts`）  
 4. 数据准备另需启用 `sample/mock/dataPrep.ts`  
 5. 数据清洗另需启用 `sample/mock/dataClean.ts`（tables / table-rows / preview）；保存事件仍由宿主自行持久化  
+6. 流程引擎当前**无**独立 Mock；保存事件由宿主自行持久化  
 
 详细装配见 [业务模块开发](/guide/development/business-module)、[DesignCornerstone](/guide/packages/design-cornerstone)。
 
@@ -85,6 +87,18 @@ lang: zh-CN
 | 预览 | `runCleanFlowLocal` 本地管道（Demo / Mock 表，默认 50 行）；`getFlow` / `setFlow` 可受控 |
 
 详见 [数据清洗 · 基础用法](/data-clean/usage)。
+
+### 流程引擎
+
+| 区域 | 要点 |
+|------|------|
+| 工具栏 | 名称、草稿/已发布标签、保存（**无预览**） |
+| 左栏 | 六类节点：人工 / 事件 / 系统 / 状态机 / 决策 / 分支 |
+| 画布 | **上入下出**；允许成环（回退/跳转）；Delete 删节点/边 |
+| 配置 | 选中节点或连线后浮层配置（含人员指派、分支出口、`transitionKind`） |
+| API | `getFlow` / `setFlow`；产物 `ProcessFlow` |
+
+详见 [流程引擎 · 基础用法](/process-engine/usage)。
 
 ### 代码沙箱
 

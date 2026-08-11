@@ -38,6 +38,7 @@ README「相关包说明」速查表见 [开发规范 - 相关包速查](/guide/
 | `@grow-admin-rock/schema-designer` | 可视化数据库建模（`GrowSchemaDesigner`） |
 | `@grow-admin-rock/data-prep` | 数据准备 Dataset（`GrowDataPrepDesigner`） |
 | `@grow-admin-rock/data-clean` | 数据清洗流（`GrowDataCleanDesigner`） |
+| `@grow-admin-rock/process-engine` | 流程引擎（`GrowProcessDesigner`） |
 
 ---
 
@@ -449,3 +450,25 @@ import '@grow-admin-rock/styles'
 目录：`DesignRock/rock-data-clean`。Mock：`sample/mock/dataClean.ts`。
 
 完整说明见 [数据清洗](/data-clean/)。工具链见 [低代码设计器](/guide/designers/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**数据清洗**）。
+
+---
+
+## @grow-admin-rock/process-engine
+
+可视化流程编排（业务审批 / 事件 / 系统 / 状态机 / 决策）：从组件库拖入节点，自上而下连成 `ProcessFlow`。当前为设计期编排与全量配置 UI；尚无运行时执行引擎与独立 Mock。
+
+**主要导出：**
+
+| 导出 | 说明 |
+|------|------|
+| `GrowProcessDesigner` | 可视化编辑器（`v-model` / `@change` / `@save`；`getFlow` / `setFlow`） |
+| `createProcessFlow` / `createProcessFlowNode` / `createProcessFlowEdge` | 流 / 节点 / 边工厂 |
+| `cloneProcessFlow` / `defaultConfigForType` | 深拷贝 / 按类型默认 config |
+| `CATEGORY_META` / `NODE_TYPE_META` / `PALETTE_GROUPS` | 类别与组件库元数据 |
+| `PERSON_ASSIGNEE_TYPE_OPTIONS` 及各类 UI 选项常量 | 指派、超时、驳回、协议等 |
+| `canConnectNodes` / `isStartNodeType` / `isEndNodeType` | 连线与起止判定 |
+| `resolveSourceHandle` / `resolveTargetHandle` | Handle 归一化 |
+
+目录：`DesignRock/rock-process-engine`。
+
+完整说明见 [流程引擎](/process-engine/)。演示入口同 [apps-designer](/guide/packages/design-cornerstone#grow-admin-cornerstoneapps-designer)（菜单：**流程引擎**）。
