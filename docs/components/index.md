@@ -22,6 +22,16 @@ lang: zh-CN
 
 ## 文档目录
 
+### 组件库基础
+
+| 章节 | 说明 |
+|------|------|
+| [组件驱动架构](/guide/architecture/component-driver) | Grow* 与三套 UI 驱动的桥接原理 |
+| [Grow 契约组件](/guide/development/grow-components) | 模板里使用契约组件的通用写法 |
+| [命令式 API](/guide/development/imperative-api) | Message / Notice / Dialog 等统一调用 |
+| [切换组件库](/guide/development/switch-component-library) | 全局切换 Element Plus / Naive UI / Ant Design Vue |
+| [局部覆盖组件库](/guide/development/local-override) | 单页或局部子树使用不同 UI 库 |
+
 ### 预设业务组件
 
 | 组件 | 说明 | 演示 |
