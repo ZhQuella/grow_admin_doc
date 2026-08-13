@@ -205,8 +205,10 @@ export function bootstrapAppConfig() {
 | 变量 | 说明 |
 |------|------|
 | `VITE_USE_MOCK` | 是否启用 Mock |
-| `VITE_PROXY` | 开发代理（`[prefix, target]` JSON） |
-| `VITE_GLOB_API_URL` | API 基础地址（`getGlobalConfig` 读取） |
+| `VITE_GLOB_API_URL` | API 基础地址（`getGlobalConfig` → `InfrastructureOptions.apiUrl`） |
+| `VITE_PROXY` | **仅开发服**多代理：`[[前缀, 目标], ...]` JSON，见下方说明 |
+| `VITE_USE_HTTPS` | 开发是否启用 https |
+| `VITE_USE_PROXY` | 与 https 联用时启用 http2-proxy 插件（普通 http 只需 `VITE_PROXY`） |
 | `VITE_GLOB_APP_AUTH_MODE` | 认证模式（OAuth 等，需装配 settings + hooks） |
 | `VITE_UNOCSS_TYPE` | UnoCSS 加载方式 |
 | `VITE_DROP_CONSOLE` | 生产构建移除 console |
@@ -214,6 +216,28 @@ export function bootstrapAppConfig() {
 | `VITE_LEGACY` | 是否启用 legacy 插件 |
 
 生产构建时，`createConfigPlugin` 会生成 `_app.config.js` 注入 `window.__PRODUCTION__*__CONF__`，供运行时读取全局配置。
+
+### 本地 / 生产如何区分 API 地址
+
+| 文件 | 何时加载 | 典型用途 |
+|------|----------|----------|
+| `sample/.env` | 各 mode 共用 | 应用标题、短名等 |
+| `sample/.env.development` | `vite` 开发 | `VITE_GLOB_API_URL`、`VITE_PROXY`、`VITE_USE_MOCK` |
+| `sample/.env.production` | `vite build` | `VITE_GLOB_API_URL`、压缩等（**不要指望 `VITE_PROXY`**） |
+
+整站请求前缀由 `VITE_GLOB_API_URL` 决定，经 `getGlobalConfig` 注入 HTTP 基础设施。详见 [HTTP 基础设施 - 环境如何区分](/guide/development/http-infrastructure#环境如何区分本地-测试-生产)。
+
+### 开发多代理示例
+
+写在 **`sample/.env.development`**（生产构建不会启用 Vite 代理）：
+
+```env
+VITE_USE_MOCK = false
+VITE_GLOB_API_URL = /api
+VITE_PROXY = [["/api","http://127.0.0.1:8080"],["/upload","http://127.0.0.1:9000"]]
+```
+
+请求 `/api/user` → 转发到 `http://127.0.0.1:8080/user`（前缀会被去掉）。完整说明与 https 注意点见 [HTTP 基础设施 - 开发环境多代理](/guide/development/http-infrastructure#开发环境多代理vite_proxy)。
 
 ## 可选模块：settings + hooks
 

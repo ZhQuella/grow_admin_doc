@@ -104,7 +104,7 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 
 | 章节 | 说明 |
 |------|------|
-| [HTTP 基础设施](/guide/development/http-infrastructure) | 请求封装与解包 |
+| [HTTP 基础设施](/guide/development/http-infrastructure) | 请求封装、环境区分、开发多代理 |
 | [Mock 数据](/guide/development/mock) | 本地假接口 |
 
 ### 组件库
