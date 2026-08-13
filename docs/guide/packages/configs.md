@@ -60,6 +60,17 @@ export default defineConfig(async ({ command, mode }) => {
 | `MonoRepoResolver` | Monorepo 包内 `#/` → `src/` 路径别名解析 |
 | `vite-plugin-monaco-editor` | Monaco 编辑器 |
 
+### 开发代理（VITE_PROXY）
+
+`createViteConfig` 会从宿主 `sample/.env.[mode]` 读取环境变量：
+
+| 变量 | 作用 |
+|------|------|
+| `VITE_PROXY` | `[[前缀, target], ...]`，经 `wrapperEnv` → `resolveProxy` 注入 `server.proxy` |
+| `VITE_USE_HTTPS` / `VITE_USE_PROXY` | https 开发时走 `vite-plugin-http2-proxy` |
+
+**仅本地 `vite serve` 生效**；生产反代请配 Nginx / 网关，并设置 `VITE_GLOB_API_URL`。配置示例与环境区分见 [HTTP 基础设施 - 开发环境多代理](/guide/development/http-infrastructure#开发环境多代理vite_proxy)。
+
 ### 预构建
 
 根目录 `pnpm install` 后自动执行 `pnpm stub`，预构建此包：
