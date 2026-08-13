@@ -47,26 +47,18 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 
 ## 推荐阅读顺序
 
-文档按「先跑起来 → 懂结构 → 配好壳 → 打通权限与接口 → 写页面 → 沙箱 / 设计器 → 拆模块」排列，建议按序阅读：
+文档按「先跑起来 → 懂结构 → 配好壳 → 打通权限与接口 → 写页面 → 拆模块」排列，建议按序阅读：
 
 1. **[快速上手](/guide/getting-started)** — 先跑起来
 2. **架构** — 懂目录、模块装配、路由菜单
 3. **配置与主题** — 改项目名、主题色、语言
 4. **认证与权限** — 登录、守卫、权限模式
 5. **网络与数据** — 请求封装与 Mock
-6. **组件库** — 用 `Grow*` 写页面，按需换 UI 库
-7. **[组件文档](/components/)** — SearchBar / ColumnBar 等具体用法
-8. **[低代码设计器](/guide/designers/)** — 建模 → 数据准备 / 清洗 / 流程 → 页面 / 报表工具链
-9. **[代码沙箱](/code-sandbox/)** — 在线编辑 Vue SFC 与宿主内预览
-10. **[页面设计器](/page-designer/)** — 拖拽式低代码设计器与样式 / schema
-11. **[报表设计器](/report-designer/)** — 图表看板布局、数据绑定与 ECharts 渲染
-12. **[数据库建模](/schema-designer/)** — 可视化表 / 字段 / 关联与 schema 导出
-13. **[数据准备](/data-prep/)** — Dataset：选表、Join、公式度量；经 state 对接页面 / 报表
-14. **[数据清洗](/data-clean/)** — CleanFlow：声明式 ETL 编排（本地预览 / 调用时执行）
-15. **[流程引擎](/process-engine/)** — ProcessFlow：业务审批 / 事件 / 系统编排（设计期）
-16. **业务开发** — 新建 Cornerstone 包
-17. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
-18. **包说明** — 查某个 npm 包是干什么的
+6. **[组件文档](/components/)** — 组件库基础、SearchBar / ColumnBar 等具体用法
+7. **[低代码集成](/guide/designers/)** — 低代码工具链、代码沙箱与各设计器入口
+8. **业务开发** — 新建 Cornerstone 包
+9. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+10. **包说明** — 查某个 npm 包是干什么的
 
 ## 文档导航
 
@@ -107,16 +99,6 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [HTTP 基础设施](/guide/development/http-infrastructure) | 请求封装、环境区分、开发多代理 |
 | [Mock 数据](/guide/development/mock) | 本地假接口 |
 
-### 组件库
-
-| 章节 | 说明 |
-|------|------|
-| [组件驱动架构](/guide/architecture/component-driver) | Grow* 与驱动桥接原理 |
-| [Grow 契约组件](/guide/development/grow-components) | 模板里怎么用 |
-| [命令式 API](/guide/development/imperative-api) | Message / Dialog 等 |
-| [切换组件库](/guide/development/switch-component-library) | 全局换 Element / Naive / Antdv |
-| [局部覆盖组件库](/guide/development/local-override) | 单页换库（进阶） |
-
 ### 组件文档
 
 | 章节 | 说明 |
@@ -126,84 +108,6 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [ColumnBar](/components/column-bar) | 表格列设置 |
 | [AbstractEle](/components/abstract-ele) | 动态表单项 |
 | [其他组件](/components/other) | Iconify、SplitPane 等 |
-
-### 低代码设计器
-
-| 章节 | 说明 |
-|------|------|
-| [概述](/guide/designers/) | 工具链关系与模块一览 |
-| [协同工作](/guide/designers/collaboration) | 产物衔接、`state` 总线、端到端示例 |
-| [演示与接入](/guide/designers/playground) | 菜单对照、宿主装配、界面要点 |
-
-### 代码沙箱
-
-| 章节 | 说明 |
-|------|------|
-| [概述](/code-sandbox/) | 能力概览与演示入口 |
-| [基础用法](/code-sandbox/usage) | 仅预览 / 三分屏 |
-| [GrowCodeEditor](/code-sandbox/code-editor) | Monaco 编辑器 |
-| [GrowCodeDeps](/code-sandbox/code-deps) | 依赖注入 |
-| [GrowCodeSandbox](/code-sandbox/preview) | SFC 编译预览 |
-| [工具 API](/code-sandbox/api) | 工具函数与注意点 |
-
-### 页面设计器
-
-| 章节 | 说明 |
-|------|------|
-| [概述](/page-designer/) | 设计器能力与界面分区 |
-| [基础用法](/page-designer/usage) | 接入、画布操作、渲染 |
-| [样式面板](/page-designer/style) | 尺寸 / 边框 / display 等 |
-| [数据源与数据请求](/page-designer/data) | 数据源 / 接口配置与字段 |
-| [变量绑定](/page-designer/variable-bind) | 属性绑定 state、函数绑定 |
-| [事件与生命周期](/page-designer/events) | 组件事件、页面事件、监听、计算属性 |
-| [数据模型](/page-designer/schema) | structures / props / propBindModes |
-
-### 报表设计器
-
-| 章节 | 说明 |
-|------|------|
-| [概述](/report-designer/) | 能力概览与界面分区 |
-| [基础用法](/report-designer/usage) | 接入、设计器 / 渲染器 API |
-| [数据绑定](/report-designer/data-binding) | 页面 state → 区块图表 data |
-| [数据模型](/report-designer/schema) | ReportSchema / layout |
-| [图表配置](/report-designer/chart-config) | chartConfig 与 option 编译 |
-
-### 数据库建模
-
-| 章节 | 说明 |
-|------|------|
-| [概述](/schema-designer/) | 能力概览与界面分区 |
-| [基础用法](/schema-designer/usage) | 接入、画布操作、设计器 API |
-| [数据模型](/schema-designer/schema) | DatabaseSchema / 表 / 字段 |
-| [表关联](/schema-designer/relations) | 1:1 / 1:N / N:N 与参照动作 |
-
-### 数据准备
-
-| 章节 | 说明 |
-|------|------|
-| [概述](/data-prep/) | 能力概览与界面分区 |
-| [基础用法](/data-prep/usage) | 接入、操作流程、与页面 / 报表对接 |
-| [数据模型](/data-prep/schema) | DataPrepDataset / metricConfigs / 查询结果 |
-| [公式度量](/data-prep/formulas) | 字段引用、聚合与逻辑函数 |
-| [表关联](/data-prep/joins) | 多字段 Join 与并 / 或 |
-
-### 数据清洗
-
-| 章节 | 说明 |
-|------|------|
-| [概述](/data-clean/) | 能力概览、与数据准备边界、本地预览与边界 |
-| [基础用法](/data-clean/usage) | 接入、Mock、画布操作、组件 API |
-| [数据模型](/data-clean/schema) | CleanFlow / 节点 config / `runCleanFlowLocal` 导出 |
-| [节点与算子](/data-clean/nodes) | 十五种节点、端口、配置与本地变换 |
-
-### 流程引擎
-
-| 章节 | 说明 |
-|------|------|
-| [概述](/process-engine/) | 能力概览、与数据清洗边界、设计期范围 |
-| [基础用法](/process-engine/usage) | 接入、竖向画布、组件 API |
-| [数据模型](/process-engine/schema) | ProcessFlow / 指派 / 工厂导出 |
-| [节点与连线](/process-engine/nodes) | 十九种节点、分支、连线语义 |
 
 ### 业务开发
 
