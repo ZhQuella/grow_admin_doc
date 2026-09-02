@@ -57,7 +57,8 @@ grow_admin/
 │   ├── cornerstone-apps-home/      # 首页（布局 + 动态路由）
 │   ├── cornerstone-apps-workspace/ # 工作区（页面 + 路由配置）
 │   ├── cornerstone-apps-sandbox/   # 代码沙箱演示
-│   └── cornerstone-apps-designer/  # 页面 / 报表 / 建模 / 数据准备演示
+│   ├── cornerstone-apps-designer/  # 页面 / 报表 / 建模 / 数据准备演示
+│   └── cornerstone-apps-system/    # 系统管理（组织 / 人员 / 权限）
 ├── configs/                 # 共享构建配置（含 UnoCSS 主题色映射）
 └── sample/                  # 宿主示例应用
 ```
@@ -119,10 +120,11 @@ DesignCornerstone/
 ├── cornerstone-apps-home/       # 登录后首页（布局壳 + 动态路由注册）
 ├── cornerstone-apps-workspace/  # 工作区业务页（路由配置 + 页面组件）
 ├── cornerstone-apps-sandbox/    # 代码沙箱演示（编辑器 / 依赖 / 预览）
-└── cornerstone-apps-designer/   # 页面 / 报表 / 建模 / 数据准备 / 清洗 / 流程引擎演示
+├── cornerstone-apps-designer/   # 页面 / 报表 / 建模 / 数据准备 / 清洗 / 流程引擎演示
+└── cornerstone-apps-system/     # 系统管理（部门 / 人员 / 账号 / 角色 / 菜单）
 ```
 
-业务模块通过 Library 约定接入宿主应用，不自行安装组件驱动。
+业务模块通过 Library 约定接入宿主应用，不自行安装组件驱动。系统管理模块说明见 [系统管理](/system-admin/)。
 
 ## configs — 共享构建配置
 

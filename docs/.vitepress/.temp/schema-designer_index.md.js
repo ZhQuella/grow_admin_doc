@@ -1,0 +1,24 @@
+import { ssrRenderAttrs, ssrRenderStyle } from "vue/server-renderer";
+import { useSSRContext } from "vue";
+import { _ as _export_sfc } from "./plugin-vue_export-helper.cc2b3d55.js";
+const __pageData = JSON.parse('{"title":"数据库建模","description":"","frontmatter":{"title":"数据库建模","lang":"zh-CN"},"headers":[],"relativePath":"schema-designer/index.md"}');
+const _sfc_main = { name: "schema-designer/index.md" };
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<div${ssrRenderAttrs(_attrs)}><h1 id="数据库建模" tabindex="-1">数据库建模 <a class="header-anchor" href="#数据库建模" aria-label="Permalink to &quot;数据库建模&quot;">​</a></h1><p>基于 <strong>Vue Flow</strong> 的可视化数据库建模：在画布上拖拽表节点、配置字段与类型，通过字段圆点连线创建关联，导出可持久化的 <code>DatabaseSchema</code> JSON。</p><table><thead><tr><th>项</th><th>说明</th></tr></thead><tbody><tr><td>核心包</td><td><code>@grow-admin-rock/schema-designer</code></td></tr><tr><td>源码目录</td><td><code>DesignRock/rock-schema-designer</code></td></tr><tr><td>演示模块</td><td><code>@grow-admin-cornerstone/apps-designer</code>（侧栏菜单：<strong>设计器 → 数据库建模</strong>）</td></tr><tr><td>主要组件</td><td><code>GrowSchemaDesigner</code></td></tr><tr><td>当前方言</td><td>PostgreSQL（<code>dialect: &#39;postgresql&#39;</code>）</td></tr></tbody></table><p>与 <a href="/page-designer/">页面设计器</a>、<a href="/report-designer/">报表设计器</a>、<a href="/data-prep/">数据准备</a> 同属低代码工具链：本模块面向 <strong>表结构与表间关系</strong>（PostgreSQL）；数据准备消费已发布建模；页面 / 报表经 <code>state</code> 消费查询结果（后续亦可对接建模侧 SQL 查询管理）。</p><h2 id="界面分区" tabindex="-1">界面分区 <a class="header-anchor" href="#界面分区" aria-label="Permalink to &quot;界面分区&quot;">​</a></h2><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki material-theme-palenight"><code><span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">│ 工具栏：添加表 / 清空 / 复制 JSON / 导出 JSON                  │</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">├────┬──────────────┬─────────────────────────────────────────┤</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">│ 轨 │ 左侧面板      │ Vue Flow 画布 + 浮层配置                   │</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">│ 道 │ 库信息/SQL    │ 表节点拖拽、字段连线、小地图 / 缩放控件   │</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">└────┴──────────────┴─────────────────────────────────────────┘</span></span></code></pre></div><table><thead><tr><th>区域</th><th>能力</th></tr></thead><tbody><tr><td><strong>工具栏</strong></td><td>添加表、清空画布、复制 / 下载 schema JSON</td></tr><tr><td><strong>左侧轨道</strong></td><td>库信息、SQL 查询配置（<code>queries</code>）</td></tr><tr><td><strong>画布</strong></td><td>表节点（字段列表 + 连线手柄）、关联边、Controls / MiniMap</td></tr><tr><td><strong>浮层</strong></td><td>选中表 → 表配置；选中边 → 关联配置</td></tr></tbody></table><h2 id="核心能力" tabindex="-1">核心能力 <a class="header-anchor" href="#核心能力" aria-label="Permalink to &quot;核心能力&quot;">​</a></h2><ol><li><strong>表与字段</strong>：新建表默认带 <code>id</code> 主键；可配置 PostgreSQL 类型、长度、主键 / 自增(IDENTITY) / 唯一 / 可空 / 索引等</li><li><strong>连线建关联</strong>：从字段圆点拖拽到另一表字段，弹出抽屉选择 1:1 / 1:N / N:N 与参照动作</li><li><strong>外键与中间表</strong>：1:1 / 1:N 可自动补外键列；N:N 自动生成 <code>isJunction</code> 中间表</li><li><strong>SQL 查询配置</strong>：左轨维护 <code>queries[]</code>（本版本地存档，随 schema 导出）</li><li><strong>双向绑定</strong>：支持 <code>v-model</code>（<code>modelValue</code>）与 <code>getSchema</code> / <code>setSchema</code></li><li><strong>导出</strong>：工具栏复制 / 下载，或 <code>exportSchemaJson</code> / 实例 <code>exportJson()</code></li></ol><p>完整工具链见 <a href="/guide/designers/">低代码设计器</a>。</p><h2 id="推荐阅读" tabindex="-1">推荐阅读 <a class="header-anchor" href="#推荐阅读" aria-label="Permalink to &quot;推荐阅读&quot;">​</a></h2><ol><li><a href="/schema-designer/usage">基础用法</a> — 接入演示、设计器 API、画布与面板操作</li><li><a href="/schema-designer/schema">数据模型</a> — <code>DatabaseSchema</code> / 表 / 字段类型</li><li><a href="/schema-designer/relations">表关联</a> — 连线约定、1:1 / 1:N / N:N 与参照动作</li></ol><div class="tip custom-block"><p class="custom-block-title">演示入口</p><p>登录后打开侧栏 <strong>设计器 → 数据库建模</strong>（由 <code>apps-designer</code> 注册）。本地需装配 <code>@grow-admin-rock/schema-designer</code> 与对应 Cornerstone 模块。</p></div></div>`);
+}
+const _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("schema-designer/index.md");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
+export {
+  __pageData,
+  index as default
+};

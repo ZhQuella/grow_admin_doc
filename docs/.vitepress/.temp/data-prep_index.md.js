@@ -1,0 +1,30 @@
+import { ssrRenderAttrs, ssrRenderStyle } from "vue/server-renderer";
+import { useSSRContext } from "vue";
+import { _ as _export_sfc } from "./plugin-vue_export-helper.cc2b3d55.js";
+const __pageData = JSON.parse('{"title":"数据准备","description":"","frontmatter":{"title":"数据准备","lang":"zh-CN"},"headers":[],"relativePath":"data-prep/index.md"}');
+const _sfc_main = { name: "data-prep/index.md" };
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<div${ssrRenderAttrs(_attrs)}><h1 id="数据准备" tabindex="-1">数据准备 <a class="header-anchor" href="#数据准备" aria-label="Permalink to &quot;数据准备&quot;">​</a></h1><p>基于 <strong>Vue Flow</strong> 的可视化数据准备（Dataset）：从已发布的数据库建模中选表、配置多表 Join、编写 <strong>公式度量</strong>，并通过 <strong>数据输出</strong> 投影字段，导出可持久化的 <code>DataPrepDataset</code> 并支持预览查询。</p><table><thead><tr><th>项</th><th>说明</th></tr></thead><tbody><tr><td>核心包</td><td><code>@grow-admin-rock/data-prep</code></td></tr><tr><td>源码目录</td><td><code>DesignRock/rock-data-prep</code></td></tr><tr><td>演示模块</td><td><code>@grow-admin-cornerstone/apps-designer</code>（侧栏菜单：<strong>设计器 → 数据准备</strong>）</td></tr><tr><td>主要组件</td><td><code>GrowDataPrepDesigner</code></td></tr><tr><td>当前范围</td><td>前端可视化 + 本地 / Mock 查询</td></tr></tbody></table><p>与其它低代码工具的分工（完整链路见 <a href="/guide/designers/">低代码设计器</a>）：</p><div class="language-text"><button title="Copy Code" class="copy"></button><span class="lang">text</span><pre class="shiki material-theme-palenight"><code><span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">数据库建模（PostgreSQL 物理模型）</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">    ↓ 已发布元数据</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">数据准备 Dataset（怎么算）          ← 本模块</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">    ↓ 查询结果（经数据请求写入 state）</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">    ├─→ 低代码设计器（页面组件绑定）</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">    └─→ 报表设计器（图表 dataBinding）</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">可选：数据清洗 CleanFlow（怎么洗）→ 调用时执行（规划对接展示侧）</span></span></code></pre></div><table><thead><tr><th>模块</th><th>定位</th></tr></thead><tbody><tr><td><a href="/schema-designer/">数据库建模</a></td><td>物理模型：表 / 字段 / 关系</td></tr><tr><td><strong>数据准备</strong></td><td>分析模型：选表、Join、公式度量、输出字段</td></tr><tr><td><a href="/data-clean/">数据清洗</a></td><td>ETL 流：源 → 清洗 / 合并 / 聚合 → 输出</td></tr><tr><td><a href="/page-designer/">页面设计器</a></td><td>展示：页面物料 + 绑定 <code>state</code></td></tr><tr><td><a href="/report-designer/">报表设计器</a></td><td>展示：图表布局 + 绑定 <code>state</code></td></tr></tbody></table><h2 id="界面分区" tabindex="-1">界面分区 <a class="header-anchor" href="#界面分区" aria-label="Permalink to &quot;界面分区&quot;">​</a></h2><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki material-theme-palenight"><code><span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">│ 工具栏：数据集名称 / 预览数据 / 保存                           │</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">├────┬──────────────┬─────────────────────────────────────────┤</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">│ 轨 │ 左侧面板      │ Vue Flow 画布                            │</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">│ 道 │ 表/度量/输出  │ 表节点、Join 连线、小地图 / 缩放控件       │</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">└────┴──────────────┴─────────────────────────────────────────┘</span></span></code></pre></div><table><thead><tr><th>区域</th><th>能力</th></tr></thead><tbody><tr><td><strong>工具栏</strong></td><td>改名称；预览（需已配置输出字段）；保存 Dataset</td></tr><tr><td><strong>左侧轨道</strong></td><td>添加表、维度 / 度量、数据输出、数据集信息</td></tr><tr><td><strong>画布</strong></td><td>表节点拖拽、连线配置 Join、设主表；Controls / MiniMap</td></tr><tr><td><strong>侧扩展</strong></td><td>编辑度量时打开配置面板（公式编辑器）</td></tr></tbody></table><h2 id="核心能力" tabindex="-1">核心能力 <a class="header-anchor" href="#核心能力" aria-label="Permalink to &quot;核心能力&quot;">​</a></h2><ol><li><strong>跨建模选表</strong>：左轨「添加表」按建模分组列出表，可连续添加；第一张表自动设为主表</li><li><strong>手动表关联</strong>：画布拖线打开抽屉，配置 INNER / LEFT / RIGHT 与多字段并 / 或条件</li><li><strong>维度 / 度量配置</strong>：每条配置 = 多个维度字段 + 一条公式度量（<code>SUM([alias.col])</code> 等）</li><li><strong>数据输出</strong>：勾选 / 排序 <code>outputFields</code>；预览与对外查询均按此投影（未配置则不可预览）</li><li><strong>本地 + Mock</strong>：Dataset 写入 <code>localStorage</code>；查询走 <code>sample/mock/dataPrep.ts</code></li></ol><h2 id="推荐阅读" tabindex="-1">推荐阅读 <a class="header-anchor" href="#推荐阅读" aria-label="Permalink to &quot;推荐阅读&quot;">​</a></h2><ol><li><a href="/data-prep/usage">基础用法</a> — 接入演示、操作流程、设计器 API</li><li><a href="/data-prep/schema">数据模型</a> — <code>DataPrepDataset</code> / <code>metricConfigs</code> / 查询结果</li><li><a href="/data-prep/formulas">公式度量</a> — 字段引用、聚合与逻辑函数</li><li><a href="/data-prep/joins">表关联</a> — Join 类型、多字段条件、并 / 或</li></ol><div class="tip custom-block"><p class="custom-block-title">演示入口</p><p>登录后打开侧栏 <strong>设计器 → 数据准备</strong>（由 <code>apps-designer</code> 注册）。本地需装配 <code>@grow-admin-rock/data-prep</code> 与对应 Cornerstone 模块，并启用 <code>sample/mock/dataPrep.ts</code>。</p></div></div>`);
+}
+const _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("data-prep/index.md");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
+export {
+  __pageData,
+  index as default
+};

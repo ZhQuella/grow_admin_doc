@@ -28,6 +28,7 @@ module.exports = {
     ],
     nav: [
       { text: '指南', link: '/guide/' },
+      { text: '系统管理', link: '/system-admin/' },
       { text: '组件', link: '/components/' },
       {
         text: '低代码集成',
@@ -90,6 +91,23 @@ module.exports = {
             { text: '基础用法', link: '/data-clean/usage' },
             { text: '数据模型', link: '/data-clean/schema' },
             { text: '节点与算子', link: '/data-clean/nodes' }
+          ]
+        }
+      ],
+      "/system-admin/": [
+        {
+          text: '系统管理',
+          items: [
+            { text: '概述', link: '/system-admin/' },
+            { text: '部门管理', link: '/system-admin/dept' },
+            { text: '岗位与职级', link: '/system-admin/post-grade' },
+            { text: '人员管理', link: '/system-admin/person' },
+            { text: '账号管理', link: '/system-admin/account' },
+            { text: '角色管理', link: '/system-admin/role' },
+            { text: '菜单管理', link: '/system-admin/menu' },
+            { text: '组织架构图', link: '/system-admin/org-chart' },
+            { text: '导入导出', link: '/system-admin/import-export' },
+            { text: '权限联动与通用规则', link: '/system-admin/permission-rules' }
           ]
         }
       ],
