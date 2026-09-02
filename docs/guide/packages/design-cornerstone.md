@@ -23,6 +23,7 @@ lang: zh-CN
 | `@grow-admin-cornerstone/apps-workspace` | 工作区示例业务页（路由配置 + 页面） | 可用 |
 | `@grow-admin-cornerstone/apps-sandbox` | 代码沙箱演示（编辑器 / 依赖 / 预览） | 可用 |
 | `@grow-admin-cornerstone/apps-designer` | 页面 / 报表 / 数据库建模 / 数据准备 / 数据清洗 / 流程引擎演示 | 可用 |
+| `@grow-admin-cornerstone/apps-system` | 系统管理（部门 / 岗位 / 职级 / 人员 / 账号 / 角色 / 菜单 / 组织架构图） | 可用 |
 
 ---
 
@@ -300,6 +301,29 @@ export { Lib } from './library'
 ```
 
 完整能力见 [低代码设计器](/guide/designers/)、[页面设计器](/page-designer/)、[报表设计器](/report-designer/)、[数据库建模](/schema-designer/)、[数据准备](/data-prep/)、[数据清洗](/data-clean/)、[流程引擎](/process-engine/)。
+
+---
+
+## @grow-admin-cornerstone/apps-system
+
+基础服务（系统管理）模块：组织、人员、账号、角色、菜单与权限配置，以及组织架构可视化。
+
+**主要页面：**
+
+| 页面 | 组件 | 说明 |
+|------|------|------|
+| 部门管理 | `DeptManage` | 部门树表、迁移 / 合并 / 停用 |
+| 岗位管理 | `PostManage` | 按部门展开岗位与编制统计 |
+| 职级管理 | `PositionManage` | 全局职级维护 |
+| 人员管理 | `PersonManage` / `PersonCreate` / `PersonDetail` | 档案、任职、调岗、生命周期 |
+| 账号管理 | `AccountManage` | 登录身份、人员绑定、权限明细 |
+| 角色管理 | `RoleManage` | 菜单 / 功能 / 数据权限 |
+| 菜单管理 | `MenuManage` | 访问入口、功能权限、表字段定义 |
+| 组织架构图 | `OrgChart` | ECharts 关系图浏览 |
+
+目录：`DesignCornerstone/cornerstone-apps-system`。Mock：`sample/mock/system*.ts`。
+
+完整说明见 [系统管理](/system-admin/)。演示入口：侧栏 **系统管理** 菜单。
 
 ## 命名规范
 

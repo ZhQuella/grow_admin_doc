@@ -1,0 +1,24 @@
+import { ssrRenderAttrs, ssrRenderStyle } from "vue/server-renderer";
+import { useSSRContext } from "vue";
+import { _ as _export_sfc } from "./plugin-vue_export-helper.cc2b3d55.js";
+const __pageData = JSON.parse('{"title":"页面设计器","description":"","frontmatter":{"title":"页面设计器","lang":"zh-CN"},"headers":[],"relativePath":"page-designer/index.md"}');
+const _sfc_main = { name: "page-designer/index.md" };
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<div${ssrRenderAttrs(_attrs)}><h1 id="页面设计器" tabindex="-1">页面设计器 <a class="header-anchor" href="#页面设计器" aria-label="Permalink to &quot;页面设计器&quot;">​</a></h1><p>拖拽式低代码页面设计器：从左侧物料区拖入组件到画布，在右侧配置 <strong>属性 / 样式 / 事件</strong>，最终产出可渲染的结构化数据，并可用 <code>GrowRenderer</code> 预览或落地。</p><table><thead><tr><th>项</th><th>说明</th></tr></thead><tbody><tr><td>核心包</td><td><code>@grow-admin-rock/designer</code></td></tr><tr><td>源码目录</td><td><code>DesignRock/rock-designer</code></td></tr><tr><td>演示模块</td><td><code>@grow-admin-cornerstone/apps-designer</code>（侧栏菜单：<strong>设计器 → 低代码设计器</strong>）</td></tr><tr><td>主要组件</td><td><code>GrowDesigner</code>（编辑）、<code>GrowRenderer</code>（渲染）</td></tr></tbody></table><h2 id="界面分区" tabindex="-1">界面分区 <a class="header-anchor" href="#界面分区" aria-label="Permalink to &quot;界面分区&quot;">​</a></h2><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki material-theme-palenight"><code><span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">┌─────────────────────────────────────────────────────────────┐</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">│ 工具栏：清空 / 预览                                           │</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">├────┬──────────────┬──────────────────────────┬──────────────┤</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">│ 轨 │ 左侧面板      │ 画布                      │ 右侧属性面板  │</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">│ 道 │ 组件库/树/…   │ 拖拽放置、选中、复制删除     │ 属性/样式/事件 │</span></span>
+<span class="line"><span style="${ssrRenderStyle({ "color": "#A6ACCD" })}">└────┴──────────────┴──────────────────────────┴──────────────┘</span></span></code></pre></div><table><thead><tr><th>区域</th><th>能力</th></tr></thead><tbody><tr><td><strong>左侧轨道</strong></td><td>组件库、查看数据、结构树、数据源、属性计算、数据监听、页面事件、数据请求</td></tr><tr><td><strong>画布</strong></td><td>拖入 / 排序 / 选中；选中后显示工具条（拖拽手柄、复制、添加子项、删除）</td></tr><tr><td><strong>右侧面板</strong></td><td>对当前选中节点编辑 props、styles、events、高级项</td></tr></tbody></table><h2 id="核心能力" tabindex="-1">核心能力 <a class="header-anchor" href="#核心能力" aria-label="Permalink to &quot;核心能力&quot;">​</a></h2><ol><li><strong>物料拖拽</strong>：基础元素、表单、布局、展示类与业务组件（映射到 <code>Grow*</code> 或原生标签）</li><li><strong>样式可视化</strong>：尺寸与间距、圆角、边框、背景、阴影、布局模式（display / flex）；文字类可配颜色 / 字号 / 对齐等</li><li><strong>结构树与 JSON</strong>：查看 / 定位节点，导出设计数据</li><li><strong>数据源 / 计算属性 / 数据请求</strong>：静态数据、派生 state、远程接口配置</li><li><strong>页面事件与数据监听</strong>：生命周期脚本、state 监听</li><li><strong>变量绑定 / 函数绑定</strong>：属性支持 <code>text</code> / <code>bind</code> / <code>function</code> 三种模式</li><li><strong>渲染分离</strong>：编辑态 <code>GrowDesigner</code>，运行态 <code>GrowRenderer</code> 消费同一套 schema</li></ol><p>与 <a href="/report-designer/">报表设计器</a> 的关系：报表复用本模块的页面级数据面板与运行时；图表区块用独立的 <code>dataBinding</code> 注入 data，见 <a href="/report-designer/data-binding">报表 · 数据绑定</a>。</p><p>工具链全景见 <a href="/guide/designers/">低代码设计器</a>。</p><h2 id="推荐阅读" tabindex="-1">推荐阅读 <a class="header-anchor" href="#推荐阅读" aria-label="Permalink to &quot;推荐阅读&quot;">​</a></h2><ol><li><a href="/page-designer/usage">基础用法</a> — 接入演示模块、画布操作</li><li><a href="/page-designer/style">样式面板</a> — 样式项、display 内外层约定</li><li><a href="/page-designer/data">数据源与数据请求</a> — 左侧数据面板与字段说明</li><li><a href="/page-designer/variable-bind">变量绑定</a> — 属性绑定 state、函数绑定</li><li><a href="/page-designer/events">事件与生命周期</a> — 组件事件、页面事件、监听、计算属性</li><li><a href="/page-designer/schema">数据模型</a> — structures / props / propBindModes / pageConfig</li></ol><div class="tip custom-block"><p class="custom-block-title">演示入口</p><p>登录后打开侧栏 <strong>设计器 → 低代码设计器</strong>（由 <code>apps-designer</code> 注册动态路由）。本地需在宿主中装配 <code>@grow-admin-rock/designer</code> 与对应 Cornerstone 模块。</p></div></div>`);
+}
+const _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("page-designer/index.md");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
+export {
+  __pageData,
+  index as default
+};

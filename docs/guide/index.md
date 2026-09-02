@@ -56,9 +56,10 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 5. **网络与数据** — 请求封装与 Mock
 6. **[组件文档](/components/)** — 组件库基础、SearchBar / ColumnBar 等具体用法
 7. **[低代码集成](/guide/designers/)** — 低代码工具链、代码沙箱与各设计器入口
-8. **业务开发** — 新建 Cornerstone 包
-9. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
-10. **包说明** — 查某个 npm 包是干什么的
+8. **[系统管理](/system-admin/)** — 组织、人员、账号、角色、菜单与权限配置
+9. **业务开发** — 新建 Cornerstone 包
+10. **[开发规范](/guide/development/dev-conventions)** — 上线前对照检查
+11. **包说明** — 查某个 npm 包是干什么的
 
 ## 文档导航
 
@@ -108,6 +109,20 @@ Grow Admin 打破了这一结构，围绕 **可组合、可替换、可演进** 
 | [ColumnBar](/components/column-bar) | 表格列设置 |
 | [AbstractEle](/components/abstract-ele) | 动态表单项 |
 | [其他组件](/components/other) | Iconify、SplitPane 等 |
+
+### 系统管理
+
+| 章节 | 说明 |
+|------|------|
+| [系统管理概述](/system-admin/) | 设计原则、关系模型、模块一览 |
+| [部门管理](/system-admin/dept) | 树表、迁移 / 合并 / 停用 |
+| [岗位与职级](/system-admin/post-grade) | 编制、职级独立维护 |
+| [人员管理](/system-admin/person) | 任职、调岗、生命周期 |
+| [账号管理](/system-admin/account) | 绑定人员、权限明细 |
+| [角色管理](/system-admin/role) | 菜单 / 功能 / 数据权限 |
+| [菜单管理](/system-admin/menu) | 功能权限、表与字段定义 |
+| [组织架构图](/system-admin/org-chart) | ECharts 关系图 |
+| [权限联动与通用规则](/system-admin/permission-rules) | 跨模块通用口径 |
 
 ### 业务开发
 

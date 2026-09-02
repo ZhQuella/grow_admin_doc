@@ -1,0 +1,19 @@
+import { ssrRenderAttrs } from "vue/server-renderer";
+import { useSSRContext } from "vue";
+import { _ as _export_sfc } from "./plugin-vue_export-helper.cc2b3d55.js";
+const __pageData = JSON.parse('{"title":"低代码设计器 · 演示与接入","description":"","frontmatter":{"title":"低代码设计器 · 演示与接入","lang":"zh-CN"},"headers":[],"relativePath":"guide/designers/playground.md"}');
+const _sfc_main = { name: "guide/designers/playground.md" };
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<div${ssrRenderAttrs(_attrs)}><h1 id="演示与接入" tabindex="-1">演示与接入 <a class="header-anchor" href="#演示与接入" aria-label="Permalink to &quot;演示与接入&quot;">​</a></h1><h2 id="演示菜单对照" tabindex="-1">演示菜单对照 <a class="header-anchor" href="#演示菜单对照" aria-label="Permalink to &quot;演示菜单对照&quot;">​</a></h2><table><thead><tr><th>侧栏</th><th>路由 path（相对 Home）</th><th>组件</th></tr></thead><tbody><tr><td>设计器 → 低代码设计器</td><td><code>designer-playground</code></td><td><code>GrowDesigner</code></td></tr><tr><td>设计器 → 报表设计器</td><td><code>report-designer-playground</code></td><td><code>GrowReportDesigner</code></td></tr><tr><td>设计器 → 数据库建模</td><td><code>schema-designer-playground</code></td><td><code>GrowSchemaDesigner</code></td></tr><tr><td>设计器 → 数据准备</td><td><code>data-prep-playground</code></td><td><code>GrowDataPrepDesigner</code></td></tr><tr><td>设计器 → 数据清洗</td><td><code>data-clean-playground</code></td><td><code>GrowDataCleanDesigner</code></td></tr><tr><td>设计器 → 流程引擎</td><td><code>process-engine-playground</code></td><td><code>GrowProcessDesigner</code></td></tr><tr><td>沙箱 → 沙箱工具 / 呈现沙箱 / 代码编辑器</td><td><code>sandbox-overview</code> 等</td><td><code>GrowCode*</code></td></tr></tbody></table><h2 id="接入要点-宿主" tabindex="-1">接入要点（宿主） <a class="header-anchor" href="#接入要点-宿主" aria-label="Permalink to &quot;接入要点（宿主）&quot;">​</a></h2><ol><li>workspace 依赖对应 <code>@grow-admin-rock/*</code> 包与 Cornerstone 演示模块</li><li><code>sample/src/plugin/initIoc.ts</code> 中 <code>.use(appsDesignerLib)</code> / <code>.use(appsSandboxLib)</code></li><li>Mock 菜单合并设计器 / 沙箱结构（见 <code>sample/mock/routers.ts</code>）</li><li>数据准备另需启用 <code>sample/mock/dataPrep.ts</code></li><li>数据清洗另需启用 <code>sample/mock/dataClean.ts</code>（tables / table-rows / preview）；保存事件仍由宿主自行持久化</li><li>流程引擎当前<strong>无</strong>独立 Mock；保存事件由宿主自行持久化</li></ol><p>详细装配见 <a href="/guide/development/business-module">业务模块开发</a>、<a href="/guide/packages/design-cornerstone">DesignCornerstone</a>。</p><h2 id="模块文档入口" tabindex="-1">模块文档入口 <a class="header-anchor" href="#模块文档入口" aria-label="Permalink to &quot;模块文档入口&quot;">​</a></h2><table><thead><tr><th>模块</th><th>说明</th></tr></thead><tbody><tr><td><a href="/page-designer/usage">页面设计器 · 基础用法</a></td><td>菜单、接入、画布操作、渲染</td></tr><tr><td><a href="/report-designer/usage">报表设计器 · 基础用法</a></td><td>菜单、接入、设计器 / 渲染器 API</td></tr><tr><td><a href="/schema-designer/usage">数据库建模 · 基础用法</a></td><td>接入、画布操作、连线规则、导出</td></tr><tr><td><a href="/data-prep/usage">数据准备 · 基础用法</a></td><td>接入、Mock、预览、与页面 / 报表对接</td></tr><tr><td><a href="/data-clean/usage">数据清洗 · 基础用法</a></td><td>接入、Mock、画布操作、组件 API</td></tr><tr><td><a href="/process-engine/usage">流程引擎 · 基础用法</a></td><td>接入、竖向画布、组件 API</td></tr><tr><td><a href="/code-sandbox/usage">代码沙箱 · 基础用法</a></td><td>仅预览 / 三分屏 / 单编辑器</td></tr></tbody></table><div class="tip custom-block"><p class="custom-block-title">TIP</p><p>不熟悉模块关系时，先读 <a href="/guide/designers/collaboration">协同工作</a>，再进入各设计器「基础用法」。</p></div></div>`);
+}
+const _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("guide/designers/playground.md");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+const playground = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
+export {
+  __pageData,
+  playground as default
+};
